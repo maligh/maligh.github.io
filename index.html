@@ -3,20 +3,23 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hexo</title>
+  <title>记录学习中的点滴</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
   
   
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+  <meta name="description" content="MaLi">
+<meta property="og:type" content="website">
+<meta property="og:title" content="记录学习中的点滴">
 <meta property="og:url" content="http://superma.me/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="记录学习中的点滴">
+<meta property="og:description" content="MaLi">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="记录学习中的点滴">
+<meta name="twitter:description" content="MaLi">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="记录学习中的点滴" type="application/atom+xml">
   
   <link rel="icon" href="/css/images/mylogo.jpg">
   <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
@@ -59,7 +62,7 @@
   
     <div id="intrologo" class="intro-logo" style="background-position:center; background-repeat:no-repeat; background-image: url(); background-size: auto 100%;">
     <script>
-        var imgUrls = "css/images/home-bg.jpg,css/images/sample.jpg,http://t.cn/RMbvEza".split(",");
+        var imgUrls = "css/images/home-one.jpg,css/images/home-two.jpg,css/images/home-three.jpg".split(",");
         var random = Math.floor((Math.random() * imgUrls.length ));
         if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
           document.getElementById("intrologo").style.backgroundImage='url(' + imgUrls[random] + ')';
@@ -98,9 +101,9 @@
 
         
           <div class="homelogoback"  style="border: 1px solid #404040;" >
-            <h1><a href="#content" id="logo">Hexo</a></h1>
-            <h3>null</h3>
-            <h5>Ma Li</h5>
+            <h1><a href="#content" id="logo">记录学习中的点滴</a></h1>
+            <h3>MaLi</h3>
+            <h5>Objective-C &amp;&amp; PHP &amp;&amp; Swift &amp;&amp; Python</h5>
             <!-- <p><a href="https://github.com/iTimeTraveler" target="_blank">Github</a></p> -->
           </div>
         
@@ -198,33 +201,18 @@
 </ul>
 <hr>
 <ul>
-<li>那到底什么时候使用宏，什么时候该使用const？<ul>
-<li>定义<code>不对外公开的常量</code>的时候，我们应该尽量先考虑使用 static 方式声名const来替代使用宏定义。const不能满足的情况再考虑使用宏定义。比如用以下定义：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">static NSString * const kConst = @&quot;Hello&quot;；</div><div class="line">static const CGFloat kWidth = 10.0;</div></pre></td></tr></table></figure>
-</li>
+<li>那到底什么时候使用宏，什么时候该使用const？</li>
 </ul>
-</li>
-</ul>
-<p>代替：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#define DEFINE @&quot;Hello&quot;</div><div class="line">#define WIDTH 10.0</div></pre></td></tr></table></figure></p>
-<ul>
-<li><p>当定义<code>对外公开的常量</code>的时候，我们一般使用如下定义：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//Test.h</div><div class="line">extern NSString * const CLASSNAMEconst;</div><div class="line">//Test.m</div><div class="line">NSString * const CLASSNAMEconst = @&quot;hello&quot;;</div></pre></td></tr></table></figure>
-<ul>
-<li>对于整型类型，代替宏定义直接定义整型常量比较好的办法是使用enum，使用enum时推荐使用NS_ENUM和NS_OPTIONS宏。比如用以下定义：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">typedef NS_ENUM(NSInteger,TestEnum) &#123;</div><div class="line">        MY_INT_CONST = 12345</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<p>代替：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#define MY_INT_CONST 12345</div></pre></td></tr></table></figure></p>
-<p>NS_OPTIONS定义方式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">typedef NS_OPTIONS(NSInteger, SelectType) &#123;</div><div class="line">        SelectA    = 0,</div><div class="line">        SelectB    = 1 &lt;&lt; 0,</div><div class="line">        SelectC    = 1 &lt;&lt; 1,</div><div class="line">        SelectD    = 1 &lt;&lt; 2</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<hr>
-<h3 id="下面顺便说一下const-的一些使用方式，主要说明这几种写法的区别："><a href="#下面顺便说一下const-的一些使用方式，主要说明这几种写法的区别：" class="headerlink" title="下面顺便说一下const 的一些使用方式，主要说明这几种写法的区别："></a>下面顺便说一下const 的一些使用方式，主要说明这几种写法的区别：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">const NSString *constString1 = @&quot;I am a const NSString * string&quot;;</div><div class="line">NSString const *constString2 = @&quot;I am a NSString const * string&quot;;</div><div class="line">static const NSString *staticConstString1 = @&quot;I am a static const NSString * string&quot;;</div><div class="line">static NSString const *staticConstString2 = @&quot;I am a static NSString const * string&quot;;</div><div class="line">NSString * const stringConst = @&quot;I am a NSString * const string&quot;;</div></pre></td></tr></table></figure>
-<hr>
-<p>全局变量：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//全局变量，constString1地址不能修改，constString1值能修改</div><div class="line">const NSString *constString1 = @&quot;I am a const NSString * string&quot;;</div><div class="line">//意义同上，无区别</div><div class="line">NSString const *constString2 = @&quot;I am a NSString const * string&quot;;</div><div class="line">// stringConst 地址能修改，stringConst值不能修改</div><div class="line">NSString * const stringConst = @&quot;I am a NSString * const string&quot;;</div></pre></td></tr></table></figure></p>
-<p>constString1 跟constString2 无区别.<br>＊左边代表指针本身的类型信息，const表示这个指针指向的这个地址是不可变的<br>＊右边代表指针指向变量的可变性，即指针存储的地址指向的内存单元所存储的变量的可变性</p>
-<hr>
-<p>局部常量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//作用域只在本文件中</div><div class="line">static const NSString *kstaticConstString1 = @&quot;I am a static const NSString * string&quot;;</div><div class="line">static NSString const *kstaticConstString2 = @&quot;I am a static NSString const * string&quot;;</div><div class="line">//---------------------------</div></pre></td></tr></table></figure></p>
-<hr>
-<h5 id="总结：不要用宏定义定义常量，能用const-enum替换的以后就少用宏定义吧。有任何问题或者指点请直接留言，欢迎拍砖-最后感谢你的时间"><a href="#总结：不要用宏定义定义常量，能用const-enum替换的以后就少用宏定义吧。有任何问题或者指点请直接留言，欢迎拍砖-最后感谢你的时间" class="headerlink" title="总结：不要用宏定义定义常量，能用const,enum替换的以后就少用宏定义吧。有任何问题或者指点请直接留言，欢迎拍砖~最后感谢你的时间~"></a>总结：不要用宏定义定义常量，能用const,enum替换的以后就少用宏定义吧。有任何问题或者指点请直接留言，欢迎拍砖~最后感谢你的时间~</h5>
+        <!-- 
+
+前言：本文主要梳理iOS中如何使用常量、enum、宏，以及各自的使用场景。
+
+ 重要的事情首先说：在iOS开发中请尽量多使用const、enum来代替宏定义(#define)；随着项目工程的逐渐增大，过多的宏定义还可能影响项目的运行速度（这点待考证）
+
+宏定义大家应该都不陌生，使用起来非常简单，首先我们先来看一下宏定义跟const的区别：1.宏在编译开始之前就会被替换，而const只是变......  -->
+        <p class="article-more-link">
+          <a href="/2017/03/31/post/#more">weiter lesen</a>
+        </p>
       
     </div>
     <footer class="article-footer">
@@ -252,7 +240,7 @@
   <div class="container">
       	<div class="row">
 	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
-	      <p id="copyRightEn">Copyright &copy; 2013 - 2017 Hexo All Rights Reserved.</p>
+	      <p id="copyRightEn">Copyright &copy; 2013 - 2017 记录学习中的点滴 All Rights Reserved.</p>
 	      
 	      
     		<p class="busuanzi_uv">
@@ -396,10 +384,10 @@
         </div>
          <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
           <div class="panel-body">
-            Hexo
+            记录学习中的点滴
           </div>
           <div class="panel-body">
-            Copyright © 2017 Ma Li All Rights Reserved.
+            Copyright © 2017 Objective-C &amp;&amp; PHP &amp;&amp; Swift &amp;&amp; Python All Rights Reserved.
           </div>
         </div>
       </div>
