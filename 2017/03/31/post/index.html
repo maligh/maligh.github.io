@@ -24,7 +24,7 @@
 
 宏定义大家应该都不陌生，使用起来非常简单，首先我们先来看一下宏定义跟const的区别：1.宏在编译开始之前就会被替换，而const只是变量进行">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1457495-df0b95375604d34b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-04-12T15:30:25.000Z">
+<meta property="og:updated_time" content="2017-04-13T13:09:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS常量(const)、enum、宏(#define)的使用场景及区别">
 <meta name="twitter:description" content="前言：本文主要梳理iOS中如何使用常量、enum、宏，以及各自的使用场景。
@@ -204,6 +204,7 @@
 </li>
 </ul>
 <p>代替：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#define DEFINE @&quot;Hello&quot;</div><div class="line">#define WIDTH 10.0</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public class test &#123;</div><div class="line">    return ; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <ul>
 <li><p>当定义<code>对外公开的常量</code>的时候，我们一般使用如下定义：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//Test.h</div><div class="line">extern NSString * const CLASSNAMEconst;</div><div class="line">//Test.m</div><div class="line">NSString * const CLASSNAMEconst = @&quot;hello&quot;;</div></pre></td></tr></table></figure>
