@@ -24,7 +24,7 @@
 
 宏定义大家应该都不陌生，使用起来非常简单，首先我们先来看一下宏定义跟const的区别：1.宏在编译开始之前就会被替换，而const只是变量进行修">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1457495-df0b95375604d34b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-04-29T15:33:08.000Z">
+<meta property="og:updated_time" content="2017-04-29T15:34:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS常量(const)、enum、宏(#define)的使用场景及区别">
 <meta name="twitter:description" content="前言：本文主要梳理iOS中如何使用常量、enum、宏，以及各自的使用场景。
@@ -176,7 +176,8 @@
 <hr>
 <p>局部常量：<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//作用域只在本文件中</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="built_in">NSString</span> *kstaticConstString1 = <span class="string">@"I am a static const NSString * string"</span>;</div><div class="line"><span class="keyword">static</span> <span class="built_in">NSString</span> <span class="keyword">const</span> *kstaticConstString2 = <span class="string">@"I am a static NSString const * string"</span>;</div><div class="line"><span class="comment">//---------------------------</span></div></pre></td></tr></table></figure></p>
 <hr>
-<h5 id="总结：不要用宏定义定义常量，能用const-enum替换的以后就少用宏定义吧。有任何问题或者指点请直接留言，欢迎拍砖-最后感谢你的时间"><a href="#总结：不要用宏定义定义常量，能用const-enum替换的以后就少用宏定义吧。有任何问题或者指点请直接留言，欢迎拍砖-最后感谢你的时间" class="headerlink" title="总结：不要用宏定义定义常量，能用const,enum替换的以后就少用宏定义吧。有任何问题或者指点请直接留言，欢迎拍砖~最后感谢你的时间~"></a>总结：不要用宏定义定义常量，能用const,enum替换的以后就少用宏定义吧。有任何问题或者指点请直接留言，欢迎拍砖~最后感谢你的时间~</h5>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>不要用宏定义定义常量，能用const,enum替换的以后就少用宏定义吧。有任何问题或者指点请直接留言，欢迎拍砖~最后感谢你的时间~</p>
+
       
     </div>
     <footer class="entry-meta entry-footer">
@@ -222,7 +223,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#重要的事情首先说："><span class="nav-number">1.</span> <span class="nav-text">重要的事情首先说：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#那到底什么时候使用宏，什么时候该使用const？"><span class="nav-number">2.</span> <span class="nav-text">那到底什么时候使用宏，什么时候该使用const？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下面顺便说一下const-的一些使用方式，主要说明这几种写法的区别："><span class="nav-number">3.</span> <span class="nav-text">下面顺便说一下const 的一些使用方式，主要说明这几种写法的区别：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#总结：不要用宏定义定义常量，能用const-enum替换的以后就少用宏定义吧。有任何问题或者指点请直接留言，欢迎拍砖-最后感谢你的时间"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">总结：不要用宏定义定义常量，能用const,enum替换的以后就少用宏定义吧。有任何问题或者指点请直接留言，欢迎拍砖~最后感谢你的时间~</span></a></li></ol></li></ol></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#重要的事情首先说："><span class="nav-number">1.</span> <span class="nav-text">重要的事情首先说：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#那到底什么时候使用宏，什么时候该使用const？"><span class="nav-number">2.</span> <span class="nav-text">那到底什么时候使用宏，什么时候该使用const？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下面顺便说一下const-的一些使用方式，主要说明这几种写法的区别："><span class="nav-number">3.</span> <span class="nav-text">下面顺便说一下const 的一些使用方式，主要说明这几种写法的区别：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结："><span class="nav-number">4.</span> <span class="nav-text">总结：</span></a></li></ol>
     
     </div>
   </aside>
