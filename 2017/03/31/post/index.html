@@ -9,34 +9,22 @@
   
   
   
-  <meta name="description" content="前言：本文主要梳理iOS中如何使用常量、enum、宏，以及各自的使用场景。
-
-重要的事情首先说：在iOS开发中请尽量多使用const、enum来代替宏定义(#define)；随着项目工程的逐渐增大，过多的宏定义还可能影响项目的运行速度（这点待考证）
-
-宏定义大家应该都不陌生，使用起来非常简单，首先我们先来看一下宏定义跟const的区别：1.宏在编译开始之前就会被替换，而const只是变量进行修">
+  <meta name="description" content="前言：本文主要梳理iOS中如何使用常量、enum、宏，以及各自的使用场景。  重要的事情首先说：在iOS开发中请尽量多使用const、enum来代替宏定义(#define)；随着项目工程的逐渐增大，过多的宏定义还可能影响项目的运行速度（这点待考证）  宏定义大家应该都不陌生，使用起来非常简单，首先我们先来看一下宏定义跟const的区别：1.宏在编译开始之前就会被替换，而const只是变量进行修">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS常量(const)、enum、宏(#define)的使用场景及区别">
 <meta property="og:url" content="http://superma.me/2017/03/31/post/index.html">
 <meta property="og:site_name" content="记录学习中的点滴">
-<meta property="og:description" content="前言：本文主要梳理iOS中如何使用常量、enum、宏，以及各自的使用场景。
-
-重要的事情首先说：在iOS开发中请尽量多使用const、enum来代替宏定义(#define)；随着项目工程的逐渐增大，过多的宏定义还可能影响项目的运行速度（这点待考证）
-
-宏定义大家应该都不陌生，使用起来非常简单，首先我们先来看一下宏定义跟const的区别：1.宏在编译开始之前就会被替换，而const只是变量进行修">
+<meta property="og:description" content="前言：本文主要梳理iOS中如何使用常量、enum、宏，以及各自的使用场景。  重要的事情首先说：在iOS开发中请尽量多使用const、enum来代替宏定义(#define)；随着项目工程的逐渐增大，过多的宏定义还可能影响项目的运行速度（这点待考证）  宏定义大家应该都不陌生，使用起来非常简单，首先我们先来看一下宏定义跟const的区别：1.宏在编译开始之前就会被替换，而const只是变量进行修">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1457495-df0b95375604d34b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-04-29T15:34:58.000Z">
+<meta property="og:updated_time" content="2017-04-30T11:04:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS常量(const)、enum、宏(#define)的使用场景及区别">
-<meta name="twitter:description" content="前言：本文主要梳理iOS中如何使用常量、enum、宏，以及各自的使用场景。
-
-重要的事情首先说：在iOS开发中请尽量多使用const、enum来代替宏定义(#define)；随着项目工程的逐渐增大，过多的宏定义还可能影响项目的运行速度（这点待考证）
-
-宏定义大家应该都不陌生，使用起来非常简单，首先我们先来看一下宏定义跟const的区别：1.宏在编译开始之前就会被替换，而const只是变量进行修">
+<meta name="twitter:description" content="前言：本文主要梳理iOS中如何使用常量、enum、宏，以及各自的使用场景。  重要的事情首先说：在iOS开发中请尽量多使用const、enum来代替宏定义(#define)；随着项目工程的逐渐增大，过多的宏定义还可能影响项目的运行速度（这点待考证）  宏定义大家应该都不陌生，使用起来非常简单，首先我们先来看一下宏定义跟const的区别：1.宏在编译开始之前就会被替换，而const只是变量进行修">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1457495-df0b95375604d34b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   
     <link rel="alternate" href="/atom.xml" title="记录学习中的点滴" type="application/atom+xml">
   
-  <link rel="icon" href="/css/images/favicon.ico">
+  <link rel="icon" href="/css/images/mali.png">
   
     <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
@@ -78,12 +66,14 @@
 
           <h1 class="site-title">
             
-              <a href="/" title="记录学习中的点滴" rel="home"> 记录学习中的点滴 </a>
+              <a href="/" rel="home" >
+                <img style="margin-bottom: 10px;"  width="66px" height="66px" alt="Hike News" src=" /css/images/mali.png">
+              </a>
             
           </h1>
           
           
-            <div class="site-description">MaLi</div>
+            <div class="site-description">记录学习中的点点滴滴，努力打怪升级~  Objective-C &amp;&amp; PHP &amp;&amp; Swift &amp;&amp; Python</div>
           
             
           <nav id="main-navigation" class="main-navigation" role="navigation">
@@ -97,7 +87,7 @@
                     
                       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">Kategorien</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">Categories</a> </li>
                     
                       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
                     
@@ -120,6 +110,16 @@
           <section id="main" style="float:none;"><article id="post-post" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img fancybox" href="http://upload-images.jianshu.io/upload_images/1457495-df0b95375604d34b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" rel="gallery_cj24e50jj00006cqyam6zx2ld">
+        <img src="http://upload-images.jianshu.io/upload_images/1457495-df0b95375604d34b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
     
       <header class="article-header">
         
