@@ -3,26 +3,29 @@
 <head>
   <meta charset="utf-8">
   
-  <title>iOS常量(const)、enum、宏(#define)的使用场景及区别 | 记录学习中的点滴</title>
+  <title>iOS常量(const)、enum、宏(#define)的使用场景及区别 | 记录学习中的点滴-MaLi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="宏常量" />
   
   
   
   
   <meta name="description" content="前言：本文主要梳理iOS中如何使用常量、enum、宏，以及各自的使用场景。  重要的事情首先说：在iOS开发中请尽量多使用const、enum来代替宏定义(#define)；随着项目工程的逐渐增大，过多的宏定义还可能影响项目的运行速度（这点待考证）  宏定义大家应该都不陌生，使用起来非常简单，首先我们先来看一下宏定义跟const的区别：1.宏在编译开始之前就会被替换，而const只是变量进行修饰">
+<meta name="keywords" content="宏,常量">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS常量(const)、enum、宏(#define)的使用场景及区别">
-<meta property="og:url" content="http://superma.me/2017/03/31/post/index.html">
-<meta property="og:site_name" content="记录学习中的点滴">
+<meta property="og:url" content="http://superma.me/2016/04/30/post/index.html">
+<meta property="og:site_name" content="记录学习中的点滴-MaLi">
 <meta property="og:description" content="前言：本文主要梳理iOS中如何使用常量、enum、宏，以及各自的使用场景。  重要的事情首先说：在iOS开发中请尽量多使用const、enum来代替宏定义(#define)；随着项目工程的逐渐增大，过多的宏定义还可能影响项目的运行速度（这点待考证）  宏定义大家应该都不陌生，使用起来非常简单，首先我们先来看一下宏定义跟const的区别：1.宏在编译开始之前就会被替换，而const只是变量进行修饰">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1457495-df0b95375604d34b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-05-09T15:33:46.000Z">
+<meta property="og:updated_time" content="2017-05-09T16:45:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS常量(const)、enum、宏(#define)的使用场景及区别">
 <meta name="twitter:description" content="前言：本文主要梳理iOS中如何使用常量、enum、宏，以及各自的使用场景。  重要的事情首先说：在iOS开发中请尽量多使用const、enum来代替宏定义(#define)；随着项目工程的逐渐增大，过多的宏定义还可能影响项目的运行速度（这点待考证）  宏定义大家应该都不陌生，使用起来非常简单，首先我们先来看一下宏定义跟const的区别：1.宏在编译开始之前就会被替换，而const只是变量进行修饰">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1457495-df0b95375604d34b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   
-    <link rel="alternate" href="/atom.xml" title="记录学习中的点滴" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="记录学习中的点滴-MaLi" type="application/atom+xml">
   
   <link rel="icon" href="/css/images/mali.png">
   
@@ -133,11 +136,14 @@
     
     <div class="article-meta">
       
-	<a href="/2017/03/31/post/" class="article-date">
-	  <time datetime="2017-03-30T16:27:54.000Z" itemprop="datePublished">March 31, 2017</time>
+	<a href="/2016/04/30/post/" class="article-date">
+	  <time datetime="2016-04-29T18:37:54.000Z" itemprop="datePublished">April 30, 2016</time>
 	</a>
 
       
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Objective-C/">Objective-C</a>
+
     </div>
     <div class="article-entry" itemprop="articleBody">
       
@@ -181,7 +187,13 @@
     </div>
     <footer class="entry-meta entry-footer">
       
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Objective-C/">Objective-C</a>
+
       
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/宏/">宏</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常量/">常量</a></li></ul>
+
       
     </footer>
     <hr class="entry-footer-hr">
@@ -224,7 +236,7 @@
 
   <div class="clearfix container">
       <div class="site-info">
-	      &copy; 2017 记录学习中的点滴 All Rights Reserved.
+	      &copy; 2017 记录学习中的点滴-MaLi All Rights Reserved.
       </div>
       <div class="site-credit">
         Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
