@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="记录学习中的点滴">
 <meta property="og:description" content="前言：本文主要梳理iOS中如何使用常量、enum、宏，以及各自的使用场景。  重要的事情首先说：在iOS开发中请尽量多使用const、enum来代替宏定义(#define)；随着项目工程的逐渐增大，过多的宏定义还可能影响项目的运行速度（这点待考证）  宏定义大家应该都不陌生，使用起来非常简单，首先我们先来看一下宏定义跟const的区别：1.宏在编译开始之前就会被替换，而const只是变量进行修饰">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1457495-df0b95375604d34b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-05-02T15:16:27.000Z">
+<meta property="og:updated_time" content="2017-05-09T15:33:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS常量(const)、enum、宏(#define)的使用场景及区别">
 <meta name="twitter:description" content="前言：本文主要梳理iOS中如何使用常量、enum、宏，以及各自的使用场景。  重要的事情首先说：在iOS开发中请尽量多使用const、enum来代替宏定义(#define)；随着项目工程的逐渐增大，过多的宏定义还可能影响项目的运行速度（这点待考证）  宏定义大家应该都不陌生，使用起来非常简单，首先我们先来看一下宏定义跟const的区别：1.宏在编译开始之前就会被替换，而const只是变量进行修饰">
@@ -57,32 +57,10 @@
 
 
   
-  
-  <div class="site-header-image">
-    <img id="originBg" width="100%" alt="Hike News" src="">
-  </div>
-
-  <div id="header-blur" class="site-header-image blur" style="position: absolute; top:0; height: 207px; min-height: 207px; min-width: 100%;">
-    <img id="blurBg" width="100%" style="top: 96%" alt="Hike News" src="">
-  </div>
-
-  <script>
-        var imgUrls = "css/images/pose01.jpg,https://images.unsplash.com/photo-1464306208223-e0b4495a5553?dpr=1&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=&bg=".split(",");
-        var random = Math.floor((Math.random() * imgUrls.length ));
-        if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
-          document.getElementById("originBg").src=imgUrls[random];
-          document.getElementById("blurBg").src=imgUrls[random];
-        } else {
-          document.getElementById("originBg").src='/' + imgUrls[random];
-          document.getElementById("blurBg").src='/' + imgUrls[random];
-        }
-    </script>
-
-
 
 
 <header id="allheader" class="site-header" role="banner" 
-   style="width: 100%; position: absolute; top:0; background: rgba(255,255,255,.8);"  >
+   >
   <div class="clearfix container">
       <div class="site-branding">
 
@@ -135,7 +113,7 @@
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="http://upload-images.jianshu.io/upload_images/1457495-df0b95375604d34b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" rel="gallery_cj2hpckxt00016sqyl2su8wn3">
+      <a class="article-gallery-img fancybox" href="http://upload-images.jianshu.io/upload_images/1457495-df0b95375604d34b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" rel="gallery_cj2hqh7xq0001cqqyenc5ug6h">
         <img src="http://upload-images.jianshu.io/upload_images/1457495-df0b95375604d34b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" itemprop="image">
       </a>
     
@@ -205,31 +183,6 @@
       
       
       
-        
-	<div id="comment">
-	
-	<!-- 多说评论框 start -->
-	 <div class="ds-thread" data-thread-key="/2017/03/31/post/" data-title="iOS常量(const)、enum、宏(#define)的使用场景及区别" data-url="http://superma.me/2017/03/31/post/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"iTimeTraveler"};
-	  (function() {
-	    var ds = document.createElement('script');
-	    ds.type = 'text/javascript';ds.async = true;
-	    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-	    ds.charset = 'UTF-8';
-	    (document.getElementsByTagName('head')[0] 
-	     || document.getElementsByTagName('body')[0]).appendChild(ds);
-	  })();
-	  </script>
-	<!-- 多说公共JS代码 end -->
-	
-	</div>
-	<link rel="stylesheet" href="/css/comment.css">
-
-
-      
     </footer>
     <hr class="entry-footer-hr">
   </div>
@@ -291,9 +244,6 @@
 
 
     <!-- headerblur min height -->
-    
-      var headerblur = document.getElementById("header-blur");
-      headerblur.style.minHeight = window.getComputedStyle(document.getElementById("allheader"), null).height;
     
     
 </script>
