@@ -11,6 +11,8 @@
     
     
     
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
     <meta name="description" content="前言：本文主要梳理iOS中如何使用常量、enum、宏，以及各自的使用场景。  重要的事情首先说：在iOS开发中请尽量多使用const、enum来代替宏定义(#define)；随着项目工程的逐渐增大，过多的宏定义还可能影响项目的运行速度（这点待考证）  宏定义大家应该都不陌生，使用起来非常简单，首先我们先来看一下宏定义跟const的区别：1.宏在编译开始之前就会被替换，而const只是变量进行修饰">
 <meta name="keywords" content="宏,常量">
 <meta property="og:type" content="blog">
@@ -18,12 +20,10 @@
 <meta property="og:url" content="http://superma.me/2016/04/30/post/index.html">
 <meta property="og:site_name" content="记录学习中的点滴-MaLi">
 <meta property="og:description" content="前言：本文主要梳理iOS中如何使用常量、enum、宏，以及各自的使用场景。  重要的事情首先说：在iOS开发中请尽量多使用const、enum来代替宏定义(#define)；随着项目工程的逐渐增大，过多的宏定义还可能影响项目的运行速度（这点待考证）  宏定义大家应该都不陌生，使用起来非常简单，首先我们先来看一下宏定义跟const的区别：1.宏在编译开始之前就会被替换，而const只是变量进行修饰">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1457495-df0b95375604d34b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-05-09T16:45:50.000Z">
+<meta property="og:updated_time" content="2017-06-14T15:17:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS常量(const)、enum、宏(#define)的使用场景及区别">
 <meta name="twitter:description" content="前言：本文主要梳理iOS中如何使用常量、enum、宏，以及各自的使用场景。  重要的事情首先说：在iOS开发中请尽量多使用const、enum来代替宏定义(#define)；随着项目工程的逐渐增大，过多的宏定义还可能影响项目的运行速度（这点待考证）  宏定义大家应该都不陌生，使用起来非常简单，首先我们先来看一下宏定义跟const的区别：1.宏在编译开始之前就会被替换，而const只是变量进行修饰">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1457495-df0b95375604d34b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
     
     
         
@@ -31,11 +31,6 @@
     
     
     
-    
-        
-            <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1457495-df0b95375604d34b.jpg" />
-            <meta class="swiftype" name="image" data-type="enum" content="http://upload-images.jianshu.io/upload_images/1457495-df0b95375604d34b.jpg" />
-        
     
     <!--STYLES-->
     <link rel="stylesheet" href="/assets/css/style-e0lpuezeiioocuou0t61adlw36gh6pl1vegu9gi3lsahpyavfvvr7heo6eq1.min.css">
@@ -243,24 +238,6 @@
 <h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>不要用宏定义定义常量，能用const,enum替换的以后就少用宏定义吧。有任何问题或者指点请直接留言，欢迎拍砖~最后感谢你的时间~</p>
 
             
-    
-    <div class="image-gallery">
-        <div class="image-gallery-metabar">
-            <span>Gallery : 1 images</span>
-        </div>
-        <div class="image-gallery-photos undefined">
-            
-            
-            <div class="photo-box">
-                <a class="photo-box-inner fancybox" data-fancybox-group="gallery-cj3x4plk7000125qy15goye4h"
-                   title="" href="http://upload-images.jianshu.io/upload_images/1457495-df0b95375604d34b.jpg">
-                    <img class="photo" src="http://upload-images.jianshu.io/upload_images/1457495-df0b95375604d34b.jpg" itemprop="image">
-                </a>
-            </div>
-            
-        </div>
-    </div>
-
         </div>
     </div>
     <div id="post-footer" class="post-footer main-content-wrap">
@@ -467,12 +444,6 @@
             <div class="results">
                 
                 <div class="media">
-                    
-                    <div class="media-left">
-                        <a class="link-unstyled" href="http://superma.me/2016/04/30/post/">
-                            <img class="media-image" src="http://upload-images.jianshu.io/upload_images/1457495-df0b95375604d34b.jpg" width="90" height="90"/>
-                        </a>
-                    </div>
                     
                     <div class="media-body">
                         <a class="link-unstyled" href="http://superma.me/2016/04/30/post/">
