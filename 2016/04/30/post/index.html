@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="记录学习中的点滴-MaLi">
     <title>iOS常量(const)、enum、宏(#define)的使用场景及区别 - 记录学习中的点滴-MaLi</title>
-    <meta name="author" content="Objective-C &amp;&amp; PHP &amp;&amp; Swift &amp;&amp; Python">
+    <meta name="author" content="Mali">
     
     
     
@@ -29,11 +29,13 @@
         
     
     
+        <meta property="og:image" content="http://superma.me/assets/images/avatar.jpg"/>
+    
     
     
     
     <!--STYLES-->
-    <link rel="stylesheet" href="/assets/css/style-e0lpuezeiioocuou0t61adlw36gh6pl1vegu9gi3lsahpyavfvvr7heo6eq1.min.css">
+    <link rel="stylesheet" href="/assets/css/style-sxklfps8ywgfyyjcowvnb4gxdgt0zjts3hsguljmv9uqanxjbnitrovtbrek.min.css">
     <!--STYLES END-->
     
     
@@ -44,6 +46,10 @@
             <!-- Define author's picture -->
 
 
+    
+        
+            
+        
     
 
 <header id="header" data-behavior="4">
@@ -57,6 +63,8 @@
                 href="#about">
         
         
+            <img class="header-picture" src="/assets/images/avatar.jpg" alt="Author&#39;s picture"/>
+        
         </a>
     
 </header>
@@ -64,8 +72,23 @@
             <!-- Define author's picture -->
 
 
+
+        
+    
+
 <nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.jpg" alt="Author&#39;s picture"/>
+                </a>
+                <h4 class="sidebar-profile-name">Mali</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Objective-C &amp;&amp; Swift &amp;&amp; Python &amp;&amp; PHP’s Learner</p>
+</h5>
+                
+            </div>
         
         
             <ul class="sidebar-buttons">
@@ -85,7 +108,7 @@
                 <li class="sidebar-button">
                     
                         <a  class="sidebar-button-link "
-                             href="/all-categories"
+                             href="/categories"
                             
                         >
                     
@@ -97,7 +120,7 @@
                 <li class="sidebar-button">
                     
                         <a  class="sidebar-button-link "
-                             href="/all-tags"
+                             href="/tags"
                             
                         >
                     
@@ -109,7 +132,7 @@
                 <li class="sidebar-button">
                     
                         <a  class="sidebar-button-link "
-                             href="/all-archives"
+                             href="/archives"
                             
                         >
                     
@@ -145,6 +168,15 @@
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="https://github.com/" target="_blank" rel="noopener">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
             
         </ul>
         
@@ -182,7 +214,8 @@
             iOS常量(const)、enum、宏(#define)的使用场景及区别
         </h1>
     
-    <div class="post-meta">
+    
+        <div class="post-meta">
     <time itemprop="datePublished" datetime="2016-04-30T02:37:54+08:00">
 	
 		    Apr 30, 2016
@@ -197,6 +230,7 @@
     
 </div>
 
+    
 </div>
     
     <div class="post-content markdown" itemprop="articleBody">
@@ -249,7 +283,8 @@
 
             </div>
         
-        <div class="post-actions-wrap">
+        
+            <div class="post-actions-wrap">
     <nav>
         <ul class="post-actions post-action-nav">
             <li class="post-action">
@@ -276,21 +311,63 @@
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://superma.me/2016/04/30/post/">
-                <i class="fa fa-google-plus"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://superma.me/2016/04/30/post/">
-                <i class="fa fa-facebook-official"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://superma.me/2016/04/30/post/">
-                <i class="fa fa-twitter"></i>
-            </a>
-        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://superma.me/2016/04/30/post/">
+                    <i class="fa fa-facebook-official"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://superma.me/2016/04/30/post/">
+                    <i class="fa fa-twitter"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://superma.me/2016/04/30/post/">
+                    <i class="fa fa-google-plus"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="http://service.weibo.com/share/share.php?&amp;title=http://superma.me/2016/04/30/post/">
+                    <i class="fa fa-weibo"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="http://connect.qq.com/widget/shareqq/index.html?url=http://superma.me/2016/04/30/post/&amp;title=iOS常量(const)、enum、宏(#define)的使用场景及区别">
+                    <i class="fa fa-qq"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://superma.me/2016/04/30/post/">
+                    <i class="fa fa-star"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="http://widget.renren.com/dialog/share?resourceUrl=http://superma.me/2016/04/30/post/">
+                    <i class="fa fa-renren"></i>
+                </a>
+            </li>
+        
         
         <li class="post-action">
             
@@ -304,6 +381,7 @@
 
 
         
+        
             
         
     </div>
@@ -313,7 +391,7 @@
 
                 <footer id="footer" class="main-content-wrap">
     <span class="copyrights">
-        Copyrights &copy; 2017 Objective-C &amp;&amp; PHP &amp;&amp; Swift &amp;&amp; Python. All Rights Reserved.
+        Copyrights &copy; 2017 Mali. All Rights Reserved.
     </span>
 </footer>
 
@@ -347,21 +425,63 @@
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://superma.me/2016/04/30/post/">
-                <i class="fa fa-google-plus"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://superma.me/2016/04/30/post/">
-                <i class="fa fa-facebook-official"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://superma.me/2016/04/30/post/">
-                <i class="fa fa-twitter"></i>
-            </a>
-        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://superma.me/2016/04/30/post/">
+                    <i class="fa fa-facebook-official"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://superma.me/2016/04/30/post/">
+                    <i class="fa fa-twitter"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://superma.me/2016/04/30/post/">
+                    <i class="fa fa-google-plus"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="http://service.weibo.com/share/share.php?&amp;title=http://superma.me/2016/04/30/post/">
+                    <i class="fa fa-weibo"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="http://connect.qq.com/widget/shareqq/index.html?url=http://superma.me/2016/04/30/post/&amp;title=iOS常量(const)、enum、宏(#define)的使用场景及区别">
+                    <i class="fa fa-qq"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://superma.me/2016/04/30/post/">
+                    <i class="fa fa-star"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="http://widget.renren.com/dialog/share?resourceUrl=http://superma.me/2016/04/30/post/">
+                    <i class="fa fa-renren"></i>
+                </a>
+            </li>
+        
         
         <li class="post-action">
             
@@ -376,30 +496,76 @@
 
                 </div>
                 <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <i id="btn-close-shareoptions" class="fa fa-close"></i>
     <ul class="share-options">
-        <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://superma.me/2016/04/30/post/">
-                <i class="fa fa-google-plus"></i><span>Share on Google Plus</span>
-            </a>
-        </li>
-        <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://superma.me/2016/04/30/post/">
-                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
-            </a>
-        </li>
-        <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://superma.me/2016/04/30/post/">
-                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
-            </a>
-        </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://superma.me/2016/04/30/post/">
+                    <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://superma.me/2016/04/30/post/">
+                    <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://superma.me/2016/04/30/post/">
+                    <i class="fa fa-google-plus"></i><span>Share on Google+</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="http://service.weibo.com/share/share.php?&amp;title=http://superma.me/2016/04/30/post/">
+                    <i class="fa fa-weibo"></i><span>Share on Weibo</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="http://connect.qq.com/widget/shareqq/index.html?url=http://superma.me/2016/04/30/post/&amp;title=iOS常量(const)、enum、宏(#define)的使用场景及区别">
+                    <i class="fa fa-qq"></i><span>Share on QQ</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://superma.me/2016/04/30/post/">
+                    <i class="fa fa-star"></i><span>Share on Qzone</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="http://widget.renren.com/dialog/share?resourceUrl=http://superma.me/2016/04/30/post/">
+                    <i class="fa fa-renren"></i><span>Share on Renren</span>
+                </a>
+            </li>
+        
     </ul>
 </div>
-<div id="share-options-mask" class="share-options-mask"></div>
 
             
         </div>
         
 
+
+    
+        
+    
 
 <div id="about">
     <div id="about-card">
@@ -407,19 +573,27 @@
             <i class="fa fa-remove"></i>
         </div>
         
-            <h4 id="about-card-name">Objective-C &amp;&amp; PHP &amp;&amp; Swift &amp;&amp; Python</h4>
+            <img id="about-card-picture" src="/assets/images/avatar.jpg" alt="Author&#39;s picture"/>
         
-            <div id="about-card-bio"><p>author.bio</p>
+            <h4 id="about-card-name">Mali</h4>
+        
+            <div id="about-card-bio"><p>Objective-C &amp;&amp; Swift &amp;&amp; Python &amp;&amp; PHP’s Learner</p>
 </div>
         
         
             <div id="about-card-job">
                 <i class="fa fa-briefcase"></i>
                 <br/>
-                <p>author.job</p>
+                <p>iOS Developer</p>
 
             </div>
         
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                ShenZhen
+            </div>
         
     </div>
 </div>
@@ -428,7 +602,7 @@
     <div class="modal">
         <div class="modal-header">
             <span class="close-button"><i class="fa fa-close"></i></span>
-            <a href="https://algolia.com" target="_blank" class="searchby-algolia text-color-light link-unstyled">
+            <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
                 <span class="searchby-algolia-text text-color-light text-small">by</span>
                 <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
             </a>
@@ -436,7 +610,7 @@
             <form id="algolia-search-form">
                 <input type="text" id="algolia-search-input" name="search"
                     class="form-control input--large search-input" placeholder="Search "
-                    autofocus="autofocus"/>
+                    />
             </form>
         </div>
         <div class="modal-body">
@@ -482,14 +656,14 @@
         </div>
     </div>
 </div>
+
         
 <div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
         <!--SCRIPTS-->
-<script src="/assets/js/script-kr0ly6hz2kdxgkjcvq4aubfzvbeyatechzx4t2crrfroizm6tebvrzib9jll.min.js"></script>
+<script src="/assets/js/script-ivwiy10zeb8fifc4swnhkwneuk64y53w2scmdmtp8thi9cqfxh31aowtroaz.min.js"></script>
 <!--SCRIPTS END-->
 
     
-
 
 
     </body>
