@@ -14,12 +14,13 @@
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
     <meta name="description" content="前言：本文主要梳理iOS中如何使用常量、enum、宏，以及各自的使用场景。  重要的事情首先说：在iOS开发中请尽量多使用const、enum来代替宏定义(#define)；随着项目工程的逐渐增大，过多的宏定义还可能影响项目的运行速度（这点待考证）  宏定义大家应该都不陌生，使用起来非常简单，首先我们先来看一下宏定义跟const的区别：1.宏在编译开始之前就会被替换，而const只是变量进行修饰">
+<meta name="keywords" content="宏,常量">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="iOS常量(const)、enum、宏(#define)的使用场景及区别">
 <meta property="og:url" content="http://superma.me/2016/04/30/post/index.html">
 <meta property="og:site_name" content="记录学习中的点滴-MaLi">
 <meta property="og:description" content="前言：本文主要梳理iOS中如何使用常量、enum、宏，以及各自的使用场景。  重要的事情首先说：在iOS开发中请尽量多使用const、enum来代替宏定义(#define)；随着项目工程的逐渐增大，过多的宏定义还可能影响项目的运行速度（这点待考证）  宏定义大家应该都不陌生，使用起来非常简单，首先我们先来看一下宏定义跟const的区别：1.宏在编译开始之前就会被替换，而const只是变量进行修饰">
-<meta property="og:updated_time" content="2017-06-20T15:24:07.000Z">
+<meta property="og:updated_time" content="2017-06-20T15:25:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS常量(const)、enum、宏(#define)的使用场景及区别">
 <meta name="twitter:description" content="前言：本文主要梳理iOS中如何使用常量、enum、宏，以及各自的使用场景。  重要的事情首先说：在iOS开发中请尽量多使用const、enum来代替宏定义(#define)；随着项目工程的逐渐增大，过多的宏定义还可能影响项目的运行速度（这点待考证）  宏定义大家应该都不陌生，使用起来非常简单，首先我们先来看一下宏定义跟const的区别：1.宏在编译开始之前就会被替换，而const只是变量进行修饰">
@@ -107,7 +108,7 @@
                 <li class="sidebar-button">
                     
                         <a  class="sidebar-button-link "
-                             href="/categories"
+                             href="/all-categories"
                             
                         >
                     
@@ -119,7 +120,7 @@
                 <li class="sidebar-button">
                     
                         <a  class="sidebar-button-link "
-                             href="/tags"
+                             href="/all-tags"
                             
                         >
                     
@@ -131,7 +132,7 @@
                 <li class="sidebar-button">
                     
                         <a  class="sidebar-button-link "
-                             href="/archives"
+                             href="/all-archives"
                             
                         >
                     
@@ -221,6 +222,12 @@
     	
     </time>
     
+        <span>in </span>
+        
+    <a class="category-link" href="/all-categories/Objective-C/">Objective-C</a>
+
+
+    
 </div>
 
     
@@ -269,13 +276,20 @@
     </div>
     <div id="post-footer" class="post-footer main-content-wrap">
         
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/all-tags/宏/">宏</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/常量/">常量</a>
+
+            </div>
+        
         
             <div class="post-actions-wrap">
     <nav>
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/06/20/test/"  data-tooltip="test">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -389,7 +403,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/06/20/test/"  data-tooltip="test">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -630,6 +644,25 @@
                     <hr>
                 </div>
                 
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://superma.me/2017/06/20/test/">
+                            <h3 class="media-heading">test</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    Jun 20, 2017
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
             </div>
         </div>
         <div class="modal-footer">
@@ -637,7 +670,7 @@
                 data-message-zero="no post found"
                 data-message-one="1 post found"
                 data-message-other="{n} posts found">
-                1 post found
+                2 posts found
             </p>
         </div>
     </div>

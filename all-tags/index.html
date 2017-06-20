@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="记录学习中的点滴-MaLi">
-    <title>Archives: 2016 - 记录学习中的点滴-MaLi</title>
+    <title>all-tags - 记录学习中的点滴-MaLi</title>
     <meta name="author" content="Mali">
     
     
@@ -15,12 +15,13 @@
     
     <meta name="description" content="记录学习中的点点滴滴，努力打怪升级~  Objective-C &amp;&amp; PHP &amp;&amp; Swift &amp;&amp; Python">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="记录学习中的点滴-MaLi">
-<meta property="og:url" content="http://superma.me/archives/2016/index.html">
+<meta property="og:title" content="all-tags">
+<meta property="og:url" content="http://superma.me/all-tags/index.html">
 <meta property="og:site_name" content="记录学习中的点滴-MaLi">
 <meta property="og:description" content="记录学习中的点点滴滴，努力打怪升级~  Objective-C &amp;&amp; PHP &amp;&amp; Swift &amp;&amp; Python">
+<meta property="og:updated_time" content="2017-06-20T15:39:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="记录学习中的点滴-MaLi">
+<meta name="twitter:title" content="all-tags">
 <meta name="twitter:description" content="记录学习中的点点滴滴，努力打怪升级~  Objective-C &amp;&amp; PHP &amp;&amp; Swift &amp;&amp; Python">
     
     
@@ -202,71 +203,70 @@
                  class="
                         hasCoverMetaIn
                         ">
-                
-    <section class="postShorten-group main-content-wrap">
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/04/30/post/">
-                            iOS常量(const)、enum、宏(#define)的使用场景及区别
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-04-30T02:37:54+08:00">
-	
-		    Apr 30, 2016
-    	
-    </time>
-    
-        <span>in </span>
+                <div id="tags-archives" class="main-content-wrap">
+    <form id="filter-form" action="#">
+        <input name="tag" type="text" class="form-control input--xlarge" placeholder="Search tag" autofocus="autofocus">
+    </form>
+    <h4 class="archive-result text-color-base text-xlarge"
+        data-message-zero="no tag found"
+        data-message-one="1 tag found"
+        data-message-other="{n} tags found"></h4>
+
+        <section>
         
-    <a class="category-link" href="/all-categories/Objective-C/">Objective-C</a>
-
-
-    
-</div>
-
+            <a class="tag tag--primary tag--small" href="#宏-list" data-tag="宏">
+                宏
+            </a>
+        
+            <a class="tag tag--primary tag--small" href="#常量-list" data-tag="常量">
+                常量
+            </a>
+        
+    </section>
+    <section class="boxes">
+        
+            <div id="宏-list" class="archive box" data-tag="宏">
+                <h4 class="archive-title">
+                    <a class="link-unstyled" href="/all-tags/宏">
+                        宏 (1)
+                    </a>
+                </h4>
+                <ul class="archive-posts">
+                    
+                        <li class="archive-post">
+                            <a class="archive-post-title" href="/2016/04/30/post/">
+                                iOS常量(const)、enum、宏(#define)的使用场景及区别
+                            </a>
+                            <span class="archive-post-date">
+                                 - apr 30, 2016
+                            </span>
+                        </li>
+                    
+                </ul>
             </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <blockquote>
-<p>前言：本文主要梳理iOS中如何使用常量、enum、宏，以及各自的使用场景。</p>
-</blockquote>
-<h2 id="重要的事情首先说："><a href="#重要的事情首先说：" class="headerlink" title="重要的事情首先说："></a>重要的事情首先说：</h2><p>在iOS开发中请尽量多使用const、enum来代替宏定义(#define)；随着项目工程的逐渐增大，过多的宏定义还可能影响项目的运行速度（这点待考证）</p>
-<ul>
-<li>宏定义大家应该都不陌生，使用起来非常简单，首先我们先来看一下宏定义跟const的区别：<br>1.宏在编译开始之前就会被替换，而const只是变量进行修饰;<br>2.宏可以定义一些函数方法，const不能<br>3.宏编译时只替换不做检查不报错，也就是说有重复定义问题。而const会编译检查，会报错</li>
-</ul>
-<hr>
-<h2 id="那到底什么时候使用宏，什么时候该使用const？"><a href="#那到底什么时候使用宏，什么时候该使用const？" class="headerlink" title="那到底什么时候使用宏，什么时候该使用const？"></a>那到底什么时候使用宏，什么时候该使用const？</h2>
+        
+            <div id="常量-list" class="archive box" data-tag="常量">
+                <h4 class="archive-title">
+                    <a class="link-unstyled" href="/all-tags/常量">
+                        常量 (1)
+                    </a>
+                </h4>
+                <ul class="archive-posts">
                     
-                        <a href="/2016/04/30/post/" class="postShorten-excerpt_link link">
-                            Continue reading
-                        </a>
-                        
+                        <li class="archive-post">
+                            <a class="archive-post-title" href="/2016/04/30/post/">
+                                iOS常量(const)、enum、宏(#define)的使用场景及区别
+                            </a>
+                            <span class="archive-post-date">
+                                 - apr 30, 2016
+                            </span>
+                        </li>
                     
-                </div>
-            
-        </div>
+                </ul>
+            </div>
         
-    </article>
-    
-    <div class="pagination-bar">
-    <ul class="pagination">
-        
-        
-        <li class="pagination-number">page 1 of 1</li>
-    </ul>
+    </section>
 </div>
-
-</section>
-
-
 
                 <footer id="footer" class="main-content-wrap">
     <span class="copyrights">
