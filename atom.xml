@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://superma.me/"/>
-  <updated>2017-07-04T16:28:33.000Z</updated>
+  <updated>2017-07-04T16:49:57.000Z</updated>
   <id>http://superma.me/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://superma.me/2017/07/04/Objective-C%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83%E4%BB%A5%E5%8F%8A%E5%BB%BA%E8%AE%AE/"/>
     <id>http://superma.me/2017/07/04/Objective-C编程规范以及建议/</id>
     <published>2017-07-04T15:36:51.000Z</published>
-    <updated>2017-07-04T16:28:33.000Z</updated>
+    <updated>2017-07-04T16:49:57.000Z</updated>
     
     <content type="html"><![CDATA[<p>本文记录一下Objective-C编程规范以及一些建议，可能后续会有些修改和补充，至于初衷是最近接手的项目中代码”有些”凌乱，所以整理了一篇，有一些来自网上，有一些是我平时的代码风格的吧~<br><a id="more"></a><br><img src="http://upload-images.jianshu.io/upload_images/1457495-ad0b17b8f89cc097.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Flag"></p>
 <h2 id="方法声明和定义"><a href="#方法声明和定义" class="headerlink" title="方法声明和定义"></a>方法声明和定义</h2><p>-或者+和返回类型之间须使用一个空格，括号要同行并有一个空格</p>
@@ -125,6 +125,8 @@
     
       <category term="Objective-C" scheme="http://superma.me/all-categories/Objective-C/"/>
     
+    
+      <category term="编码规范" scheme="http://superma.me/all-tags/%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83/"/>
     
   </entry>
   
