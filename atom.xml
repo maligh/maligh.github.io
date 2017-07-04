@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://superma.me/"/>
-  <updated>2017-07-04T15:30:50.000Z</updated>
+  <updated>2017-07-04T15:50:42.000Z</updated>
   <id>http://superma.me/</id>
   
   <author>
@@ -16,11 +16,124 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Objective-C编程规范以及建议</title>
+    <link href="http://superma.me/2017/07/04/Objective-C%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83%E4%BB%A5%E5%8F%8A%E5%BB%BA%E8%AE%AE/"/>
+    <id>http://superma.me/2017/07/04/Objective-C编程规范以及建议/</id>
+    <published>2017-07-04T15:36:51.000Z</published>
+    <updated>2017-07-04T15:50:42.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文记录一下Objective-C编程规范以及一些建议，可能后续会有些修改和补充，至于初衷是最近接收的项目中代码有些凌乱，所以整理了一篇，有一些来自网上，有一些是我平时的代码风格的吧~<br><a id="more"></a><br><img src="http://upload-images.jianshu.io/upload_images/1457495-ad0b17b8f89cc097.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Flag"></p>
+<h2 id="方法声明和定义"><a href="#方法声明和定义" class="headerlink" title="方法声明和定义"></a>方法声明和定义</h2><p>-或者+和返回类型之间须使用一个空格，括号要同行并有一个空格</p>
+<p>方法应该像这样：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)doSomethingWithString:(<span class="built_in">NSString</span> *)theString &#123;</div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果函数名字太长，可以用冒号对齐，像这样：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)doSomethingWith:(GTMFoo *)theFoo</div><div class="line">                   rect:(<span class="built_in">NSRect</span>)theRect</div><div class="line">               interval:(<span class="keyword">float</span>)theInterval &#123;</div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当第一个关键字比其它的短时,要保证下一行至少有4个空格的缩进，对齐关键字，像这样：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)<span class="keyword">short</span>:(GTMFoo *)theFoo</div><div class="line">    longKeyword:(<span class="built_in">NSRect</span>)theRect</div><div class="line">    evenLongerKeyword:(<span class="keyword">float</span>)theInterval &#123;</div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="方法调用"><a href="#方法调用" class="headerlink" title="方法调用"></a>方法调用</h2><p>调用时所有参数应该在同一行：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[myObject doFooWith:arg1 name:arg2 error:arg3];</div></pre></td></tr></table></figure>
+<p>或者每行一个参数，以冒号对齐：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[myObject doFooWith:arg1</div><div class="line">               name:arg2</div><div class="line">              error:arg3];</div></pre></td></tr></table></figure>
+<p>方法定义与方法声明一样，当关键字的长度不足以以冒号对齐时，下一行都要以四个空格进行缩进</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[myObj <span class="keyword">short</span>:arg1</div><div class="line">    longKeyword:arg2</div><div class="line">    evenLongerKeyword:arg3];</div></pre></td></tr></table></figure>
+<p>不要使用下面的缩进风格：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">[myObject doFooWith:arg1 name:arg2  <span class="comment">// some lines with &gt;1 arg</span></div><div class="line">              error:arg3];</div><div class="line"></div><div class="line">[myObject doFooWith:arg1</div><div class="line">               name:arg2 error:arg3];</div><div class="line"></div><div class="line">[myObject doFooWith:arg1</div><div class="line">          name:arg2  <span class="comment">// aligning keywords instead of colons</span></div><div class="line">          error:arg3];</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h2><p>对于易维护的代码而言，命名规则非常重要。Objective-C 的方法名往往十分长，但代码块读起来就像散文一样，不需要太多的代码注释</p>
+<p>当编写纯粹的 Objective-C 代码时，我们基本遵守标准的 <a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html" target="_blank" rel="external">Objective-C naming rules</a>,</p>
+<h2 id="文件名"><a href="#文件名" class="headerlink" title="文件名"></a>文件名</h2><table>
+<thead>
+<tr>
+<th>扩展名</th>
+<th>文件分类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.h</td>
+<td>C/C++/Objective-C 的头文件</td>
+</tr>
+<tr>
+<td>.m</td>
+<td>Objective-C 实现文件</td>
+</tr>
+<tr>
+<td>.mm</td>
+<td>Ojbective-C++ 的实现文件</td>
+</tr>
+<tr>
+<td>.cc</td>
+<td>纯 C++ 的实现文件</td>
+</tr>
+<tr>
+<td>.c</td>
+<td>纯C 的实现文件</td>
+</tr>
+</tbody>
+</table>
+<h2 id="类名"><a href="#类名" class="headerlink" title="类名"></a>类名</h2><p>类名（以及类别、协议名）应首字母大写，并以驼峰格式分割单词</p>
+<h2 id="Objective-C-方法名"><a href="#Objective-C-方法名" class="headerlink" title="Objective-C 方法名"></a>Objective-C 方法名</h2><p>方法名应该以小写字母开头，并混合驼峰格式。每个具名参数也应该以小写字母开头<br>方法名应尽量读起来就像句子，这表示你应该选择与方法名连在一起读起来通顺的参数名。（例如，convertPoint:fromRect: 或 replaceCharactersInRange:withString:）。详情参见 <a href="http://developer.apple.com/documentation/Cocoa/Conceptual/CodingGuidelines/Articles/NamingMethods.html" target="_blank" rel="external">Apple’s Guide to Naming Methods</a><br>第二个参数不要<code>and</code>：</p>
+<ul>
+<li>正确: <code>- (instancetype)initWithWidth:(float)width :(float)height;</code> </li>
+<li>不好: <code>- (id)initWithWidth:(float)width andHeight:(float)height;</code> </li>
+</ul>
+<h2 id="变量名"><a href="#变量名" class="headerlink" title="变量名"></a>变量名</h2><p>应该使用驼峰命名法，变量名尽量能够代表其自身意思，尽量避免中英文混合命名，中英文混合命名是建议用’_’下划线分割中英文。<br><strong>尽量避免如下命名方式</strong></p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSDictionary</span> *d0 = [ACGPCacheCenter readFileAtSubDir: HSHomePageSubDirForAD];</div><div class="line"><span class="built_in">NSDictionary</span> *d2 = [ACGPCacheCenter readFileAtSubDir: HSHomePageSubDirForZX];</div><div class="line"><span class="built_in">NSDictionary</span> *d3 = [ACGPCacheCenter readFileAtSubDir: HSHPSubDirForEntry];</div><div class="line"><span class="built_in">NSDictionary</span> *d4 = [ACGPCacheCenter readFileAtSubDir: HSHPSubDirForCopywriting];</div></pre></td></tr></table></figure>
+<p>循环以及一些生命周期很短、很浅显易懂的变量可以放开要求，可以使用简单单字母等等变量名</p>
+<h2 id="常量名"><a href="#常量名" class="headerlink" title="常量名"></a>常量名</h2><p>常量名（如宏定义、枚举、静态局部变量等）应该以小写字母 k 开头，使用驼峰格式分隔单词，如：<code>kInvalidHandle，kWritePerm</code></p>
+<hr>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>建议注释不要过多，尽量能够做到代码自解释。与其给类型及变量起一个晦涩难懂的名字，再为它写注释，不如直接起一个有意义的名字</p>
+<p>关于注释有以下几点建议：</p>
+<h3 id="h-文件注释"><a href="#h-文件注释" class="headerlink" title=".h 文件注释"></a>.h 文件注释</h3><p> <code>.h</code> 文件中 interface 前要加<code>VVDocumenter</code>注释，例如下面这个类，根据类名根本不知道哪个模块，做什么的。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">HSHPCopywritingCell</span> : <span class="title">HSBaseCollectionViewCell</span></span></div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<p>应改成</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> 首页模块-自选股cell</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">HSHPCopywritingCell</span> : <span class="title">HSBaseCollectionViewCell</span></span></div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<p>之后在业务代码中遇到这个类，按住<code>alt</code>键鼠标点击类名就可以查看到类的<code>Description</code>如下：<br><img src="http://opmu2mji9.bkt.clouddn.com/123.png" alt=""></p>
+<h3 id="属性以及成员变量注释"><a href="#属性以及成员变量注释" class="headerlink" title="属性以及成员变量注释"></a>属性以及成员变量注释</h3><p>属性、成员变量、枚举类型的注释建议用 <code>///&lt;</code>进行注释</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) HSMarketIndexModel *USmodel;      <span class="comment">///&lt; 美股指数model</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) HSMarketIndexModel *HKmodel;      <span class="comment">///&lt; 港股指数model</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) HSMarketIndexView *indexView;     <span class="comment">///&lt; 指数view</span></div></pre></td></tr></table></figure>
+<p>同样按住<code>alt</code>键鼠标点击类名也可以查看到类的<code>Description</code>，用<code>/** 美股指数 */</code> 这种注释方式也可以看到Description，不过属性太多可能会不太美观</p>
+<h3 id="代码块注释"><a href="#代码块注释" class="headerlink" title="代码块注释"></a>代码块注释</h3><p>善用<code>#pragma mark</code>把代码进行分类，<code>#pragma mark</code>没有下划线，<code>#pragma mark -</code>有下划线分割</p>
+<p>建议用如下类似代码块组织代码：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#pragma mark - ================ LifeCycle =================</span></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">self</span> configUI];</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line">- (<span class="keyword">void</span>) viewWillAppear:(<span class="built_in">BOOL</span>)animated &#123;</div><div class="line">&#125;...</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)configUI &#123;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">#pragma mark - ================ Public Methods =================</span></div><div class="line"></div><div class="line"><span class="meta">#pragma mark ==== 核心公开方法注释</span></div><div class="line">- (<span class="keyword">void</span>)somePublicMethod &#123;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">#pragma mark ==== 核心公开方法注释2</span></div><div class="line">- (<span class="keyword">void</span>)somePublicMethod2 &#123;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">#pragma mark - ================ Private Methods =================</span></div><div class="line"></div><div class="line"><span class="meta">#pragma mark ==== 核心私有方法注释</span></div><div class="line">- (<span class="keyword">void</span>)somePrivateMethod &#123;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">#pragma mark - ================ UITableView Delegate =================</span></div><div class="line"></div><div class="line">- (<span class="built_in">NSInteger</span>)numberOfSectionsInTableView:(<span class="built_in">UITableView</span> *)tableView &#123; </div><div class="line">&#125;...</div><div class="line"></div><div class="line"><span class="meta">#pragma mark - ================ Actions =================</span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)someButtonClicked &#123;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">#pragma mark - ================ Getter and Setter =================</span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)setModelArray:(<span class="built_in">NSMutableArray</span> *)modelArray &#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>注意:</strong>代码块的顺序应该是由重要到不重要，Getter之类的不重要代码块要放在最后，确保别人打开你的类先映入眼帘的是<code>有用的代码</code></p>
+<hr>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="保持公共API简单"><a href="#保持公共API简单" class="headerlink" title="保持公共API简单"></a>保持公共API简单</h3><p>如果一个函数压根没必要公开，就不要这么做，属性也是一样，同时对方法进行合理的VVDocumenter注释，公开属性以及常量、枚举尽可能的用<code>///&lt;</code>注释，除非特别特别简单的可以省略</p>
+<h3 id="关于警告"><a href="#关于警告" class="headerlink" title="关于警告"></a>关于警告</h3><p>代码中遇到警告信息应该尽量解决掉，有一些可能是类型转换警告，有一些是无用的变量，代码永远不会被执行，已废弃的方法等等，有一点<code>代码洁癖</code>、对自己的代码要求严格是一件好事</p>
+<h3 id="关于废弃的代码"><a href="#关于废弃的代码" class="headerlink" title="关于废弃的代码"></a>关于废弃的代码</h3><p>项目中遇到废弃的代码、没有用到的类（头文件）、注释掉的代码，除非一定要保留的都要尽量删掉，保留的写好注释，建议用TODO注释，保留的原因以及相关责任人，以便其他人接手不至于懵逼~</p>
+<hr>
+<h2 id="一些建议"><a href="#一些建议" class="headerlink" title="一些建议"></a>一些建议</h2><h3 id="定义常量时：多用类型常量，少用-define预处理指令"><a href="#定义常量时：多用类型常量，少用-define预处理指令" class="headerlink" title="定义常量时：多用类型常量，少用#define预处理指令"></a>定义常量时：多用类型常量，少用#define预处理指令</h3><p>宏定义没有类型，有被重复定义风险，影响项目编译速度。<br>建议用</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kConst = <span class="string">@"Hello"</span>；</div><div class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="built_in">CGFloat</span> kWidth = <span class="number">10.0</span>;</div></pre></td></tr></table></figure>
+<p>代替：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#define kConst @<span class="meta-string">"Hello"</span></span></div><div class="line"><span class="meta">#define kWidth 10.0</span></div></pre></td></tr></table></figure>
+<p>当定义对外公开的常量的时候，我们一般使用如下定义</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Test.h</span></div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kClassNameconst;</div><div class="line"><span class="comment">//Test.m</span></div><div class="line"><span class="built_in">NSString</span> * <span class="keyword">const</span> kClassNameconst = <span class="string">@"hello"</span>;</div></pre></td></tr></table></figure>
+<h3 id="关于枚举"><a href="#关于枚举" class="headerlink" title="关于枚举"></a>关于枚举</h3><p>推荐使用NS_ENUM和NS_OPTIONS定义 </p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSInteger</span>,TestEnum) &#123;</div><div class="line">    MY_INT_CONST = <span class="number">12345</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="built_in">NS_OPTIONS</span>(<span class="built_in">NSInteger</span>, SelectType) &#123;</div><div class="line">    SelectA    = <span class="number">0</span>,</div><div class="line">    SelectB    = <span class="number">1</span> &lt;&lt; <span class="number">0</span>,</div><div class="line">    SelectC    = <span class="number">1</span> &lt;&lt; <span class="number">1</span>,</div><div class="line">    SelectD    = <span class="number">1</span> &lt;&lt; <span class="number">2</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>在枚举类型的switch语句中不要实现default分支，有一个好处是，当我们给枚举增加成员时，编译器就会提示开发者：<code>switch语句并未处理所有的枚举</code></p>
+<h3 id="尽量使用简洁字面量语法"><a href="#尽量使用简洁字面量语法" class="headerlink" title="尽量使用简洁字面量语法"></a>尽量使用简洁字面量语法</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSArray</span> *animals = @[<span class="string">@"dog"</span>, <span class="string">@"pig"</span>, <span class="string">@"you"</span>];</div><div class="line">Dictionary *dict = @&#123;<span class="string">@"animal"</span>:<span class="string">@"tiger"</span>, <span class="string">@"phone"</span>:<span class="string">@"iPhone 6"</span>&#125;;</div><div class="line"></div><div class="line"><span class="built_in">NSString</span> *dog = animals[<span class="number">0</span>];</div><div class="line"><span class="built_in">NSString</span> *iphone = dict[<span class="string">@"phone"</span>];</div></pre></td></tr></table></figure>
+<h3 id="属性的strong、copy"><a href="#属性的strong、copy" class="headerlink" title="属性的strong、copy"></a>属性的strong、copy</h3><p>定义可变类型时不要用copy修饰，会留下崩溃隐患</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="built_in">NSMutableArray</span> *mutableArrayOfCopy;   <span class="comment">///&lt; 插入数据时会崩溃</span></div></pre></td></tr></table></figure>
+<p>一般NSString 以及NSArray等等不可变类型建议用<code>copy</code>修饰，用<code>strong</code>修饰也没错，不过要确定情景是否真的需要<code>strong</code></p>
+<h2 id="结尾："><a href="#结尾：" class="headerlink" title="结尾："></a>结尾：</h2><p>本文对Objective-C编码粗略规范以及一些浅显建议，欢迎大家一起补充完善，共同交流进步，维护增强项目代码的易读性，易扩展性，健壮性等等~</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文记录一下Objective-C编程规范以及一些建议，可能后续会有些修改和补充，至于初衷是最近接收的项目中代码有些凌乱，所以整理了一篇，有一些来自网上，有一些是我平时的代码风格的吧~&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Objective-C" scheme="http://superma.me/all-categories/Objective-C/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>iOS常量(const)、enum、宏(#define)的使用场景及区别</title>
     <link href="http://superma.me/2016/04/30/post/"/>
     <id>http://superma.me/2016/04/30/post/</id>
     <published>2016-04-29T18:37:54.000Z</published>
-    <updated>2017-07-04T15:30:50.000Z</updated>
+    <updated>2017-07-04T15:44:49.000Z</updated>
     
     <content type="html"><![CDATA[<p>前言：本文主要梳理iOS中如何使用常量、enum、宏，以及各自的使用场景。<br><a id="more"></a><br><img src="http://upload-images.jianshu.io/upload_images/1457495-df0b95375604d34b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h2 id="重要的事情首先说："><a href="#重要的事情首先说：" class="headerlink" title="重要的事情首先说："></a>重要的事情首先说：</h2><p>在iOS开发中请尽量多使用const、enum来代替宏定义(#define)；随着项目工程的逐渐增大，过多的宏定义还会影响项目的编译时间</p>
