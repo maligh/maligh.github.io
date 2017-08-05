@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://superma.me/"/>
-  <updated>2017-08-05T17:06:36.000Z</updated>
+  <updated>2017-08-05T17:25:32.000Z</updated>
   <id>http://superma.me/</id>
   
   <author>
@@ -20,12 +20,266 @@
     <link href="http://superma.me/2017/08/06/%E9%87%8D%E6%B8%A9%E3%80%8AEffectiveObjective-C2-0%E7%BC%96%E5%86%99%E9%AB%98%E8%B4%A8%E9%87%8FiOS%E4%B8%8EOSX%E4%BB%A3%E7%A0%81%E7%9A%8452%E4%B8%AA%E6%9C%89%E6%95%88%E6%96%B9%E6%B3%95%E3%80%8B/"/>
     <id>http://superma.me/2017/08/06/重温《EffectiveObjective-C2-0编写高质量iOS与OSX代码的52个有效方法》/</id>
     <published>2017-08-05T17:06:36.000Z</published>
-    <updated>2017-08-05T17:06:36.000Z</updated>
+    <updated>2017-08-05T17:25:32.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近在重温这本OC经典之作《Effective Objective-C 2.0编写高质量iOS与OS X代码的52个有效方法》，这篇文章算是重温之后的产物吧<a id="more"></a>，读完这篇文章你将快速读完这本书，由于个人能力有限，难免有一些遗漏或者错误，请各位看官不吝赐教~谢谢~同时如果有任何问题也可以在下方留言，欢迎一起交流进步~另外由于篇幅原因，书中一些基础知识的介绍文中就省略掉了~</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1457495-debf9e0c37687e51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="目录"><br>上面就是这本书的目录，可以<a href="https://pan.baidu.com/s/1bpCj0i7" target="_blank" rel="external">点击这里下载</a>PDF版，原版英文版PDF我也有存~</p>
+<hr>
+<h2 id="第一章：熟悉Objective-C"><a href="#第一章：熟悉Objective-C" class="headerlink" title="第一章：熟悉Objective-C"></a>第一章：熟悉Objective-C</h2><h3 id="第一条：了解Objective-C语言的起源"><a href="#第一条：了解Objective-C语言的起源" class="headerlink" title="第一条：了解Objective-C语言的起源"></a>第一条：了解Objective-C语言的起源</h3><ol>
+<li><code>Objective-C</code>从Smalltalk语言是从<code>Smalltalk</code>语言演化而来，<br><code>Smalltalk</code>是消息语言的鼻祖。</li>
+<li><code>Objective-C</code>是<code>C语言</code>的超集，在<code>C语言</code>基础上添加了面向对象等特性，可能一开始接触时你会觉得语法有点奇怪，那是因为<code>Objective-C</code>使用了动态绑定的<code>消息结构</code>，而<code>Java</code>，<code>C++</code>等等语言使用的是函数调用。</li>
+<li><code>消息结构</code>与<code>函数调用</code>的关键区别在于：函数调用的语言，在编译阶段由<code>编译器</code>生成一些<code>虚方法表</code>，在运行时从这个表找到所要执行的方法去执行。而使用了动态绑定的<code>消息结构</code>在运行时接到一条消息，接下来要执行什么代码是运行期决定的，而不是编译器。</li>
+</ol>
+<h3 id="第二条：-在类的文件中尽量少引用其他头文件"><a href="#第二条：-在类的文件中尽量少引用其他头文件" class="headerlink" title="第二条： 在类的文件中尽量少引用其他头文件"></a>第二条： 在类的文件中尽量少引用其他头文件</h3><ol>
+<li>如果需要引用一个类文件时，只是需要使用类名，不需要知道其中细节，可以用<code>@class xx.h</code>，这样做的好处会减少一定的编译时间。如果是用的<code>#import</code>全部导入的话，会出现<code>a.h</code> import了<code>b.h</code>,当<code>c.h</code> 又import <code>a.h</code>时，把<code>b.h</code>也都导入了，如果只是用到类名，真的比较浪费，也不够优雅</li>
+<li>有时候无法使用<code>@class</code>向前声明，比如某个类要遵循一项协议，这个协议在另外一个类中声明的，可以将协议这部分单独放在一个头文件，或者放在分类当中，以降低引用成本。</li>
+</ol>
+<h3 id="第三条：多用字面量语法，少用与之等价的方法"><a href="#第三条：多用字面量语法，少用与之等价的方法" class="headerlink" title="第三条：多用字面量语法，少用与之等价的方法"></a>第三条：多用字面量语法，少用与之等价的方法</h3><p>1.多使用字面量语法来创建字符串，数组，字典等。<br><strong>传统创建数组方法:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NSArray *languages = [NSArray arrayWithObjects:@&quot;PHP&quot;, @&quot;Objective-C&quot;, someObject, @&quot;Swift&quot;, @&quot;Python&quot;, nil];</div><div class="line">NSString *Swift = [languages objectAtIndex:2];</div><div class="line">NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@&quot;key&quot;, @&quot;value&quot;, nil];</div><div class="line">NSString *value = [languages objectForKey:@&quot;key&quot;];</div></pre></td></tr></table></figure></p>
+<p><strong>字面量:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NSArray *languages = @[@&quot;PHP&quot;, @&quot;Objective-C&quot;, someObject, @&quot;Swift&quot;, @&quot;Python&quot;];</div><div class="line">NSString *Swift = languages[2];</div><div class="line">NSDictionary *dict = @&#123;@&quot;key&quot; : @&quot;value&quot;&#125;;</div><div class="line">NSString *value = languages[@&quot;key&quot;];</div></pre></td></tr></table></figure></p>
+<p>这样做的好处：使代码更简洁，易读，也会避免nil问题。比如languages数据中 someObject 如果为nil时，字面量语法就会抛出异常，而使用传统方法创建的languages数组值确是<code>@[@&quot;PHP&quot;, @&quot;Objective-C&quot;];</code>因为字面量语法其实是一种语法糖，效果是先创建了一个数组，然后再把括号中的对象都加到数组中来。<br>不过字面量语法有一个小缺点就是创建的数组，字符串等等对象都是不可变的，如果想要可变的对象需要自己多执行一步<code>mutableCopy</code>，例如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSMutableArray *languages = [@[@&quot;PHP&quot;, @&quot;Objective-C&quot;, @&quot;Swift&quot;, @&quot;Python&quot;] mutableCopy];</div></pre></td></tr></table></figure></p>
+<h3 id="第四条：多用类型常量，少用-define预处理指令"><a href="#第四条：多用类型常量，少用-define预处理指令" class="headerlink" title="第四条：多用类型常量，少用#define预处理指令"></a>第四条：多用类型常量，少用#define预处理指令</h3><p><a href="http://www.jianshu.com/p/064b5b82a3a2" target="_blank" rel="external">第4条第5条看这里</a></p>
+<h3 id="第五条：多用枚举表示状态、选项、状态码"><a href="#第五条：多用枚举表示状态、选项、状态码" class="headerlink" title="第五条：多用枚举表示状态、选项、状态码"></a>第五条：多用枚举表示状态、选项、状态码</h3><p><a href="http://www.jianshu.com/p/064b5b82a3a2" target="_blank" rel="external">第4条第5条看这里</a></p>
+<hr>
+<h2 id="第二章：对象、消息、运行期"><a href="#第二章：对象、消息、运行期" class="headerlink" title="第二章：对象、消息、运行期"></a>第二章：对象、消息、运行期</h2><h3 id="第六条：理解“属性”这一概念"><a href="#第六条：理解“属性”这一概念" class="headerlink" title="第六条：理解“属性”这一概念"></a>第六条：理解“属性”这一概念</h3><p>这一条讲的是属性的基本概念，以及属性的各种修饰符，这些就不多啰嗦了，这里强调一下:</p>
+<ol>
+<li>定义对外开放的属性时候尽量做到暴露权限最小化，不希望被修改的属性要加上<code>readonly</code>。</li>
+<li><code>atomic</code> 并不能保证多线程安全，例如一个线程连续多次读取某个属性的值，而同时还有别的线程在修改这个属性值得时候，也还是一样会读到不同的值。atomic 的原理只是在 setter and getter 方法中加了一个<code>@synchronized(self)</code>，所以iOS开发中属性都要声明为<code>nonatomic</code>,因为atomic严重影响了性能，但是在Mac OSX上开发却通常不存在这个性能问题</li>
+<li>说一下下面的哪个属性声明有问题<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, strong) NSArray *arrayOfStrong;</div><div class="line">@property (nonatomic, copy) NSArray *arrayOfCopy;</div><div class="line">@property (nonatomic, strong) NSMutableArray *mutableArrayOfStrong;</div><div class="line">@property (nonatomic, copy) NSMutableArray *mutableArrayOfCopy;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><a href="https://github.com/maligh/ML-Objective-C-Demo/tree/master/Copy-Strong-Array-MutableArray" target="_blank" rel="external">具体运行示例点击查看</a><br>答案是正常应该这样声明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, copy) NSArray *arrayOfCopy;</div><div class="line">@property (nonatomic, strong) NSMutableArray *mutableArrayOfStrong;</div></pre></td></tr></table></figure></p>
+<h3 id="第七条：在对象内部尽量直接访问实例变量"><a href="#第七条：在对象内部尽量直接访问实例变量" class="headerlink" title="第七条：在对象内部尽量直接访问实例变量"></a>第七条：在对象内部尽量直接访问实例变量</h3><ol>
+<li>在类内读取属性的数据时，应该通过直接实例变量来读，这样不经过Objecit-C的方法派发，编译器编译后的代码结果是直接访问存实例变量的那块内存中的值，而不会生成走方法派发的代码，这样的速度会更快。</li>
+<li>给属性写入数据时，应该通过属性的方式来写入，这样会调用setter 方法。但是在某种情况下初始化方法以及dealloc方法中，总是应该直接通过实例变量来读写数据，这样做是为了避免子类复写了setter方法造成的异常。</li>
+<li>使用了懒加载的属性，应该一直保持用属性的方式来读取写入数据。</li>
+</ol>
+<h3 id="第八条：理解“对象等同性”这一概念"><a href="#第八条：理解“对象等同性”这一概念" class="headerlink" title="第八条：理解“对象等同性”这一概念"></a>第八条：理解“对象等同性”这一概念</h3><p>思考下面输出什么？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">NSString *aString = @&quot;iphone 8&quot;;</div><div class="line">NSString *bString = [NSString stringWithFormat:@&quot;iphone %i&quot;, 8];</div><div class="line">NSLog(@&quot;%d&quot;, [aString isEqual:bString]);</div><div class="line">NSLog(@&quot;%d&quot;, [aString isEqualToString:bString]);</div><div class="line">NSLog(@&quot;%d&quot;, aString == bString);</div></pre></td></tr></table></figure></p>
+<p>答案是110<br><code>==</code>操作符只是比较了两个指针，而不是指针所指的对象</p>
+<h3 id="第九条：以“类族模式”隐藏实现细节"><a href="#第九条：以“类族模式”隐藏实现细节" class="headerlink" title="第九条：以“类族模式”隐藏实现细节"></a>第九条：以“类族模式”隐藏实现细节</h3><p>为什么下面这段if 永远为false<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">id maybeAnArray = @[];</div><div class="line">if ([maybeAnArray class] == [NSArray class]) &#123;</div><div class="line">     //Code will never be executed</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>因为[maybeAnArray class] 的返回永远不会是NSArray，NSArray是一个类族，返回的值一直都是NSArray的实体子类。大部分collection类都是某个类族中的’抽象基类’<br>所以上面的if想要有机会执行的话要改成<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">id maybeAnArray = @[];</div><div class="line">    if ([maybeAnArray isKindOfClass [NSArray class]) &#123;</div><div class="line">         //Code probably be executed</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>这样判断的意思是，maybeAnArray这个对象是否是NSArray类族中的一员<br><strong>使用类族的好处：可以把实现细节隐藏再一套简单的公共接口后面</strong></p>
+<h3 id="第十条：在既有类中使用关联对象存放自定义数据"><a href="#第十条：在既有类中使用关联对象存放自定义数据" class="headerlink" title="第十条：在既有类中使用关联对象存放自定义数据"></a>第十条：在既有类中使用关联对象存放自定义数据</h3><p>这条讲的是<code>objc_setAssociatedObject</code>和<code>objc_getAssociatedObject</code>,如何使用在这里就不多说了。值得强调的一点是，用关联对象可能会引入难于查找的bug，毕竟是在runtime阶段，所以可能要看情况谨慎选择</p>
+<h3 id="第十一条：理解“objc-msgSend”的作用"><a href="#第十一条：理解“objc-msgSend”的作用" class="headerlink" title="第十一条：理解“objc_msgSend”的作用"></a>第十一条：理解“objc_msgSend”的作用</h3><p>之前在<code>了解Objective-C语言的起源</code>有提到过，Objective-C是用的<code>消息结构</code>。这条就是让你理解一下怎么传递的消息。</p>
+<ol>
+<li>在Objective-C中，如果向某个对象传递消息，那就会在运行时使用动态绑定（dynamic binding）机制来决定需要调用的方法。但是到了底层具体实现，却是普通的C语言函数实现的。这个实现的函数就是<code>objc_msgSend</code>,该函数定义如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">void objc_msgSend(id self, SEL cmd, ...)</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这是一个参数个数可变的函数，第一参数代表<code>接收者</code>，第二个参数代表<code>选择子</code>（OC函数名），后续的参数就是消息（OC函数调用）中的那些参数</p>
+<ol>
+<li>举例来说：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">id return = [git commit:parameter];</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>上面的Objective-C方法在运行时会转换成如下函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">id return = objc_msgSend(git, @selector(commit), parameter);</div></pre></td></tr></table></figure></p>
+<p>objc_msgSend函数会在接收者所属的类中搜寻其<code>方法列表</code>，如果能找到这个跟选择子名称相同的方法，就跳转到其实现代码，往下执行。若是当前类没找到，那就沿着继承体系继续向上查找，等找到合适方法之后再跳转 ，如果最终还是找不到，那就进入<code>消息转发</code>的流程去进行处理了。</p>
+<ol>
+<li>说过了OC的函数调用实现，你会觉得消息转发要处理很多，尤其是在搜索上，幸运的是objc_msgSend在搜索这块是有做缓存的，每个OC的类都有一块这样的缓存，objc_msgSend会将匹配结果缓存在<code>快速映射表</code>(fast map)中，这样以来这个类一些频繁调用的方法会出现在fast map 中，不用再去一遍一遍的在<code>方法列表</code>中搜索了。</li>
+<li>还有一个有趣的点，就是在底层处理发送消息的时候，有用到<code>尾调用优化</code>，大概原理就是在函数末尾调用某个不含返回值函数时，编译器会自动的不在栈空间上重新进行分配内存，而是直接释放所有调用函数内部的局部变量，然后直接进入被调用函数的地址。</li>
+</ol>
+<h3 id="第十二条：理解消息转发机制"><a href="#第十二条：理解消息转发机制" class="headerlink" title="第十二条：理解消息转发机制"></a>第十二条：理解消息转发机制</h3><p>关于这条这看看这篇文章：<a href="http://www.jianshu.com/p/f9bd98ad5b05" target="_blank" rel="external">iOS理解Objective-C中消息转发机制附Demo</a></p>
+<h3 id="第十三条：用“方法调配技术”调试“黑盒方法”"><a href="#第十三条：用“方法调配技术”调试“黑盒方法”" class="headerlink" title="第十三条：用“方法调配技术”调试“黑盒方法”"></a>第十三条：用“方法调配技术”调试“黑盒方法”</h3><p>这条讲的主要内容就是 Method Swizzling，通过运行时的一些操作可以用另外一份实现来替换掉原有的方法实现，往往被应用在向原有实现中添加新功能，比如扩展UIViewController，在viewDidLoad里面增加打印信息等。具体例子<a href="https://github.com/maligh/ML-OC-Catagory/tree/master/UIViewController%2BHookForLog" target="_blank" rel="external">可以点击我查看</a></p>
+<h3 id="第十四条：理解“类对象”的用意"><a href="#第十四条：理解“类对象”的用意" class="headerlink" title="第十四条：理解“类对象”的用意"></a>第十四条：理解“类对象”的用意</h3><p>Objective-C类是由Class类型来表示的，它实际上是一个指向objc_class结构体的指针。它的定义如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typedef struct objc_class *Class;</div></pre></td></tr></table></figure></p>
+<p>在<objc runtime.h="">中能看到他的实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">struct objc_class &#123;</div><div class="line">    Class isa  OBJC_ISA_AVAILABILITY;    ///&lt; 指向metaClass(元类)</div><div class="line"></div><div class="line">#if !__OBJC2__</div><div class="line">        Class super_class                       OBJC2_UNAVAILABLE;  ///&lt; 父类</div><div class="line">        const char *name                        OBJC2_UNAVAILABLE;  ///&lt; 类名</div><div class="line">        long version                            OBJC2_UNAVAILABLE;  ///&lt; 类的版本信息，默认为0</div><div class="line">        long info                               OBJC2_UNAVAILABLE;  ///&lt; 类信息，供运行期使用的一些位标识</div><div class="line">        long instance_size                      OBJC2_UNAVAILABLE;  ///&lt; 该类的实例变量大小</div><div class="line">        struct objc_ivar_list *ivars            OBJC2_UNAVAILABLE;  ///&lt; 该类的成员变量链表</div><div class="line">        struct objc_method_list **methodLists   OBJC2_UNAVAILABLE;  ///&lt; 方法定义的链表</div><div class="line">        struct objc_cache *cache                OBJC2_UNAVAILABLE;  ///&lt; 方法缓存</div><div class="line">        struct objc_protocol_list *protocols    OBJC2_UNAVAILABLE;  ///&lt; 协议链表</div><div class="line">#endif</div><div class="line"></div><div class="line">&#125; OBJC2_UNAVAILABLE;</div></pre></td></tr></table></figure></objc></p>
+<p>此结构体存放的是类的“元数据”（metadata)，例如类的实例实现了几个方法，具备多少实例变量等信息。<br>这里的isa指针指向的是另外一个类叫做元类（metaClass)。那什么是元类呢？元类是类对象的类。也可以换一种容易理解的说法：</p>
+<ol>
+<li>当你给对象发送消息时，runtime处理时是在这个对象的类的方法列表中寻找</li>
+<li>当你给类发消息时，runtime处理时是在这个类的元类的方法列表中寻找</li>
+</ol>
+<p>我们来看一个很经典的图来加深理解：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1457495-462fff9ae695d220.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>可以总结为下：</p>
+<ol>
+<li>每一个<code>Class</code>都有一个<code>isa指针</code>指向一个唯一的<code>Meta Class</code></li>
+<li>每一个<code>Meta Class</code>的<code>isa指针</code>都指向最上层的<code>Meta Class</code>，这个<code>Meta Class</code>是<code>NSObject的Meta Class</code>。(包括<code>NSObject的Meta Class</code>的<code>isa指针</code>也是指向的<code>NSObject的Meta Class</code>，也就是自己，这里形成了个闭环)</li>
+<li>每一个<code>Meta Class</code>的<code>super class</code>指针指向它<code>原本Class</code>的 <code>Super Class的Meta Class</code> (这里最上层的<code>NSObject的Meta Class</code>的<code>super class</code>指针还是指向自己)</li>
+<li>最上层的<code>NSObject Class的super class</code>指向 nil</li>
+</ol>
+<h2 id="第三章：接口与API设计"><a href="#第三章：接口与API设计" class="headerlink" title="第三章：接口与API设计"></a>第三章：接口与API设计</h2><h3 id="第十五条：用前缀避免命名空间冲突"><a href="#第十五条：用前缀避免命名空间冲突" class="headerlink" title="第十五条：用前缀避免命名空间冲突"></a>第十五条：用前缀避免命名空间冲突</h3><p>Objective-C没有类似其他语言那样的命名空间机制(namespace)，比如说PHP中的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">namespace Root\Sub\subnamespace;</div></pre></td></tr></table></figure></p>
+<p>这就会导致当你不小心实现了两个相同名字的类，或者把两个相对独立的库导入项目时而他们又恰好有重名的类的时候该类所对应的符号和Meta Class符号定义了两次。所以很容易产生这种命名冲突，让程序的链接过程中出现出现重复的符号造成报错。<br>为了避免这种情况，我们要尽量在类名，以及分类和分类方法上增加前缀，还有一些宏定义等等根据自己项目来定吧</p>
+<h3 id="第十六条：提供“全能初始化方法”"><a href="#第十六条：提供“全能初始化方法”" class="headerlink" title="第十六条：提供“全能初始化方法”"></a>第十六条：提供“全能初始化方法”</h3><p>如果创建类的实例的方式不止一种，那么这个类就会有多个初始化方法，这样做很好，不过还是要在其中选定一个方法作为全能初始化方法，剩下的其余的初始化方法都要调用它，这样做的好处是以后如果初始化的逻辑更改了只需更改一处即可，或者是交给子类覆写的时候也只覆写这一个方法即可~<br>举个例子来说:可以看一下NSDate的实现在NSDate.h中NSDate类中定义了一个全能初始化方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (instancetype)initWithTimeIntervalSinceReferenceDate:(NSTimeInterval)ti NS_DESIGNATED_INITIALIZER;</div></pre></td></tr></table></figure></p>
+<p>其余的类似初始化方式定义在NSDate (NSDateCreation) 分类中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (instancetype)initWithTimeIntervalSinceNow:(NSTimeInterval)secs;</div><div class="line">- (instancetype)initWithTimeIntervalSince1970:(NSTimeInterval)secs;</div><div class="line">- (instancetype)initWithTimeInterval:(NSTimeInterval)secsToBeAdded sinceDate:(NSDate *)date;</div></pre></td></tr></table></figure></p>
+<p>在NSDate文档中有一条：<code>If you want to subclass NSDate to obtain behavior different than that provided by the private or public subclasses, you must do these things:</code>然后其中要做的有一步就是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Override [initWithTimeIntervalSinceReferenceDate:</div><div class="line">](apple-reference-documentation://hcslylvSCo), one of the designated initializer methods`</div></pre></td></tr></table></figure></p>
+<p><strong>这个是我们组织代码过程中应该学习的地方！</strong></p>
+<h3 id="第十七条：实现description方法"><a href="#第十七条：实现description方法" class="headerlink" title="第十七条：实现description方法"></a>第十七条：实现description方法</h3><p>这条讲的是可以通过覆写description方法或者debugDescription方法来在NSLog打印时或者LLDB打印时输出更多的自定义信息。(数据和字典的可以通过覆写<code>descriptionWithLocale:</code>方法)<br>友情提示：不要在description中使用 <code>NSLog(&quot;%@&quot;,self);</code>，不然会掉进无底深渊啊<br>这里我有一个有趣的想法，不过还没完全实现，就是想通过覆写description能把任何一个对象的属性值名称，属性值都一一完整的记录下来</p>
+<h3 id="第十八条：尽量使用不可变对象"><a href="#第十八条：尽量使用不可变对象" class="headerlink" title="第十八条：尽量使用不可变对象"></a>第十八条：尽量使用不可变对象</h3><p>这条主要讲尽量使用不可变的对象，也就是在对外属性声明的时候要尽量加上readonly修饰，默认是readwrite，这样一来，在外部就只能读取该数据，而不能修改它，使得这个类的实例所持有的数据更加安全。如果外部想要修改，可以提供方法来进行修改。<br>不要把可变的collection作为属性公开，而应提供相关方法，以此修改对象中的可变collection(这条个人感觉一般在常用、重要的类才有必要，毕竟也增加了不少代码量)<br>比如例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//Language.h</div><div class="line">@property (nonatomic, strong) NSSet *set;</div></pre></td></tr></table></figure></p>
+<p>应该改为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//Language.h</div><div class="line">@property (nonatomic, strong, readonly) NSSet *languages;</div><div class="line">- (void)addLanguage:(NSString *)language;</div><div class="line">- (void)removeLanguage:(NSString *)language;</div><div class="line">//**.m</div><div class="line">@implementation Language &#123;</div><div class="line">    NSMutableSet *mutableLanguages;</div><div class="line">&#125;</div><div class="line">- (NSSet *)languages &#123;</div><div class="line">    return [_mutableLanguages copy];</div><div class="line">&#125;</div><div class="line">- (void)addLanguage:(NSString *)language &#123;</div><div class="line">    [_mutableLanguages addObject:language];</div><div class="line">&#125;</div><div class="line">- (void)removeLanguage:(NSString *)language &#123;</div><div class="line">     [_mutableLanguages removeObject:language];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="第十九条：使用清晰而协调的命名方式"><a href="#第十九条：使用清晰而协调的命名方式" class="headerlink" title="第十九条：使用清晰而协调的命名方式"></a>第十九条：使用清晰而协调的命名方式</h3><p>这条不用太强调了，具体也可以参照一下我之前拟的<a href="http://www.jianshu.com/p/bbb0b57eb168" target="_blank" rel="external">Objective-C编程规范及建议</a>，后续可能会不断补充更新</p>
+<h3 id="第二十条：为私有方法名加前缀"><a href="#第二十条：为私有方法名加前缀" class="headerlink" title="第二十条：为私有方法名加前缀"></a>第二十条：为私有方法名加前缀</h3><p>这条讲的是应该为类内的私有方法增加前缀，以便区分，这个感觉因人而异吧，感觉只要你不随便把私有方法暴露在.h文件都能接受，曾遇到过这样的同事，感觉其不太适合写程序吧。</p>
+<h3 id="第二十一条：理解Objective-C错误模型"><a href="#第二十一条：理解Objective-C错误模型" class="headerlink" title="第二十一条：理解Objective-C错误模型"></a>第二十一条：理解Objective-C错误模型</h3><p>很多语言都有异常处理机制，Objective-C也不例外，Objective-C也有类似的@throw，不过在OC中使用@throw可能会导致内存泄漏，可能是它被设计的使用场景的问题。建议@throw只用来处理严重错误，也可以理解为致命错误(fatal error)，那么处理一般错误的时候（nonfatal error）时可以使用NSError。</p>
+<h3 id="第二十二条：理解NSCopying协议"><a href="#第二十二条：理解NSCopying协议" class="headerlink" title="第二十二条：理解NSCopying协议"></a>第二十二条：理解NSCopying协议</h3><p>在OC开发中，使用对象时经常需要拷贝它，我们会通过<code>copy/mutbleCopy</code>来完成。如果想让自己的类支持拷贝，那必须要实现<code>NSCopying</code>协议，只需要实现一个方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (id)copyWithZone:(NSZone*)zone</div></pre></td></tr></table></figure></p>
+<p>当然如果要求返回对象是可变的类型就要用到<code>NSMutableCopying</code>协议，相应方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (id)mutableCopyWithZone:(NSZone *)zone</div></pre></td></tr></table></figure></p>
+<p>在拷贝对象时，需要注意拷贝执行的是浅拷贝还是深拷贝。深拷贝在拷贝对象时，会将对象的底层数据也进行了拷贝。浅拷贝是创建了一个新的对象指向要拷贝的内容。一般情况应该尽量执行浅拷贝。</p>
+<hr>
+<h2 id="第四章：协议与分类"><a href="#第四章：协议与分类" class="headerlink" title="第四章：协议与分类"></a>第四章：协议与分类</h2><h3 id="第二十三条：通过委托与数据源协议进行对象间通信"><a href="#第二十三条：通过委托与数据源协议进行对象间通信" class="headerlink" title="第二十三条：通过委托与数据源协议进行对象间通信"></a>第二十三条：通过委托与数据源协议进行对象间通信</h3><p>这条讲的也比较基础，就是基本的delegate，protocal使用。<br>有一点稍微说一下：当某对象需要从另外一个对象中获取数据时，可以使用委托模式，这种用法经常被称为“数据源协议”（Data source Protocal）类似 <code>UITableview</code>的<code>UITableViewDataSource</code><br>另外在Swift中有一个很重要的思想就是面向协议编程。当然OC中也可以用协议来降低代码耦合性，必要的时候也可以替代继承，因为遵循同一个协议的类可以是任何，不必是同一个继承体系下。</p>
+<h3 id="第二十四条：将类的实现代码分散到便于管理的数个分类之中"><a href="#第二十四条：将类的实现代码分散到便于管理的数个分类之中" class="headerlink" title="第二十四条：将类的实现代码分散到便于管理的数个分类之中"></a>第二十四条：将类的实现代码分散到便于管理的数个分类之中</h3><p>这条主要说的是通过分类机制，可以把类分成很多歌易于管理的小块。也是有一些前提的吧，可能是这个类业务比较复杂，需要瘦身，需要解耦等等。作者还推荐把私有方法统一放在Private分类中，以隐藏实现细节。这个个人觉得视情况而定吧。</p>
+<h3 id="第二十五条：总是为第三方类的分类名称加前缀"><a href="#第二十五条：总是为第三方类的分类名称加前缀" class="headerlink" title="第二十五条：总是为第三方类的分类名称加前缀"></a>第二十五条：总是为第三方类的分类名称加前缀</h3><p>向第三方类的分类名称加上你专用的前缀，这点不必多说，😜</p>
+<h3 id="第二十六条：勿在分类中声明属性"><a href="#第二十六条：勿在分类中声明属性" class="headerlink" title="第二十六条：勿在分类中声明属性"></a>第二十六条：勿在分类中声明属性</h3><p>不要在分类中声明属性，除了“class-continuation”分类中。那什么是“class-continuation”分类呢，其实就是我们经常在.m文件中用到的，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//Swift.m </div><div class="line">@interface Swift () </div><div class="line">//这个就是“class-continuation”分类</div><div class="line">@end</div><div class="line">@implementation Swift</div><div class="line">@end</div></pre></td></tr></table></figure></p>
+<h3 id="第二十七条：使用“class-continuation”分类隐藏实现细节"><a href="#第二十七条：使用“class-continuation”分类隐藏实现细节" class="headerlink" title="第二十七条：使用“class-continuation”分类隐藏实现细节"></a>第二十七条：使用“class-continuation”分类隐藏实现细节</h3><p>这条跟之前的也有点重复，最终目的还是要尽量在公共接口中向外暴露的内容最小化，隐藏实现细节，只告诉怎么调用，怎么使用即可。具体实现以及属性的可修改权限尽可能的隐藏掉。</p>
+<h3 id="第二十八条：通过协议提供匿名对象"><a href="#第二十八条：通过协议提供匿名对象" class="headerlink" title="第二十八条：通过协议提供匿名对象"></a>第二十八条：通过协议提供匿名对象</h3><ol>
+<li>协议可以在某种程度上提供匿名对象，例如<code>id&lt;someProtocal&gt; object</code>。object对象的类型不限，只要能遵从这个协议即可，在这个协议里面定义了这个对象所应该实现的方法。</li>
+<li>如果具体类型不重要，重要的是对象能否处理好一些特定的方法，那么就可以使用这种协议匿名对象来完成。</li>
+</ol>
+<hr>
+<h2 id="第五章：内存管理"><a href="#第五章：内存管理" class="headerlink" title="第五章：内存管理"></a>第五章：内存管理</h2><h3 id="第二十九条：理解引用计数"><a href="#第二十九条：理解引用计数" class="headerlink" title="第二十九条：理解引用计数"></a>第二十九条：理解引用计数</h3><ol>
+<li>理解引用计数这个可以通过《Objective-C 高级编程》这本书中的例子来理解，比较直观，大概如下：</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/1457495-a2a2c38354a2af20.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<table>
+<thead>
+<tr>
+<th>对照明设备所做的工作</th>
+<th>对OC对象所做的动作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>开灯</td>
+<td>生成对象</td>
+</tr>
+<tr>
+<td>需要照明</td>
+<td>持有</td>
+</tr>
+<tr>
+<td>不需要照明</td>
+<td>释放</td>
+</tr>
+<tr>
+<td>关灯</td>
+<td>废弃</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>内存管理的思考方式</th>
+<th>对应OC方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>自己生成的对象，自己所持有</td>
+<td>alloc/new/copy/mutableCopy等</td>
+</tr>
+<tr>
+<td>非自己生成的对象(比如[NSArray array])，自己也能持有</td>
+<td>retain </td>
+</tr>
+<tr>
+<td>不再需要自己持有的对象时释放</td>
+<td>release</td>
+</tr>
+<tr>
+<td>当对象不被任何其他对象持有时废弃</td>
+<td>dealloc</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>自动释放池: 可以看到在我们程序中入口文件main.m中main函数中就包裹了一层autoreleasepool<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">int main(int argc, char * argv[]) &#123;</div><div class="line">    @autoreleasepool &#123;</div><div class="line">        return UIApplicationMain(argc, argv, nil, NSStringFromClass([HSAppDelegate class]));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>autoreleasepool可以延长对象的生命期，使其在跨越方法调用边界后依然可以存活一段时间，通常是在下一次“时间循环”（event loop）时释放，不过也可能会执行的早一点。</p>
+<ol>
+<li>保留环: 也称retain cycle，就是循环引用。形成原因就是对象之间相互用强引用指向对方，会使得全部都无法得以释放。解决方案通常是使用弱引用（weak reference)</li>
+</ol>
+<h3 id="第三十条：以ARC简化引用计数"><a href="#第三十条：以ARC简化引用计数" class="headerlink" title="第三十条：以ARC简化引用计数"></a>第三十条：以ARC简化引用计数</h3><p>使用ARC，可以省略对于引用计数的操作，所以在ARC下调用对象的retain，release，autorelease，dealloc方法时系统会报错。<br>这里要注意CoreFoundation 对象不归ARC管理，开发中如果有用到还是要谁创建谁释放，适时调用CFRetain/CFRelease。</p>
+<h3 id="第三十一条：在delloc方法中只释放引用并解除监听"><a href="#第三十一条：在delloc方法中只释放引用并解除监听" class="headerlink" title="第三十一条：在delloc方法中只释放引用并解除监听"></a>第三十一条：在delloc方法中只释放引用并解除监听</h3><p>不要在delloc方法中调用其他方法，尤其是需要异步执行某些任务又要回调的方法，这样的很危险的行为，很可能异步执行完回调的时候该对象已经被销毁了，这样就没得玩了，crash了。<br>在delloc方法里应该制作一些释放相关的事情，包括不限于一些KVO取消订阅，remove 通知等。</p>
+<h3 id="第三十二条：编写“异常安全代码”时留意内存管理问题"><a href="#第三十二条：编写“异常安全代码”时留意内存管理问题" class="headerlink" title="第三十二条：编写“异常安全代码”时留意内存管理问题"></a>第三十二条：编写“异常安全代码”时留意内存管理问题</h3><p>这条有点重复，之前已经说过了，OC中抛出异常的时候可能会引起内存泄漏，注意一下使用的时机，或者注意在@try捕获异常中清理干净。</p>
+<h3 id="第三十三条：以弱引用避免保留环"><a href="#第三十三条：以弱引用避免保留环" class="headerlink" title="第三十三条：以弱引用避免保留环"></a>第三十三条：以弱引用避免保留环</h3><p>这条比较简单，内容主旨就是标题：以弱引用避免保留环(Retain Cycle)</p>
+<h3 id="第三十四条：以“-autoreleasepool”降低内存峰值"><a href="#第三十四条：以“-autoreleasepool”降低内存峰值" class="headerlink" title="第三十四条：以“@autoreleasepool”降低内存峰值"></a>第三十四条：以“@autoreleasepool”降低内存峰值</h3><p>在遍历处理一些大数组或者大字典的时候，可以使用自动释放池来降低内存峰值，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">NSArray *people = /*一个很大的数组*/</div><div class="line">NSMutableArray *employeesArray = [NSMutableArray new];</div><div class="line">for (NSStirng *name in people) &#123;</div><div class="line">    @autoreleasepool &#123;</div><div class="line">        MLEmployee *employee = [MLEmployee alloc] initWithName:name];</div><div class="line">        [employeesArray addObject:employee];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="第三十五条：用“僵尸对象”调试内存管理问题"><a href="#第三十五条：用“僵尸对象”调试内存管理问题" class="headerlink" title="第三十五条：用“僵尸对象”调试内存管理问题"></a>第三十五条：用“僵尸对象”调试内存管理问题</h3><p><img src="http://upload-images.jianshu.io/upload_images/1457495-586f50d111cab802.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>如上图，勾选这里可以开启僵尸对象设置。开启之后，系统在回收对象时，不将其真正的回收，而是把它的isa指针指向特殊的僵尸类，变成僵尸对象。僵尸类能够响应所有的选择子，响应方式为：打印一条包含消息内容以及其接收者的消息，然后终止应用程序</p>
+<h3 id="第三十六条：不要使用retainCount"><a href="#第三十六条：不要使用retainCount" class="headerlink" title="第三十六条：不要使用retainCount"></a>第三十六条：不要使用retainCount</h3><p>在苹果引入ARC之后retainCount已经正式废弃，任何时候都不要调用这个retainCount方法来查看引用计数了，因为这个值实际上已经没有准确性了。但是在MRC下还是可以正常使用</p>
+<hr>
+<h2 id="第六章：Block与GCD"><a href="#第六章：Block与GCD" class="headerlink" title="第六章：Block与GCD"></a>第六章：Block与GCD</h2><h3 id="第三十七条：理解block"><a href="#第三十七条：理解block" class="headerlink" title="第三十七条：理解block"></a>第三十七条：理解block</h3><p>根据block在内存中的位置，block被分成三种类型：</p>
+<ol>
+<li><p>NSGlobalBlock 全局块:<br>这种块运行时无需获取外界任何状态，块所使用的内存区域在编译器就可以完全确定，所以该块声明在全局内存中。如果全局块执行copy会是一个空操作，相当于什么都没做。全局块例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">void (^block)() = ^&#123;</div><div class="line">    NSLog(@&quot;I am a NSGlobalBlock&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>NSStackBlock  栈块:<br>栈块保存于栈区，超出变量作用域，栈上的block以及__block变量都会被销毁。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">NSString *name = @&quot;PHP&quot;;</div><div class="line">void (^block)() = ^&#123;</div><div class="line">    NSLog(@&quot;世界上最好的编程语言是%@&quot;, name);</div><div class="line">&#125;;</div><div class="line">NSLog(@&quot;%@&quot;, block);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>运行下你会发现控制台打印的是:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;__NSStackBlock__: 0x7fff5480fa18&gt;</div></pre></td></tr></table></figure></p>
+<p>什么，你说什么，你打印出来的是<code>__ NSMallocBlock __</code>? 那是因为你在ARC下编译的，ARC下编译器编译时会帮你优化自动帮你加上了copy操作，你可以用<code>-fno-objc-arc</code>关闭ARC再看一下</p>
+<ol>
+<li>NSMallocBlock  堆块:<br><em>NSMallocBlock内心独白：我已经被暴露了，为什么要最后才介绍我！！</em><br>堆block内存保存于堆区，在变量作用域结束时不受影响。通过之前在ARC下的输出已经看到了<strong> NSMallocBlock </strong>.所以我们在定义block类型的属性时常常加上copy修饰，这个修饰其实是多余的，系统在ARC的时候已经帮我们做了copy，但是还是建议写上copy。</li>
+</ol>
+<h3 id="第三十八条：为常用的块类型创建typedef"><a href="#第三十八条：为常用的块类型创建typedef" class="headerlink" title="第三十八条：为常用的块类型创建typedef"></a>第三十八条：为常用的块类型创建typedef</h3><p>这条主要是为了代码更易读，也比较重要。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- (void)getDataWithHost:(NSString *)host success:(void (^)(id responseDic))success;</div><div class="line">//以上要改成下面这种</div><div class="line">typedef void (^SuccessBlock)(id responseDic);</div><div class="line">- (void)getDataWithHost:(NSString *)host success:(SuccessBlock)success;</div></pre></td></tr></table></figure></p>
+<h3 id="第三十九条：用handler块降低代码分散程度"><a href="#第三十九条：用handler块降低代码分散程度" class="headerlink" title="第三十九条：用handler块降低代码分散程度"></a>第三十九条：用handler块降低代码分散程度</h3><p>在iOS开发中，我们经常需要异步执行一些任务，然后等待任务执行结束之后通知相关方法。实现此需求的做法很多，比如说有些人可能会选择用委托协议。那么在这种异步执行一些任务，然后等待执行结束之后调用代理的时候，可能代码就会比较分散。当多个任务都需要异步，等等就显得比较不那么合理了。<br>所以我们可以考虑使用block的方式设计，这样业务相关的代码会比较紧凑，不会显得那么凌乱。</p>
+<h3 id="第四十条：用块引用其所属对象是不要出现保留环"><a href="#第四十条：用块引用其所属对象是不要出现保留环" class="headerlink" title="第四十条：用块引用其所属对象是不要出现保留环"></a>第四十条：用块引用其所属对象是不要出现保留环</h3><p>这点比较基础了，但是要稍微说一下，不是一定得在block中使用weakself，比如下面：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[YTKNetwork requestBlock:^(id responsObject) &#123;</div><div class="line">      NSLog(@&quot;%@&quot;,self.name);</div><div class="line">  &#125;];</div></pre></td></tr></table></figure></p>
+<p>block 不是被self所持有的，在block中就可以使用self</p>
+<h3 id="第四十一条：多用派发队列，少用同步锁"><a href="#第四十一条：多用派发队列，少用同步锁" class="headerlink" title="第四十一条：多用派发队列，少用同步锁"></a>第四十一条：多用派发队列，少用同步锁</h3><p>在iOS开发中，如果有多个线程要执行同一份代码，我们可能需要加锁来实现某种同步机制。有人可能第一印象想到的就是<code>@synchronized(self)</code>，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">- (NSString*)someString &#123;</div><div class="line">    @synchronized(self) &#123;</div><div class="line">        return _someString;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">- (void)setSomeString:(NSString*)someString &#123;</div><div class="line">     @synchronized(self) &#123;</div><div class="line">        _someString = someString;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这样写法效率很低，而且也不能保证线程中觉得的安全。如果有很多属性，那么每个属性的同步块都要等其他同步块执行完毕才能执行。<br>应该用GCD来替换：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">_syncQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</div><div class="line"></div><div class="line">//读取字符串</div><div class="line">- (NSString*)someString &#123;</div><div class="line">    __block NSString *localSomeString;</div><div class="line">     dispatch_sync(_syncQueue, ^&#123;</div><div class="line">        localSomeString = _someString;</div><div class="line">    &#125;);</div><div class="line">     return localSomeString;</div><div class="line">&#125;</div><div class="line">- (void)setSomeString:(NSString*)someString &#123;</div><div class="line">     dispatch_barrier_async(_syncQueue, ^&#123;</div><div class="line">        _someString = someString;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="第四十二条：多用GCD，少用performSelector系列方法"><a href="#第四十二条：多用GCD，少用performSelector系列方法" class="headerlink" title="第四十二条：多用GCD，少用performSelector系列方法"></a>第四十二条：多用GCD，少用performSelector系列方法</h3><p>Objective-C本质上是一门分厂动态的语言，开发者在开发中可以指定任何一个方法去调用，也可以延迟调用一些方法，或者指定运行方法的线程。一般我们会想到<code>performSelector</code>，但是在GCD出来之后基本就没那么需要<code>performSelector</code>了，<code>performSelector</code>也有很多缺点：</p>
+<ol>
+<li>内存管理问题：在ARC下使用<code>performSelector</code>我们经常会看到编译器发出如下警告：<code>warning: performSelector may cause a leak because its selector is unknown [-Warc-performSelector-leaks]</code></li>
+<li><code>performSelector</code>的返回值只能是void或对象类型。</li>
+<li><code>performSelector</code>无法处理带有多个参数的选择子，最多只能处理两个参数。<br>为了改变这些，我们可以用下面这种方式<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[self performSelectorOnMainThread:@selector(doSomething) </div><div class="line">                       withObject:nil </div><div class="line">                    waitUntilDone:NO];</div><div class="line">dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">        [self doSomething];</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>替换原来的<code>performSelector</code>方式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[self performSelector:@selector(doSomething) </div><div class="line">           withObject:nil </div><div class="line">           afterDelay:5.0];</div><div class="line">dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, </div><div class="line">                                (int64_t)(5.0 * NSEC_PER_SEC));</div><div class="line">dispatch_after(time, dispatch_get_main_queue(), ^(void)&#123;</div><div class="line">    [self doSomething];</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h3 id="第四十三条：掌握GCD以及操作队列的使用时机"><a href="#第四十三条：掌握GCD以及操作队列的使用时机" class="headerlink" title="第四十三条：掌握GCD以及操作队列的使用时机"></a>第四十三条：掌握GCD以及操作队列的使用时机</h3><p>GCD技术确实很棒，但是也有一些局限性，或者说有一些场景并不适合。比如过想取消队列中的某个操作，或者需要后台执行任务。还有一种技术叫<code>NSOperationQueue</code>，其实<code>NSOperationQueue</code>跟GCD有很多相像之处。<code>NSOperationQueue</code>在GCD之前就已经有了，GCD就是在其某些原理上构建的。GCD是C层次的API，而<code>NSOperation</code>是重量级的Objective-C对象。<br>使用<code>NSOperation</code>和<code>NSOperationQueue</code>的优点：</p>
+<ol>
+<li>支持取消某个操作：在运行任务前，可以在NSOperation对象上调用<code>cancel方法</code>，用以表明此任务不需要执行。不过已经启动的任务无法取消。GCD队列是无法取消的，GCD是“安排好之后就不管了（fire and forget）”。</li>
+<li>支持指定操作间的依赖关系：一个操作可以依赖其他多个操作，例如从服务器下载并处理文件的动作可以用操作来表示，而在处理其他文件之前必须先下载“清单文件”。而后续的下载工作，都要依赖于先下载的清单文件这一操作。这时如果操作队列允许并发执行的话，后续的下载操作就可以在他依赖的<code>下载清单文件操作</code>执行完毕之后开始同时执行。</li>
+<li>支持通过KVO监控NSOperation对象的属性：可以通过isCancelled属性来判断任务是否已取消，通过isFinished属性来判断任务是否已经完成等等。</li>
+<li>支持指定操作的优先级：操作的优先级表示此操作与队列中其他操作之间的优先关系，优先级搞的操作先执行，优先级低的后执行。GCD的队列也有优先级，不过不是针对整个队列的。</li>
+<li>重用NSOperation对象。在开发中你可以使用NSOperation的子类或者自己创建NSOperation对象来保存一些信息，可以在类中定义方法，使得代码能够多次使用。不必重复自己。</li>
+</ol>
+<h3 id="第四十四条：通过Dispatch-Group机制，根据系统资源状况来执行任务"><a href="#第四十四条：通过Dispatch-Group机制，根据系统资源状况来执行任务" class="headerlink" title="第四十四条：通过Dispatch Group机制，根据系统资源状况来执行任务"></a>第四十四条：通过Dispatch Group机制，根据系统资源状况来执行任务</h3><p>这条主要是介绍dispatch group，任务分组的功能。他可以把任务分组，然后等待这组任务执行完毕时会有通知，开发者可以拿到结果然后继续下一步操作。<br>另外通过dispatch group在并发队列上同时执行多项任务的时候，GCD会根据系统资源状态来帮忙调度这些并发执行的任务。</p>
+<h3 id="第四十五条：使用dispatch-once来执行只需要运行一次的线程安全代码"><a href="#第四十五条：使用dispatch-once来执行只需要运行一次的线程安全代码" class="headerlink" title="第四十五条：使用dispatch_once来执行只需要运行一次的线程安全代码"></a>第四十五条：使用dispatch_once来执行只需要运行一次的线程安全代码</h3><p>这条讲的是常用的dispatch_once<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">+ (id)sharedInstance &#123;</div><div class="line">     static EOCClass *sharedInstance = nil;</div><div class="line">     static dispatch_once_t onceToken;</div><div class="line">     dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">﻿            sharedInstance = [[self alloc] init];</div><div class="line">    &#125;);</div><div class="line">     return sharedInstance;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>dispatch_once比较高效，没有重量级的同步机制。</p>
+<h3 id="第四十六条：不要使用dispatch-get-current-queue"><a href="#第四十六条：不要使用dispatch-get-current-queue" class="headerlink" title="第四十六条：不要使用dispatch_get_current_queue"></a>第四十六条：不要使用dispatch_get_current_queue</h3><ol>
+<li>dispatch_get_current_queue 函数的行为常常与开发者所预期的不同，此函数已经废弃，只应做调试之用。</li>
+<li>由于GCD是按层级来组织的，所以无法单用某个队列对象来描述”当前队列”这一概念。</li>
+<li>dispatch_get_current_queue 函数用于解决由不可以重入的代码所引发的死锁，然后能用此函数解决的问题，通常也可以用”队列特定数据”来解决。</li>
+</ol>
+<hr>
+<h2 id="第七章：系统框架"><a href="#第七章：系统框架" class="headerlink" title="第七章：系统框架"></a>第七章：系统框架</h2><h3 id="第四十七条：熟悉系统框架"><a href="#第四十七条：熟悉系统框架" class="headerlink" title="第四十七条：熟悉系统框架"></a>第四十七条：熟悉系统框架</h3><p>在Objective-C中除了Foundation 与CoreFoundation之外还有很多系统库，其中包括但不限于下面列出的这些：</p>
+<ol>
+<li>CFNetwork:此框架提供了C语言级别的网络通信能力，它将BSD socket抽象成了易于使用的网络接口。而Foundation则将该框架里的部分内容封装为Objective-C接口，以便进行网络通信。</li>
+<li>CoreAudio:此框架所提供的C语言API可以用来操作设备上的音频硬件。</li>
+<li>AVFoundation:此框架所提供的Objective-C对象可用来回访并录制音频及视频，比如能够在UI视图类里播放视频。</li>
+<li>CoreData:此框架所提供的Objective-C接口可以将对象放入数据库，将数据持久化。</li>
+<li>CoreText:此框架提供的C语言接口可以高效执行文字排版以及渲染操作。</li>
+<li>SpriteKit :游戏框架</li>
+<li>CoreLocation、MapKit :定位地图相关框架</li>
+<li>Address Book框架:需要使用通讯录时才使用该框架</li>
+<li>Music Libraries框架:音乐库相关框架</li>
+<li>HealthKit框架：健康相关框架</li>
+<li>HomeKit框架：为智能化硬件提供的框架</li>
+<li>CloudKit : iCloud相关的框架</li>
+<li>Passbook、PassKit框架：为了在应用中用户可以很容易的访问他们之前购买的活动门票、旅行车票、优惠券等等提供的框架</li>
+</ol>
+<h3 id="第四十八条：多用块枚举，少用for循环"><a href="#第四十八条：多用块枚举，少用for循环" class="headerlink" title="第四十八条：多用块枚举，少用for循环"></a>第四十八条：多用块枚举，少用for循环</h3><ol>
+<li>遍历collection中的元素有四种方式，最基本的办法就是for循环，其次是NSEnumerator遍历法，还有快速遍历法（for in），以及块枚举法。块枚举是最新，最先进的方式。</li>
+<li>块枚举法是通过GCD来并发执行遍历操作</li>
+<li>若提前知道待遍历的collection含有何种对象，则应修改块签名，指出对象的具体类型。</li>
+</ol>
+<h3 id="第四十九条：对自定义其内存管理语义的collecion使用无缝桥接"><a href="#第四十九条：对自定义其内存管理语义的collecion使用无缝桥接" class="headerlink" title="第四十九条：对自定义其内存管理语义的collecion使用无缝桥接"></a>第四十九条：对自定义其内存管理语义的collecion使用无缝桥接</h3><p>通过无缝桥接技术，可以在定义于Foundation框架中的类和CoreFoundation框架中的C语言数据结构之间来回转换。<br>下面代码展示了简单的无缝桥接：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NSArray *anNSArray = @[@1, @2, @3, @4, @5];</div><div class="line">CFArrayRef aCFArray = (__bridge CFArrayRef)anNSArray;</div><div class="line">NSLog(@&quot;Size of array = %li&quot;, CFArrayGetCount(aCFArray));</div><div class="line">//Output: Size of array = 5</div></pre></td></tr></table></figure></p>
+<p>转换操作中的<code>__bridge</code>告诉ARC如何传力转换所涉及的OC对象，也就是ARC仍然具备这个OC对象的所有权。<code>__bridge_retained</code>与之相反。这里要注意用完了数组要自己释放，使用<code>CFRelease(aCFArray)</code>前面有提到过的。</p>
+<h3 id="第五十条：构建缓存时选用NSCache而非NSDictionary"><a href="#第五十条：构建缓存时选用NSCache而非NSDictionary" class="headerlink" title="第五十条：构建缓存时选用NSCache而非NSDictionary"></a>第五十条：构建缓存时选用NSCache而非NSDictionary</h3><p>在构建缓存时应该尽量选用NSCache而非NSDictionary，NSCache会在系统资源将要耗尽时自动删减缓存，而使用NSDictionary只能通过系统低内存警告方法去手动处理。此外NSCache还会看情况删减最久未使用的对象，而且是线程安全的。</p>
+<h3 id="第五十一条：精简initialize与load的实现代码"><a href="#第五十一条：精简initialize与load的实现代码" class="headerlink" title="第五十一条：精简initialize与load的实现代码"></a>第五十一条：精简initialize与load的实现代码</h3><ol>
+<li>load与initialize 方法都应该实现的精简一点，这样有助于保持应用程序的响应能力，也可以减少引入依赖环的几率</li>
+<li>无法在编译器设定的全局常量，可以放在initialize方法里面初始化。<br>另外没搞清楚load 与 initialize的可以看这里， 我之前有出过一道有点脑残有点绕的题（别拍砖，😆），<a href="http://www.jianshu.com/p/ffdefa76e4a2" target="_blank" rel="external">可以点击这里查看</a><h3 id="第五十二条：别忘了NSTimer会保留其目标对象"><a href="#第五十二条：别忘了NSTimer会保留其目标对象" class="headerlink" title="第五十二条：别忘了NSTimer会保留其目标对象"></a>第五十二条：别忘了NSTimer会保留其目标对象</h3>在iOS开发中经常会用到定时器:NSTimer，由于NSTimer会生成指向其使用者的引用，而其使用者如果也引用了NSTimer，那就形成了该死的循环引用，比如下面这个例子：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">@interface EOCClass : NSObject</div><div class="line">- (void)startPolling;</div><div class="line">- (void)stopPolling;</div><div class="line">@end</div><div class="line">@implementation EOCClass &#123;</div><div class="line">     NSTimer *_pollTimer;</div><div class="line">&#125;</div><div class="line">- (id)init &#123;</div><div class="line">     return [super init];</div><div class="line">&#125;</div><div class="line">- (void)dealloc &#123;</div><div class="line">    [_pollTimer invalidate];</div><div class="line">&#125;</div><div class="line">- (void)stopPolling &#123;</div><div class="line"></div><div class="line">    [_pollTimer invalidate];</div><div class="line">    _pollTimer = nil;</div><div class="line">&#125;</div><div class="line">- (void)startPolling &#123;</div><div class="line">   _pollTimer = [NSTimer scheduledTimerWithTimeInterval:5.0</div><div class="line">                                                 target:self</div><div class="line">                                               selector:@selector(p_doPoll)</div><div class="line">                                               userInfo:nil</div><div class="line">                                                repeats:YES];</div><div class="line">&#125;</div><div class="line">- (void)p_doPoll &#123;</div><div class="line">    // Poll the resource</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>如果创建了本类的实例，并调用其startPolling方法开始定时器，由于目标对象是self，所以要保留此实例，因为定时器是用成员变量存放的，所以self也保留了计时器，所以此时存在保留环。此时要么调用<code>stopPolling</code>，要么令系统将此实例回收，只有这样才能打破保留环。<br>这是一个很常见的内存泄漏，那么怎么解决呢？这个问题可以通过block来解决。可以添加这样的一个分类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line">//.h</div><div class="line">@interface NSTimer (EOCBlocksSupport)</div><div class="line"></div><div class="line">+ (NSTimer*)eoc_scheduledTimerWithTimeInterval:(NSTimeInterval)interval</div><div class="line">                                         block:(void(^)())block</div><div class="line">                                         repeats:(BOOL)repeats;</div><div class="line">@end</div><div class="line">//.m</div><div class="line">@implementation NSTimer (EOCBlocksSupport)</div><div class="line"></div><div class="line">+ (NSTimer*)eoc_scheduledTimerWithTimeInterval:(NSTimeInterval)interval</div><div class="line">                                         block:(void(^)())block</div><div class="line">                                        repeats:(BOOL)repeats</div><div class="line">&#123;</div><div class="line">             return [self scheduledTimerWithTimeInterval:interval</div><div class="line">                                                  target:self</div><div class="line">                                                selector:@selector(eoc_blockInvoke:)</div><div class="line">                                                userInfo:[block copy]</div><div class="line">                                                 repeats:repeats];</div><div class="line"></div><div class="line">&#125;</div><div class="line">+ (void)eoc_blockInvoke:(NSTimer*)timer &#123;</div><div class="line">     void (^block)() = timer.userInfo;</div><div class="line">         if (block) &#123;</div><div class="line">             block();</div><div class="line">        &#125;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<hr>
+<p><strong>EOF :</strong> 由于个人能力有限，难免有一些遗漏或者错误，请各位看官不吝赐教！谢谢！同时如果有任何问题也可以在下方留言，欢迎一起交流进步~最后感谢作者Matt Galloway以及译者！更多细节还是请翻阅图书，可以<a href="https://pan.baidu.com/s/1bpCj0i7" target="_blank" rel="external">点击这里下载</a>PDF版，原版英文版PDF我也有存~本文已经同步到<a href="http://www.superma.me/2017/08/06/%E9%87%8D%E6%B8%A9%E3%80%8AEffectiveObjective-C2-0%E7%BC%96%E5%86%99%E9%AB%98%E8%B4%A8%E9%87%8FiOS%E4%B8%8EOSX%E4%BB%A3%E7%A0%81%E7%9A%8452%E4%B8%AA%E6%9C%89%E6%95%88%E6%96%B9%E6%B3%95%E3%80%8B/" target="_blank" rel="external">个人博客</a></p>
+]]></content>
     
     <summary type="html">
     
+      &lt;p&gt;最近在重温这本OC经典之作《Effective Objective-C 2.0编写高质量iOS与OS X代码的52个有效方法》，这篇文章算是重温之后的产物吧
+    
     </summary>
     
+      <category term="Objective-C" scheme="http://superma.me/all-categories/Objective-C/"/>
+    
+    
+      <category term="Effective-OC" scheme="http://superma.me/all-tags/Effective-OC/"/>
     
   </entry>
   
@@ -34,7 +288,7 @@
     <link href="http://superma.me/2017/07/30/iOS%E7%90%86%E8%A7%A3Objective-C%E4%B8%AD%E6%B6%88%E6%81%AF%E8%BD%AC%E5%8F%91%E6%9C%BA%E5%88%B6%E9%99%84Demo/"/>
     <id>http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/</id>
     <published>2017-07-30T07:35:00.000Z</published>
-    <updated>2017-07-30T07:41:29.000Z</updated>
+    <updated>2017-08-05T17:23:18.000Z</updated>
     
     <content type="html"><![CDATA[<p>最近在重温Effective Objective-C 2.0，这篇文章属于重温的产物吧，本文会通过demo来讲解OC中的消息转发机制</p>
 <a id="more"></a>
