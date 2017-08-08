@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://superma.me/"/>
-  <updated>2017-08-05T18:03:29.000Z</updated>
+  <updated>2017-08-08T13:16:27.000Z</updated>
   <id>http://superma.me/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://superma.me/2017/08/06/%E9%87%8D%E6%B8%A9%E3%80%8AEffectiveObjective-C2-0%E7%BC%96%E5%86%99%E9%AB%98%E8%B4%A8%E9%87%8FiOS%E4%B8%8EOSX%E4%BB%A3%E7%A0%81%E7%9A%8452%E4%B8%AA%E6%9C%89%E6%95%88%E6%96%B9%E6%B3%95%E3%80%8B/"/>
     <id>http://superma.me/2017/08/06/重温《EffectiveObjective-C2-0编写高质量iOS与OSX代码的52个有效方法》/</id>
     <published>2017-08-05T17:06:36.000Z</published>
-    <updated>2017-08-05T18:03:29.000Z</updated>
+    <updated>2017-08-08T13:16:27.000Z</updated>
     
     <content type="html"><![CDATA[<p>最近在重温这本OC经典之作《Effective Objective-C 2.0编写高质量iOS与OS X代码的52个有效方法》，这篇文章算是重温之后的产物吧<a id="more"></a>，读完这篇文章你将快速读完这本书，由于个人能力有限，难免有一些遗漏或者错误，请各位看官不吝赐教~谢谢~同时如果有任何问题也可以在下方留言，欢迎一起交流进步~另外由于篇幅原因，书中一些基础知识的介绍文中就省略掉了~</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1457495-debf9e0c37687e51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="目录"><br>上面就是这本书的目录，可以<a href="https://pan.baidu.com/s/1bpCj0i7" target="_blank" rel="external">点击这里下载</a>PDF版，原版英文版PDF我也有存~</p>
@@ -214,10 +214,12 @@
 <ol>
 <li>内存管理问题：在ARC下使用<code>performSelector</code>我们经常会看到编译器发出如下警告：<code>warning: performSelector may cause a leak because its selector is unknown [-Warc-performSelector-leaks]</code></li>
 <li><code>performSelector</code>的返回值只能是void或对象类型。</li>
-<li><code>performSelector</code>无法处理带有多个参数的选择子，最多只能处理两个参数。<br>为了改变这些，我们可以用下面这种方式<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[self performSelectorOnMainThread:@selector(doSomething) </div><div class="line">                       withObject:nil </div><div class="line">                    waitUntilDone:NO];</div><div class="line">dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">        [self doSomething];</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<li><code>performSelector</code>无法处理带有多个参数的选择子，最多只能处理两个参数。<br>为了改变这些，我们可以用下面这种方式<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">        [self doSomething];</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>替换原来的<code>performSelector</code>方式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[self performSelector:@selector(doSomething) </div><div class="line">           withObject:nil </div><div class="line">           afterDelay:5.0];</div><div class="line">dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, </div><div class="line">                                (int64_t)(5.0 * NSEC_PER_SEC));</div><div class="line">dispatch_after(time, dispatch_get_main_queue(), ^(void)&#123;</div><div class="line">    [self doSomething];</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>替换掉<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[self performSelectorOnMainThread:@selector(doSomething) </div><div class="line">                       withObject:nil </div><div class="line">                    waitUntilDone:NO];</div></pre></td></tr></table></figure></p>
+<p>然后还可以用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, </div><div class="line">                                (int64_t)(5.0 * NSEC_PER_SEC));</div><div class="line">dispatch_after(time, dispatch_get_main_queue(), ^(void)&#123;</div><div class="line">    [self doSomething];</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>替换<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[self performSelector:@selector(doSomething) </div><div class="line">           withObject:nil </div><div class="line">           afterDelay:5.0];</div></pre></td></tr></table></figure></p>
 <h3 id="第四十三条：掌握GCD以及操作队列的使用时机"><a href="#第四十三条：掌握GCD以及操作队列的使用时机" class="headerlink" title="第四十三条：掌握GCD以及操作队列的使用时机"></a>第四十三条：掌握GCD以及操作队列的使用时机</h3><p>GCD技术确实很棒，但是也有一些局限性，或者说有一些场景并不适合。比如过想取消队列中的某个操作，或者需要后台执行任务。还有一种技术叫<code>NSOperationQueue</code>，其实<code>NSOperationQueue</code>跟GCD有很多相像之处。<code>NSOperationQueue</code>在GCD之前就已经有了，GCD就是在其某些原理上构建的。GCD是C层次的API，而<code>NSOperation</code>是重量级的Objective-C对象。<br>使用<code>NSOperation</code>和<code>NSOperationQueue</code>的优点：</p>
 <ol>
 <li>支持取消某个操作：在运行任务前，可以在NSOperation对象上调用<code>cancel方法</code>，用以表明此任务不需要执行。不过已经启动的任务无法取消。GCD队列是无法取消的，GCD是“安排好之后就不管了（fire and forget）”。</li>
