@@ -6,28 +6,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="记录学习中的点滴,努力打怪升级-MaLi">
-    <title>iOS理解Objective-C中消息转发机制附Demo - 记录学习中的点滴,努力打怪升级-MaLi</title>
+    <title>iOS设计模式四部曲一创建型模式内附Demo - 记录学习中的点滴,努力打怪升级-MaLi</title>
     <meta name="author" content="Mali">
     
     
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="最近在重温Effective Objective-C 2.0，这篇文章属于重温的产物吧，本文会通过demo来讲解OC中的消息转发机制">
-<meta name="keywords" content="消息转发">
+    <meta name="description" content="最近刚重温完经典书籍《EffectiveObjective-C2.0编写高质量iOS与OSX代码的52个有效方法》，接下来准备把设计模式扫扫盲">
+<meta name="keywords" content="设计模式,Objective-C">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="iOS理解Objective-C中消息转发机制附Demo">
-<meta property="og:url" content="http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/index.html">
+<meta property="og:title" content="iOS设计模式四部曲一创建型模式内附Demo">
+<meta property="og:url" content="http://superma.me/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/index.html">
 <meta property="og:site_name" content="记录学习中的点滴,努力打怪升级-MaLi">
-<meta property="og:description" content="最近在重温Effective Objective-C 2.0，这篇文章属于重温的产物吧，本文会通过demo来讲解OC中的消息转发机制">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1457495-ade801c636fc86fc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1457495-960047111dbd1c57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1457495-8ee6afef466e6177.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-08-05T17:23:18.000Z">
+<meta property="og:description" content="最近刚重温完经典书籍《EffectiveObjective-C2.0编写高质量iOS与OSX代码的52个有效方法》，接下来准备把设计模式扫扫盲">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1457495-b27a7821529beb5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1457495-4cac842b1e171838.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-08-21T17:25:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS理解Objective-C中消息转发机制附Demo">
-<meta name="twitter:description" content="最近在重温Effective Objective-C 2.0，这篇文章属于重温的产物吧，本文会通过demo来讲解OC中的消息转发机制">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1457495-ade801c636fc86fc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="iOS设计模式四部曲一创建型模式内附Demo">
+<meta name="twitter:description" content="最近刚重温完经典书籍《EffectiveObjective-C2.0编写高质量iOS与OSX代码的52个有效方法》，接下来准备把设计模式扫扫盲">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1457495-b27a7821529beb5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
     
     
         
@@ -36,8 +35,8 @@
         <meta property="og:image" content="http://superma.me/assets/images/avatar.jpg"/>
     
     
-        <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1457495-ade801c636fc86fc.jpg"/>
-        <meta class="swiftype" name="image" data-type="enum" content="http://upload-images.jianshu.io/upload_images/1457495-ade801c636fc86fc.jpg" />
+        <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1457495-b27a7821529beb5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://upload-images.jianshu.io/upload_images/1457495-b27a7821529beb5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" />
     
     
     
@@ -227,20 +226,20 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            iOS理解Objective-C中消息转发机制附Demo
+            iOS设计模式四部曲一创建型模式内附Demo
         </h1>
     
     
         <div class="post-meta">
-    <time itemprop="datePublished" datetime="2017-07-30T15:35:00+08:00">
+    <time itemprop="datePublished" datetime="2017-08-22T01:18:45+08:00">
 	
-		    Jul 30, 2017
+		    Aug 22, 2017
     	
     </time>
     
         <span>in </span>
         
-    <a class="category-link" href="/all-categories/Objective-C/">Objective-C</a>
+    <a class="category-link" href="/all-categories/设计模式/">设计模式</a>
 
 
     
@@ -251,27 +250,24 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <p>最近在重温Effective Objective-C 2.0，这篇文章属于重温的产物吧，本文会通过demo来讲解OC中的消息转发机制</p>
-<a id="more"></a>
-<p><img src="http://upload-images.jianshu.io/upload_images/1457495-ade801c636fc86fc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>Demo:<a href="https://github.com/maligh/ML-Objective-C-Demo/tree/master/MessageForwarding" target="_blank" rel="external">点我查看,觉得有帮助的话不要吝惜你的star</a><br>话不多说，iOS开发过程中我们经常会碰到这样的报错：<code>unrecognized selector sent to instance **</code>，原因是我们调用了一个不存在的方法。用OC消息机制来说就是：消息的接收者不过到对应的selector，这样就启动了消息转发机制，我们可以通过代码在消息转发的过程中告诉对象应该如何处理未知的消息，默认实现是抛出下面的异常</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1457495-960047111dbd1c57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="unrecognized selector.png"><br>下面我们通过实例来看一下在抛出异常之前也就是消息转发过程中都经过了哪些步骤：</p>
+            <p>  最近刚重温完经典书籍<a href="http://www.jianshu.com/p/862b064e82e0" target="_blank" rel="external">《EffectiveObjective-C2.0编写高质量iOS与OSX代码的52个有效方法》</a>，接下来准备把设计模式扫扫盲<a id="more"></a>，强烈推荐图书《Head First设计模式》，如果看完了有空可以翻翻《大话设计模式》或者《设计模式之禅》，这几篇就是阅读学习设计模式的产物吧。因设计模式大致可分三种类型以及MVX架构系列，所以总共分了4篇来讲解：<code>创建型模式篇</code>，<code>结构性模式篇</code>，<code>行为型模式篇</code>，<code>架构型模式篇</code>，这是第一篇，由于个人能力有限，难免有一些遗漏或者错误，请各位看官不吝赐教！谢谢！本文所有Demo可以在我的Git上获取，<a href="https://github.com/maligh/DesignPatterns" target="_blank" rel="external">请点击这里</a></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1457495-b27a7821529beb5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="设计模式.png"></p>
+<p>闲言碎语不多讲，上图是本系列的一个总体大纲。这篇文章是第一部：创建型模式。不过在开讲之前首先说一下设计模式的六大原则：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1457495-4cac842b1e171838.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>关于这六大原则的解释，具体可以看我之前整理的一篇文章，<a href="http://www.jianshu.com/p/807bc228dbc2" target="_blank" rel="external">请点击这里前往</a><br>创建型模式包括：<code>原型模式</code>，<code>单例模式</code>，<code>工厂方法模式</code>，<code>抽象工厂模式</code>，<code>建造者模式</code>，下面我们就通过<a href="https://github.com/maligh/DesignPatterns" target="_blank" rel="external">Demo</a>来一个一个讲解。</p>
 <hr>
-<p>第一步：对象在收到无法解读的消息后，首先会调用<code>+(BOOL)resolveInstanceMethod:(SEL)sel</code>或者<code>+ (BOOL)resolveClassMethod:(SEL)sel</code>, 询问是否有动态添加方法来进行处理，处理实例如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">//People.m</div><div class="line">void speak(id self, SEL _cmd)&#123;</div><div class="line">    NSLog(@&quot;Now I can speak.&quot;);</div><div class="line">&#125;</div><div class="line">+ (BOOL)resolveInstanceMethod:(SEL)sel &#123;</div><div class="line">    </div><div class="line">    NSLog(@&quot;resolveInstanceMethod:  %@&quot;, NSStringFromSelector(sel));</div><div class="line">    if (sel == @selector(speak)) &#123;</div><div class="line">        class_addMethod([self class], sel, (IMP)speak, &quot;V@:&quot;);</div><div class="line">        return YES;</div><div class="line">    &#125;</div><div class="line">    return [super resolveInstanceMethod:sel];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>当People 收到了未知 speak选择子的消息的时候，如果是实例方法会首选调用上文的<code>resolveInstanceMethod:</code>方法，方法内通过判断选择子然后通过<code>class_addMethod</code>方法动态添加了一个speak的实现方法来解决掉这条未知的消息，此时消息转发过程提前结束。<br>但是当People 收到fly 这条未知消息的时候，第一步返回的是No，也就是没有动态新增实现方法的时候就会调用第二步</p>
+<h2 id="原型模式（Prototype）："><a href="#原型模式（Prototype）：" class="headerlink" title="原型模式（Prototype）："></a>原型模式（Prototype）：</h2><p><strong>1. 定义：</strong>原型模式是通过克隆已有的对象来创建新的对象，已有的对象称为原型。通俗来讲，原型模式就是允许你创建现有对象的副本并根据需要进行修改，而不是从头开始创建对象并进行设置。<br><strong>2. 使用场景：</strong>通过初始化产生一个对象需要非常繁琐的准备步骤，也就是新生成一个对象的代价比较大，则可以考虑使用原型模式。<br><strong>3. 具体实现：</strong>原型模式实现起来比较简单，iOS实现这个模式用的就是<code>copy</code>方法，如果是类使用<code>copy</code>，那这个类就要实现。<code>NSCopying</code>协议中的<code>copyWithZone</code>方法，告诉程序如何复制该对象。（当然也可以自己定义协议和自定义copy方法来克隆，但是不建议这样做)。具体代码可以看<a href="https://github.com/maligh/DesignPatterns/tree/master/MLDesignPatterns-OC/MLDesignPatterns-OC/Prototype" target="_blank" rel="external">Demo</a>。另外在<code>Foudation</code>框架中你也会找到大量实现了<code>NSCopying</code>或者<code>NSMutableCopying</code>的类。<br><strong>4.优点：</strong> 在某些场景可以避免内存开销大的创建初始化动作。<br><strong>5.缺点：</strong> 基本没有缺点可言。<br><strong>6.注意事项:</strong> 涉及到<code>copy</code>，注意下深复制和浅复制就好。</p>
 <hr>
-<p>第二步：既然第一步已经问过了，没有新增方法，那就问问有没有别人能够帮忙处理一下啊，调用的是<code>- (id)forwardingTargetForSelector:(SEL)aSelector</code>这个方法<br>上文我们说到People接收到了一条选择子为<code>fly</code>的未知消息，我们可以看到控制台已经打印了<code>resolveInstanceMethod:  fly</code>，代表第一步已经问过了，那么第二步问一下是否有别的类能帮忙处理吗？代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">- (id)forwardingTargetForSelector:(SEL)aSelector &#123;</div><div class="line">    NSLog(@&quot;forwardingTargetForSelector:  %@&quot;, NSStringFromSelector(aSelector));</div><div class="line">    Bird *bird = [[Bird alloc] init];</div><div class="line">    if ([bird respondsToSelector: aSelector]) &#123;</div><div class="line">        return bird;</div><div class="line">    &#125;</div><div class="line">    return [super forwardingTargetForSelector: aSelector];</div><div class="line">&#125;</div><div class="line">// Bird.m</div><div class="line">- (void)fly &#123;</div><div class="line">    NSLog(@&quot;I am a bird, I can fly.&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>通过<code>- (id)forwardingTargetForSelector:(SEL)aSelector</code>的处理，bird能够处理这条消息，所以这条消息被bird成功处理，消息转发流程提前结束。控制台打印<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">forwardingTargetForSelector:  fly</div><div class="line">I am a bird, I can fly.</div></pre></td></tr></table></figure></p>
-<p>但是如果<code>- (id)forwardingTargetForSelector:(SEL)aSelector</code>也找不到能够帮忙处理这条未知消息，那就会走到最后一步，这步也是代价最大的一步</p>
+<h2 id="单例模式（Singleton）："><a href="#单例模式（Singleton）：" class="headerlink" title="单例模式（Singleton）："></a>单例模式（Singleton）：</h2><p><strong>1.定义:</strong> 单例模式能够确保某个类在应用中只存在一个实例，创建之后会向整个系统共用这个实例。<br><strong>2. 使用场景：</strong> 需要用来保存全局的状态，并且不和任何作用域绑定的时候可以考虑单例。<br><strong>3. 具体实现：</strong><br>最简单最常见的一种实现方式:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">+ (instancetype)sharedInstance &#123;</div><div class="line">    static id shareInstance;</div><div class="line">    static dispatch_once_t onceToken;</div><div class="line">    dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">        shareInstance = [[self alloc] init];</div><div class="line">    &#125;);</div><div class="line">    return shareInstance;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>4.优点：</strong>在某些场景节省了一些内存开销，尤其是对一个需要频繁创建销毁的对象。<br><strong>5.缺点：</strong>单例对象一旦建立，对象指针是保存在静态区的，单例对象在堆中分配的内存空间，会在应用程序终止后才会被释放。虽然也可以做到提前释放，但一般很少这样去做。另外单例类无法继承，扩展很困难。<br><strong>6.注意事项:</strong> 单例模式比较常用，也可能是很多初级工程师唯一会使用的设计模式。这里还是要尽量避免滥用单例，大家可以查看<a href="https://www.objccn.io/issue-13-2/" target="_blank" rel="external">这篇文章</a> 另外还要防止一下对单例对象的<code>copy</code>操作。</p>
 <hr>
-<p>第三步：调用<code>- (void)forwardInvocation:(NSInvocation *)anInvocation</code>，在调用<code>forwardInvocation:</code>之前会调用<code>- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector</code>方法来获取这个选择子的方法签名，然后在<code>-(void)forwardInvocation:(NSInvocation *)anInvocation</code>方法中你就可以通过<code>anInvocation</code>拿到相应信息做处理，实例代码如下</p>
-<p>当People 收到一条 选择子为code 的消息的时候，前两步发现都没办法处理掉，走到第三步：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">- (void)forwardInvocation:(NSInvocation *)anInvocation &#123;</div><div class="line">    NSLog(@&quot;forwardInvocation: %@&quot;, NSStringFromSelector([anInvocation selector]));</div><div class="line">    if ([anInvocation selector] == @selector(code)) &#123;</div><div class="line">        Monkey *monkey = [[Monkey alloc] init];</div><div class="line">        [anInvocation invokeWithTarget:monkey];</div><div class="line">    &#125;   </div><div class="line">&#125;</div><div class="line"></div><div class="line">- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector &#123;</div><div class="line">    NSLog(@&quot;method signature for selector: %@&quot;, NSStringFromSelector(aSelector));</div><div class="line">    if (aSelector == @selector(code)) &#123;</div><div class="line">        return [NSMethodSignature signatureWithObjCTypes:&quot;V@:@&quot;];</div><div class="line">    &#125;</div><div class="line">    return [super methodSignatureForSelector:aSelector];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>这时控制台会打印<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">resolveInstanceMethod:  code</div><div class="line">forwardingTargetForSelector:  code</div><div class="line">method signature for selector: code</div><div class="line">forwardInvocation: code</div><div class="line">I am a coder.</div></pre></td></tr></table></figure></p>
-<p>此时这个code消息已经被monkey实例处理掉<br>此时消息转发流程完整的结束了，完整的消息转发流程如下：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1457495-8ee6afef466e6177.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="工厂方法模式（FactoryMethod）："><a href="#工厂方法模式（FactoryMethod）：" class="headerlink" title="工厂方法模式（FactoryMethod）："></a>工厂方法模式（FactoryMethod）：</h2><p><strong>1.定义:</strong> 定义一个用于创建对象的接口，让子类决定实例化哪一个类。<br><strong>2. 使用场景：</strong> 当存在多个类共同实现一个协议或者共同继承一个基类的时候，需要创建不同的对象，这个时候就可以考虑是否有必要使用工厂类进行管理。<br><strong>3. 具体实现：</strong>  这里引用《设计模式之禅》一书中女娲造人的示例，<a href="https://github.com/maligh/DesignPatterns/tree/master/MLDesignPatterns-OC/MLDesignPatterns-OC/FactoryMethod" target="_blank" rel="external">具体实现请看demo</a>，另外还有工厂方法模式还可以缩小成简单工厂模式，形如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//CarFactory.m</div><div class="line">+ (Car *)createCarWithType:(NSIntger)passengersCount &#123;</div><div class="line">    if (passengersCount &lt; 2) &#123;</div><div class="line">        return [[SportCar alloc] init];</div><div class="line">    &#125; else if (passengersCount &lt; 4) &#123;</div><div class="line">        return [[NormalCar alloc] init];</div><div class="line">    &#125; else &#123;</div><div class="line">        return [[SUV alloc] init];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>但简单工厂模式的耦合和扩展方面存在一些问题，基本所有使用简单工厂模式的地方都可以用<code>依赖注入</code>来解决掉这个问题。<br><strong>4.优点：</strong> 1.在工厂方法中，用户只需要知道所要产品的具体工厂，不需要知道具体的创建过程，甚至不需要具体产品类。2.在系统增加新的产品时，我们只需要添加一个具体产品类和对应的实现工厂，无需对原工厂进行任何修改，很好地符合了“开闭原则”。<br><strong>5.缺点：</strong> 每次增加一个产品时，都需要增加一个具体类和对象实现工厂，代码量会增加，也增加了系统的复杂度。</p>
 <hr>
-<p>那么最后消息未能处理的时候，还会调用到<br><code>- (void)doesNotRecognizeSelector:(SEL)aSelector</code>这个方法，我们也可以在这个方法中做些文章，避免掉crash，但是只建议在线上环境的时候做处理，实际开发过程中还要把异常抛出来</p>
-<p>EOF:OC中消息转发流程大概就是这样了，Demo<a href="https://github.com/maligh/ML-Objective-C-Demo/tree/master/MessageForwarding" target="_blank" rel="external">点这里，觉得有帮助的话不要吝惜你的star</a>，由于个人能力有限，文中难免有些错误，希望大家不吝赐教~<br>另外有一个问题想问大家，+ (BOOL)resolveClassMethod:(SEL)sel 在这个方法中怎么动态添加类方法？ 比如我发送了一条未知的 [People missMethod]消息，怎么添加 +(void)missMethod 的实现呢？</p>
+<h2 id="抽象工厂模式（AbstractFactory）："><a href="#抽象工厂模式（AbstractFactory）：" class="headerlink" title="抽象工厂模式（AbstractFactory）："></a>抽象工厂模式（AbstractFactory）：</h2><p><strong>1.定义:</strong> 抽象工厂模式是工厂方式模式的升级版本，抽象工厂模式允许调用组件在不了解创建对象所需类的情况下，创建一组相关或者互相依赖的对象。<br><strong>2. 使用场景：</strong> 一个对象族有相同的约束时可以使用抽象工厂模式。<br><strong>3. 具体实现：</strong> 这里引用了一个生产门的工厂，木门需要搭配木门安装工，铁门需要搭配铁门安装工，<a href="https://github.com/maligh/DesignPatterns/tree/master/MLDesignPatterns-OC/MLDesignPatterns-OC/AbstractFactory" target="_blank" rel="external">具体实现请看demo</a><br><strong>4.优点：</strong> 良好的封装性：抽象工厂模式允许调用组件不必了解创建对象使用的类，也不必知道为什么选择这些类，因为我可以在不修改调用组件的情况下，对使用的类进行修改。<br><strong>5.缺点：</strong>  扩展产品族困难，需要更改接口及其下所有子类(什么是产品族：在抽象工厂模式中，产品族是指由同一个工厂生产的。例如苹果手机，苹果平板，苹果电脑)。</p>
+<hr>
+<h2 id="建造者模式（Builder）："><a href="#建造者模式（Builder）：" class="headerlink" title="建造者模式（Builder）："></a>建造者模式（Builder）：</h2><p><strong>1.定义:</strong> 将一个复杂的对象的构建与他的表示分离，使得同样的构建过程可以创建不同的表示。<br><strong>2. 使用场景：</strong> 当创建多种风格的对象时或者创建对象时涉及很多步骤，可以使用建造者模式。<br><strong>3. 具体实现：</strong> 这里举了一个手抓饼的例子，5元的不辣手抓饼需要添加（生菜 + 火腿肠 + 鸡蛋，味精 + 番茄酱），10元的变态辣手抓饼需要添加(生菜 + 热狗 + 肉松 + 里脊 + 芝士，辣椒 + 辣酱 + 麻酱 + 干辣椒 + 剁辣椒 + 老干妈 + 辣椒油)，<a href="https://github.com/maligh/DesignPatterns/tree/master/MLDesignPatterns-OC/MLDesignPatterns-OC/Builder" target="_blank" rel="external">具体实现请看demo</a><br><strong>4.优点：</strong> 1.将产品的创建过程与产品本身分离开来，可以使用相同的创建过程来得到不同的产品。2.每一个具体建造者都相对独立，因此可以很方便地替换具体建造者或增加新的具体建造者。<br><strong>5.缺点：</strong> 1.建造者模式所创建的产品一般具有较多的共同点，其组成部分相似，如果产品之间的差异性很大，则不适合使用建造者模式，因此其使用范围受到一定的限制。2.如果产品的内部变化复杂，可能会导致需要定义很多具体建造者类来实现这种变化，导致系统变得很庞大。</p>
+<hr>
+<p><strong>EOF :</strong> 这篇文章通过<a href="https://github.com/maligh/DesignPatterns/tree/master/MLDesignPatterns-OC/MLDesignPatterns-OC/" target="_blank" rel="external">Demo</a>梳理了设计模式中的创建型模式，由于个人能力有限，难免有一些遗漏或者错误，还请各位看官不吝赐教！下周会给大家带来第二篇<code>结构性模式篇</code>，本文已同步到<a href="http://www.superma.me/2017/08/22/iOS%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%9B%9B%E9%83%A8%E6%9B%B2%E4%B8%80%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F%E5%86%85%E9%99%84Demo/" target="_blank" rel="external">个人博客</a>，<strong>欢迎关注，欢迎点赞，欢迎star，欢迎一起交流，一起进步！</strong>🤓</p>
 
             
         </div>
@@ -281,7 +277,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="/all-tags/消息转发/">消息转发</a>
+    <a class="tag tag--primary tag--small t-link" href="/all-tags/Objective-C/">Objective-C</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/设计模式/">设计模式</a>
 
             </div>
         
@@ -291,7 +287,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/08/06/重温《EffectiveObjective-C2-0编写高质量iOS与OSX代码的52个有效方法》/"  data-tooltip="重温《EffectiveObjective-C2.0编写高质量iOS与OSX代码的52个有效方法》">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -299,7 +295,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/07/04/Objective-C编程规范以及建议/" data-tooltip="Objective-C编程规范以及建议">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/08/06/重温《EffectiveObjective-C2-0编写高质量iOS与OSX代码的52个有效方法》/" data-tooltip="重温《EffectiveObjective-C2.0编写高质量iOS与OSX代码的52个有效方法》">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -317,7 +313,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://superma.me/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/">
                     <i class="fa fa-facebook-official"></i>
                 </a>
             </li>
@@ -325,7 +321,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://superma.me/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/">
                     <i class="fa fa-twitter"></i>
                 </a>
             </li>
@@ -333,7 +329,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://superma.me/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/">
                     <i class="fa fa-google-plus"></i>
                 </a>
             </li>
@@ -341,7 +337,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="http://service.weibo.com/share/share.php?&amp;title=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="post-action-btn btn btn--default" target="new" href="http://service.weibo.com/share/share.php?&amp;title=http://superma.me/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/">
                     <i class="fa fa-weibo"></i>
                 </a>
             </li>
@@ -349,7 +345,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="http://connect.qq.com/widget/shareqq/index.html?url=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/&amp;title=iOS理解Objective-C中消息转发机制附Demo">
+                <a class="post-action-btn btn btn--default" target="new" href="http://connect.qq.com/widget/shareqq/index.html?url=http://superma.me/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/&amp;title=iOS设计模式四部曲一创建型模式内附Demo">
                     <i class="fa fa-qq"></i>
                 </a>
             </li>
@@ -357,7 +353,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="post-action-btn btn btn--default" target="new" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://superma.me/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/">
                     <i class="fa fa-star"></i>
                 </a>
             </li>
@@ -365,7 +361,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="http://widget.renren.com/dialog/share?resourceUrl=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="post-action-btn btn btn--default" target="new" href="http://widget.renren.com/dialog/share?resourceUrl=http://superma.me/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/">
                     <i class="fa fa-renren"></i>
                 </a>
             </li>
@@ -405,7 +401,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/08/06/重温《EffectiveObjective-C2-0编写高质量iOS与OSX代码的52个有效方法》/"  data-tooltip="重温《EffectiveObjective-C2.0编写高质量iOS与OSX代码的52个有效方法》">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -413,7 +409,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/07/04/Objective-C编程规范以及建议/" data-tooltip="Objective-C编程规范以及建议">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/08/06/重温《EffectiveObjective-C2-0编写高质量iOS与OSX代码的52个有效方法》/" data-tooltip="重温《EffectiveObjective-C2.0编写高质量iOS与OSX代码的52个有效方法》">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -431,7 +427,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://superma.me/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/">
                     <i class="fa fa-facebook-official"></i>
                 </a>
             </li>
@@ -439,7 +435,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://superma.me/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/">
                     <i class="fa fa-twitter"></i>
                 </a>
             </li>
@@ -447,7 +443,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://superma.me/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/">
                     <i class="fa fa-google-plus"></i>
                 </a>
             </li>
@@ -455,7 +451,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="http://service.weibo.com/share/share.php?&amp;title=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="post-action-btn btn btn--default" target="new" href="http://service.weibo.com/share/share.php?&amp;title=http://superma.me/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/">
                     <i class="fa fa-weibo"></i>
                 </a>
             </li>
@@ -463,7 +459,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="http://connect.qq.com/widget/shareqq/index.html?url=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/&amp;title=iOS理解Objective-C中消息转发机制附Demo">
+                <a class="post-action-btn btn btn--default" target="new" href="http://connect.qq.com/widget/shareqq/index.html?url=http://superma.me/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/&amp;title=iOS设计模式四部曲一创建型模式内附Demo">
                     <i class="fa fa-qq"></i>
                 </a>
             </li>
@@ -471,7 +467,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="post-action-btn btn btn--default" target="new" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://superma.me/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/">
                     <i class="fa fa-star"></i>
                 </a>
             </li>
@@ -479,7 +475,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="http://widget.renren.com/dialog/share?resourceUrl=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="post-action-btn btn btn--default" target="new" href="http://widget.renren.com/dialog/share?resourceUrl=http://superma.me/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/">
                     <i class="fa fa-renren"></i>
                 </a>
             </li>
@@ -504,7 +500,7 @@
             
             
             <li class="share-option">
-                <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://superma.me/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/">
                     <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
                 </a>
             </li>
@@ -512,7 +508,7 @@
             
             
             <li class="share-option">
-                <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://superma.me/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/">
                     <i class="fa fa-twitter"></i><span>Share on Twitter</span>
                 </a>
             </li>
@@ -520,7 +516,7 @@
             
             
             <li class="share-option">
-                <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://superma.me/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/">
                     <i class="fa fa-google-plus"></i><span>Share on Google+</span>
                 </a>
             </li>
@@ -528,7 +524,7 @@
             
             
             <li class="share-option">
-                <a class="share-option-btn" target="new" href="http://service.weibo.com/share/share.php?&amp;title=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="share-option-btn" target="new" href="http://service.weibo.com/share/share.php?&amp;title=http://superma.me/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/">
                     <i class="fa fa-weibo"></i><span>Share on Weibo</span>
                 </a>
             </li>
@@ -536,7 +532,7 @@
             
             
             <li class="share-option">
-                <a class="share-option-btn" target="new" href="http://connect.qq.com/widget/shareqq/index.html?url=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/&amp;title=iOS理解Objective-C中消息转发机制附Demo">
+                <a class="share-option-btn" target="new" href="http://connect.qq.com/widget/shareqq/index.html?url=http://superma.me/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/&amp;title=iOS设计模式四部曲一创建型模式内附Demo">
                     <i class="fa fa-qq"></i><span>Share on QQ</span>
                 </a>
             </li>
@@ -544,7 +540,7 @@
             
             
             <li class="share-option">
-                <a class="share-option-btn" target="new" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="share-option-btn" target="new" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://superma.me/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/">
                     <i class="fa fa-star"></i><span>Share on Qzone</span>
                 </a>
             </li>
@@ -552,7 +548,7 @@
             
             
             <li class="share-option">
-                <a class="share-option-btn" target="new" href="http://widget.renren.com/dialog/share?resourceUrl=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="share-option-btn" target="new" href="http://widget.renren.com/dialog/share?resourceUrl=http://superma.me/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/">
                     <i class="fa fa-renren"></i><span>Share on Renren</span>
                 </a>
             </li>
