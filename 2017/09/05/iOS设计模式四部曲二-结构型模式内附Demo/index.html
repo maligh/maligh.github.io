@@ -6,22 +6,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="记录学习中的点滴,努力打怪升级-MaLi">
-    <title>Tag: Objective-C - 记录学习中的点滴,努力打怪升级-MaLi</title>
+    <title>iOS设计模式四部曲二:结构型模式内附Demo - 记录学习中的点滴,努力打怪升级-MaLi</title>
     <meta name="author" content="Mali">
     
     
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="记录学习中的点点滴滴,努力打怪升级~  Objective-C &amp;&amp; PHP &amp;&amp; Swift &amp;&amp; Python ‘s learner.">
+    <meta name="description" content="本篇是四部曲的第二篇，第一篇请点这里iOS设计模式四部曲(一):创建型模式 内附Demo，关于设计模式强烈推荐图书《Head First设计模式》以及。由于个人能力有限，文中难免有一些遗漏或者错误，请各位看官不吝赐教！谢谢！本文所有Demo可以在我的Git上获取，请点击这里  废话不多说，上图是整个设计模式的目录，这篇文章是其中的第二部分：结构型模式。结构型模式包括：适配器模式（Adapter）">
+<meta name="keywords" content="设计模式,Objective-C">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="记录学习中的点滴,努力打怪升级-MaLi">
-<meta property="og:url" content="http://superma.me/all-tags/Objective-C/index.html">
+<meta property="og:title" content="iOS设计模式四部曲二:结构型模式内附Demo">
+<meta property="og:url" content="http://superma.me/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/index.html">
 <meta property="og:site_name" content="记录学习中的点滴,努力打怪升级-MaLi">
-<meta property="og:description" content="记录学习中的点点滴滴,努力打怪升级~  Objective-C &amp;&amp; PHP &amp;&amp; Swift &amp;&amp; Python ‘s learner.">
+<meta property="og:description" content="本篇是四部曲的第二篇，第一篇请点这里iOS设计模式四部曲(一):创建型模式 内附Demo，关于设计模式强烈推荐图书《Head First设计模式》以及。由于个人能力有限，文中难免有一些遗漏或者错误，请各位看官不吝赐教！谢谢！本文所有Demo可以在我的Git上获取，请点击这里  废话不多说，上图是整个设计模式的目录，这篇文章是其中的第二部分：结构型模式。结构型模式包括：适配器模式（Adapter）">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1457495-9bef37686fbfa917.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1457495-b27a7821529beb5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1457495-8a193f7beaa6017c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-09-04T17:10:17.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="记录学习中的点滴,努力打怪升级-MaLi">
-<meta name="twitter:description" content="记录学习中的点点滴滴,努力打怪升级~  Objective-C &amp;&amp; PHP &amp;&amp; Swift &amp;&amp; Python ‘s learner.">
+<meta name="twitter:title" content="iOS设计模式四部曲二:结构型模式内附Demo">
+<meta name="twitter:description" content="本篇是四部曲的第二篇，第一篇请点这里iOS设计模式四部曲(一):创建型模式 内附Demo，关于设计模式强烈推荐图书《Head First设计模式》以及。由于个人能力有限，文中难免有一些遗漏或者错误，请各位看官不吝赐教！谢谢！本文所有Demo可以在我的Git上获取，请点击这里  废话不多说，上图是整个设计模式的目录，这篇文章是其中的第二部分：结构型模式。结构型模式包括：适配器模式（Adapter）">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1457495-9bef37686fbfa917.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
     
     
         
@@ -29,6 +35,9 @@
     
         <meta property="og:image" content="http://superma.me/assets/images/avatar.jpg"/>
     
+    
+        <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1457495-9bef37686fbfa917.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://upload-images.jianshu.io/upload_images/1457495-9bef37686fbfa917.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" />
     
     
     
@@ -50,7 +59,7 @@
         
     
 
-<header id="header" data-behavior="1">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a class="header-title-link" href="/ ">记录学习中的点滴,努力打怪升级-MaLi</a>
@@ -74,7 +83,7 @@
         
     
 
-<nav id="sidebar" data-behavior="1">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
             <div class="sidebar-profile">
@@ -207,26 +216,22 @@
 </nav>
 
             
-            <div id="main" data-behavior="1"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
                 
-    <section class="postShorten-group main-content-wrap">
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/">
-                            iOS设计模式四部曲二:结构型模式内附Demo
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            iOS设计模式四部曲二:结构型模式内附Demo
+        </h1>
+    
+    
+        <div class="post-meta">
     <time itemprop="datePublished" datetime="2017-09-05T01:03:39+08:00">
 	
 		    Sep 05, 2017
@@ -241,10 +246,12 @@
     
 </div>
 
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p> 本篇是四部曲的第二篇，第一篇请点这里<a href="http://www.jianshu.com/p/55f0e3b30e9c" target="_blank" rel="external">iOS设计模式四部曲(一):创建型模式 内附Demo</a>，关于设计模式强烈推荐图书《Head First设计模式》以及。由于个人能力有限，文中难免有一些遗漏或者错误，请各位看官不吝赐教！谢谢！本文所有Demo可以在我的Git上获取，<a href="https://github.com/maligh/DesignPatterns" target="_blank" rel="external">请点击这里</a></p>
+    
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p> 本篇是四部曲的第二篇，第一篇请点这里<a href="http://www.jianshu.com/p/55f0e3b30e9c" target="_blank" rel="external">iOS设计模式四部曲(一):创建型模式 内附Demo</a>，关于设计模式强烈推荐图书《Head First设计模式》以及。由于个人能力有限，文中难免有一些遗漏或者错误，请各位看官不吝赐教！谢谢！本文所有Demo可以在我的Git上获取，<a href="https://github.com/maligh/DesignPatterns" target="_blank" rel="external">请点击这里</a></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1457495-9bef37686fbfa917.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="第二篇来了"><br><img src="http://upload-images.jianshu.io/upload_images/1457495-b27a7821529beb5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="设计模式.png"></p>
 <p>废话不多说，上图是整个设计模式的目录，这篇文章是其中的第二部分：结构型模式。结构型模式包括：<code>适配器模式（Adapter）</code>，<code>桥接模式（Bridge）</code>，<code>装饰器模式（Decorator）</code>，<code>组合模式（Composite）</code>，<code>外观模式（Facade）</code>，<code>享元模式（Flyweight）</code>，<code>代理模式（Proxy）</code>。下面我们就开始吧~</p>
 <hr>
@@ -265,88 +272,122 @@
 <hr>
 <p><strong>EOF:</strong>这篇文章通过<a href="https://github.com/maligh/DesignPatterns/tree/master/MLDesignPatterns-OC/MLDesignPatterns-OC/" target="_blank" rel="external">Demo</a>梳理了设计模式中的结构型模式，由于个人能力有限，难免有一些遗漏或者错误，<strong>还请各位看官不吝赐教！</strong> 最近工作有点忙，剩下的部分会尽量抽时间早点完成。本文已同步到<a href="">个人博客</a>，<strong>欢迎关注，欢迎点赞，欢迎star，欢迎一起交流，一起进步！</strong>🤓</p>
 
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
             
         </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
         
-            <a href="/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/">
-                <div class="postShorten-thumbnailimg">
-                    <img alt="" itemprop="image" src="http://upload-images.jianshu.io/upload_images/1457495-9bef37686fbfa917.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"/>
-                </div>
-            </a>
-            
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/">
-                            iOS设计模式四部曲一创建型模式内附Demo
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-08-22T01:18:45+08:00">
-	
-		    Aug 22, 2017
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/all-categories/设计模式/">设计模式</a>
-
-
-    
-</div>
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/all-tags/Objective-C/">Objective-C</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/设计模式/">设计模式</a>
 
             </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>  最近刚重温完经典书籍<a href="http://www.jianshu.com/p/862b064e82e0" target="_blank" rel="external">《EffectiveObjective-C2.0编写高质量iOS与OSX代码的52个有效方法》</a>，接下来准备把设计模式扫扫盲
-                    
-                        <a href="/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/" class="postShorten-excerpt_link link">
-                            Continue reading
-                        </a>
-                        
-                    
-                </div>
-            
-        </div>
         
-            <a href="/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/">
-                <div class="postShorten-thumbnailimg">
-                    <img alt="" itemprop="image" src="http://upload-images.jianshu.io/upload_images/1457495-b27a7821529beb5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"/>
-                </div>
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/" data-tooltip="iOS设计模式四部曲一创建型模式内附Demo">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
             </a>
+        </li>
+        
             
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://superma.me/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/">
+                    <i class="fa fa-facebook-official"></i>
+                </a>
+            </li>
         
-    </article>
-    
-    <div class="pagination-bar">
-    <ul class="pagination">
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://superma.me/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/">
+                    <i class="fa fa-twitter"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://superma.me/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/">
+                    <i class="fa fa-google-plus"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="http://service.weibo.com/share/share.php?&amp;title=http://superma.me/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/">
+                    <i class="fa fa-weibo"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="http://connect.qq.com/widget/shareqq/index.html?url=http://superma.me/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/&amp;title=iOS设计模式四部曲二:结构型模式内附Demo">
+                    <i class="fa fa-qq"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://superma.me/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/">
+                    <i class="fa fa-star"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="http://widget.renren.com/dialog/share?resourceUrl=http://superma.me/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/">
+                    <i class="fa fa-renren"></i>
+                </a>
+            </li>
         
         
-        <li class="pagination-number">page 1 of 1</li>
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
     </ul>
 </div>
 
-</section>
+
+        
+        
+            
+        
+    </div>
+</article>
+
 
 
                 <footer id="footer" class="main-content-wrap">
@@ -356,6 +397,168 @@
 </footer>
 
             </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/08/22/iOS设计模式四部曲一创建型模式内附Demo/" data-tooltip="iOS设计模式四部曲一创建型模式内附Demo">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://superma.me/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/">
+                    <i class="fa fa-facebook-official"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://superma.me/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/">
+                    <i class="fa fa-twitter"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://superma.me/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/">
+                    <i class="fa fa-google-plus"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="http://service.weibo.com/share/share.php?&amp;title=http://superma.me/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/">
+                    <i class="fa fa-weibo"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="http://connect.qq.com/widget/shareqq/index.html?url=http://superma.me/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/&amp;title=iOS设计模式四部曲二:结构型模式内附Demo">
+                    <i class="fa fa-qq"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://superma.me/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/">
+                    <i class="fa fa-star"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="http://widget.renren.com/dialog/share?resourceUrl=http://superma.me/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/">
+                    <i class="fa fa-renren"></i>
+                </a>
+            </li>
+        
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <i id="btn-close-shareoptions" class="fa fa-close"></i>
+    <ul class="share-options">
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://superma.me/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/">
+                    <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://superma.me/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/">
+                    <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://superma.me/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/">
+                    <i class="fa fa-google-plus"></i><span>Share on Google+</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="http://service.weibo.com/share/share.php?&amp;title=http://superma.me/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/">
+                    <i class="fa fa-weibo"></i><span>Share on Weibo</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="http://connect.qq.com/widget/shareqq/index.html?url=http://superma.me/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/&amp;title=iOS设计模式四部曲二:结构型模式内附Demo">
+                    <i class="fa fa-qq"></i><span>Share on QQ</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://superma.me/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/">
+                    <i class="fa fa-star"></i><span>Share on Qzone</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="http://widget.renren.com/dialog/share?resourceUrl=http://superma.me/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/">
+                    <i class="fa fa-renren"></i><span>Share on Renren</span>
+                </a>
+            </li>
+        
+    </ul>
+</div>
+
             
         </div>
         
@@ -583,6 +786,8 @@
         <!--SCRIPTS-->
 <script src="/assets/js/script-ivwiy10zeb8fifc4swnhkwneuk64y53w2scmdmtp8thi9cqfxh31aowtroaz.min.js"></script>
 <!--SCRIPTS END-->
+
+    
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.min.js"></script>
