@@ -215,7 +215,7 @@
     <section class="postShorten-group main-content-wrap">
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+    <article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
         <div class="postShorten-wrap">
             
             <div class="postShorten-header">
@@ -243,37 +243,13 @@
 
             </div>
             
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p> 本篇是四部曲的第二篇，第一篇请点这里<a href="http://www.jianshu.com/p/55f0e3b30e9c" target="_blank" rel="external">iOS设计模式四部曲(一):创建型模式 内附Demo</a>，关于设计模式强烈推荐图书《Head First设计模式》以及。由于个人能力有限，文中难免有一些遗漏或者错误，请各位看官不吝赐教！谢谢！本文所有Demo可以在我的Git上获取，<a href="https://github.com/maligh/DesignPatterns" target="_blank" rel="external">请点击这里</a></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1457495-9bef37686fbfa917.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="第二篇来了"><br><img src="http://upload-images.jianshu.io/upload_images/1457495-b27a7821529beb5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="设计模式.png"></p>
-<p>废话不多说，上图是整个设计模式的目录，这篇文章是其中的第二部分：结构型模式。结构型模式包括：<code>适配器模式（Adapter）</code>，<code>桥接模式（Bridge）</code>，<code>装饰器模式（Decorator）</code>，<code>组合模式（Composite）</code>，<code>外观模式（Facade）</code>，<code>享元模式（Flyweight）</code>，<code>代理模式（Proxy）</code>。下面我们就开始吧~</p>
-<hr>
-<h2 id="适配器模式（Adapter）："><a href="#适配器模式（Adapter）：" class="headerlink" title="适配器模式（Adapter）："></a>适配器模式（Adapter）：</h2><p><strong>1.定义:</strong> 适配器模式将一个类的接口变成调用者所期待的另一种接口，从而使原本因接口不匹配而无法在一起工作的两个类能够在一起工作。(举一个现实中的实例：比如转接头)。<br><strong>2. 使用场景：</strong> 扩展应用或者组件时，而被集成进来的又不符合现在的接口，这个时候可以考虑使用适配器模式。<br><strong>3. 具体实现：</strong> 这里用举一个实际的例子，同声传译。举了一个虚拟的国际大会场景，主持人只会说英语，然后马云先生又听不懂英语（当然只是假设，事实是说的比中文都6），在乔布斯演讲之后，就到马云演讲，这个时候就需要一个翻译，去告诉马云可以开始你的表演啦😄，具体<a href="https://github.com/maligh/DesignPatterns/tree/master/MLDesignPatterns-OC/MLDesignPatterns-OC/Adapter" target="_blank" rel="external">Demo点击这里查看</a><br><strong>4.优点：</strong> 通过使用适配器让不兼容的接口变成了兼容，让调用者从实现类的接口解耦。在不修改原有代码的基础上增加新的适配器类，所以灵活性和扩展性比较好，哪天不想用了，就一起卸载掉。<br><strong>5.缺点：</strong> 只有集成具有类似功能的组件时，适配器模式才具有使用价值。具有相似功能具体指：API不一样，但是功能是相似的。<br><strong>6.注意事项:</strong> 适配器模式一般不是为了解决还处在于开发阶段的问题，一般都是解决正在服役项目的扩展问题。</p>
-<hr>
-<h2 id="桥接模式（Bridge）："><a href="#桥接模式（Bridge）：" class="headerlink" title="桥接模式（Bridge）："></a>桥接模式（Bridge）：</h2><p><strong>1.定义:</strong> 桥接模式就是将抽象部分和实现部分解耦，从而使得两者可以独立的变化。<br><strong>2. 使用场景：</strong> 重用性要求较高的不希望或不适用使用继承的场景。也就是说当继承N层，达到层级有点爆炸的时候可以考虑使用此模式。<br><strong>3. 具体实现：</strong> 这里举了一个App不同模块可以切换不同主题的例子，桥接模式主打的是组合优于继承，<a href="https://github.com/maligh/DesignPatterns/tree/master/MLDesignPatterns-OC/MLDesignPatterns-OC/Bridge" target="_blank" rel="external">具体Demo点击查看</a>，如果没有用桥接模式的话，可能就会出现<code>MyRedModule</code>，<code>MyBlueModule</code>这样的类<br><strong>4.优点：</strong> 此模式分离了应用的抽象部分与实现部分，有利于扩充。<br><strong>5.缺点：</strong> 桥接模式要求正确识别出系统中两个独立变化的维度，因此其使用范围具有一定的局限性。<br><strong>6.注意事项:</strong> 并不是一涉及继承就要考虑使用桥接模式，不然还要继承做什么？桥接模式的目的就是要对变化进行封装，尽可能的把变化的因素封装到最细最小的单元中，避免风险扩散。所以当发现类的继承有N层的时候，才需要去考虑使用该模式。</p>
-<hr>
-<h2 id="装饰器模式（Decorator）："><a href="#装饰器模式（Decorator）：" class="headerlink" title="装饰器模式（Decorator）："></a>装饰器模式（Decorator）：</h2><p><strong>1.定义:</strong> 装饰模式能动态的给一个对象添加一些额外的职责。就增加功能来说，装饰模式会比通过继承生成子类更为灵活。<br><strong>2. 使用场景：</strong> 需要动态地给一个对象增加功能，这些功能也可以动态地被撤销。<br><strong>3. 具体实现：</strong> Objective-C中的Category 就是装饰器模式的一种应用。这里举了一个鸡肉堡的例子，<a href="https://github.com/maligh/DesignPatterns/tree/master/MLDesignPatterns-OC/MLDesignPatterns-OC/Decorator" target="_blank" rel="external">具体Demo点击查看</a><br><strong>4.优点：</strong> 装饰器模式中定义的行为，能够在不创建大量子类的情况下，组合起来实现复杂的效果，比继承更加灵活。<br><strong>5.缺点：</strong> 装饰器模式会导致设计中出现许多的小对象，会让系统变得更加复杂，比如说出错调试时寻找错误可能需要逐级排查。</p>
-<hr>
-<h2 id="组合模式（Composite）："><a href="#组合模式（Composite）：" class="headerlink" title="组合模式（Composite）："></a>组合模式（Composite）：</h2><p><strong>1.定义:</strong> 组合模式将对象组合成树形结构以表示“部分-整体”的层次结构，使得用户对单个对象和组合对象的使用具有一致性。<br><strong>2. 使用场景：</strong> 维护和展示部分-整体关系的场景，在具有整体和部分的层次结构中，希望通过一种方式忽略整体与部分的差异，可以一致地对待它们的时候。<br><strong>3. 具体实现：</strong> 这里举一个文件系统的例子<br><img src="http://upload-images.jianshu.io/upload_images/1457495-8a193f7beaa6017c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>这里有这个目录下有<code>文件夹Composite</code>和<code>main实现文件</code>，<code>文件夹Composite</code>下有<code>实现文件</code>和<code>头文件</code>。<a href="https://github.com/maligh/DesignPatterns/tree/master/MLDesignPatterns-OC/MLDesignPatterns-OC/Composite" target="_blank" rel="external">Demo点击这里查看</a></p>
-<p><strong>4.优点：</strong> 1.高层模块调用简单。2.节点自由增加，而不必更改原来代码。3.叶子对象可以被组合成更复杂的容器对象，而这个容器对象又可以被组合，这样不断递归下去，可以形成复杂的树形结构。<br><strong>5.缺点：</strong> 使设计变得更加抽象，对象的业务规则如果很复杂，则实现组合模式具有很大挑战性，而且不是所有的方法都与叶子对象子类都有关联。<br><strong>6.注意事项:</strong> 当使用这个属性结构的调用组件能够通过同一个类或者协议来使用书中包含的所有的对象时，才能证明正确的实现了此模式。</p>
-<hr>
-<h2 id="外观模式（Facade）："><a href="#外观模式（Facade）：" class="headerlink" title="外观模式（Facade）："></a>外观模式（Facade）：</h2><p><strong>1.定义:</strong> 外观模式要求一个子系统的外部与内部的通信必须通过一个统一的对象进行。外观模式提供一个高层次的接口，用来访问子系统中的一群接口。<br><strong>2. 使用场景：</strong> 当一个复杂子系统需要提供一个简单的调用接口时可以使用外观模式。<br><strong>3. 具体实现：</strong> 外观模式比较容易理解，这里举一个家电管家的例子，命令起床，命令睡觉。家电管家帮你做关灯，拉窗帘等等一系列操作。<a href="https://github.com/maligh/DesignPatterns/tree/master/MLDesignPatterns-OC/MLDesignPatterns-OC/Facade" target="_blank" rel="external">具体Demo请点击这里查看</a><br><strong>4.优点：</strong> 使用此模式可以将复杂的API代码隐藏到一个简单的接口中，减少调用者直接对复杂API的依赖和耦合。修改时也只需要修改简单的接口即可。<br><strong>5.缺点：</strong> 不太遵守开闭原则，一旦发现有一些操作的时候，或者在增加新的子系统的时候，可能需要修改外观类代码，可能会造成一些风险。</p>
-<hr>
-<h2 id="享元模式（Flyweight）："><a href="#享元模式（Flyweight）：" class="headerlink" title="享元模式（Flyweight）："></a>享元模式（Flyweight）：</h2><p><strong>1.定义:</strong> 享元模式就是运行共享技术有效地支持大量细粒度对象的复用<br><strong>2. 使用场景：</strong> 系统中存在大量的相似对象，由于这类对象的大量使用可能会造成系统内存资源浪费，而且这些对象的状态大部分可以外部化，这个时候可以考虑享元模式。在iOS中，我们用到的UITableView 重用机制就是享元模式的典型应用。<br><strong>3. 具体实现：</strong> 这里通过了一个画圆的Demo来演示一下享元模式，<a href="https://github.com/maligh/DesignPatterns/tree/master/MLDesignPatterns-OC/MLDesignPatterns-OC/Flyweight" target="_blank" rel="external">具体Demo请点击这里查看</a><br><strong>4.优点：</strong> 通过共享极大的减少了对象实例的个数，节省了内存开销。<br><strong>5.缺点：</strong> 1.提高了系统的复杂度，需要分离出外部状态和内部状态。 2.这些类必须有一个工厂对象加以控制。</p>
-<hr>
-<h2 id="代理模式（Proxy）："><a href="#代理模式（Proxy）：" class="headerlink" title="代理模式（Proxy）："></a>代理模式（Proxy）：</h2><p><strong>1.定义:</strong> 代理模式为其他对象提供一种代理以控制对这个对象的访问。<br><strong>2. 使用场景：</strong> 想在访问一个类时做一些控制。<br><strong>3. 具体实现：</strong> 这里举一个实际的例子，就是火车票代售点，<a href="https://github.com/maligh/DesignPatterns/tree/master/MLDesignPatterns-OC/MLDesignPatterns-OC/Proxy" target="_blank" rel="external">具体实现Demo请点击这里查看</a><br><strong>4.优点：</strong> 1、职责清晰。 2、高扩展性。<br><strong>5.缺点：</strong> 增加了系统的复杂度<br><strong>6.注意事项:</strong> 1、和适配器模式的区别：适配器模式主要改变所考虑对象的接口，而代理模式不能改变所代理类的接口。 2、和装饰器模式的区别：装饰器模式为了增强功能，而代理模式是为了加以控制。</p>
-<hr>
-<p><strong>EOF:</strong>这篇文章通过<a href="https://github.com/maligh/DesignPatterns/tree/master/MLDesignPatterns-OC/MLDesignPatterns-OC/" target="_blank" rel="external">Demo</a>梳理了设计模式中的结构型模式，由于个人能力有限，难免有一些遗漏或者错误，<strong>还请各位看官不吝赐教！</strong> 最近工作有点忙，剩下的部分会尽量抽时间早点完成。本文已同步到<a href="">个人博客</a>，<strong>欢迎关注，欢迎点赞，欢迎star，欢迎一起交流，一起进步！</strong>🤓</p>
-
+                <div class="postShorten-excerpt" itemprop="articleBody">
+                    <p> 本篇是四部曲的第二篇，第一篇请点这里<a href="http://www.jianshu.com/p/55f0e3b30e9c" target="_blank" rel="external">iOS设计模式四部曲(一):创建型模式 内附Demo</a>，关于设计模式强烈推荐图书《Head First设计模式》以及《研磨设计模式》
                     
+                        <a href="/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/" class="postShorten-excerpt_link link">
+                            Continue reading
+                        </a>
                         
-                    
-                    
-                        <p>
-                            <a href="/2017/09/05/iOS设计模式四部曲二-结构型模式内附Demo/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
                     
                 </div>
             
@@ -760,7 +736,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p> 本篇是四部曲的第二篇，第一篇请点这里<a href="http://www.jianshu.com/p/55f0e3b30e9c" target="_blank" rel="external">iOS设计模式四部曲(一):创建型模式 内附Demo</a>，关于设计模式强烈推荐图书《Head First设计模式》以及《研磨设计模式》</div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
