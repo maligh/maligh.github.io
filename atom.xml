@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://superma.me/"/>
-  <updated>2017-12-31T15:03:02.067Z</updated>
+  <updated>2017-12-31T15:06:22.778Z</updated>
   <id>http://superma.me/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://superma.me/2017/12/31/2017%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
     <id>http://superma.me/2017/12/31/2017年终总结/</id>
     <published>2017-12-31T14:31:18.000Z</published>
-    <updated>2017-12-31T15:03:02.067Z</updated>
+    <updated>2017-12-31T15:06:22.778Z</updated>
     
     <content type="html"><![CDATA[<p>转眼2017年走到了尾声，之前很少有写<code>年终总结</code>，如今已到了奔三的年纪，肩上的责任也越来越‘丰富’，每年做个总结，尽量避免每年‘瞎忙’吧。<a id="more"></a></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1457495-7dd518bf11850849.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
@@ -49,7 +49,7 @@
 <hr>
 <h2 id="内容付费"><a href="#内容付费" class="headerlink" title="内容付费"></a>内容付费</h2><p>去年到今年内容付费火了，我知道和接触的有不少内容付费的事物，有很多还是蛮有帮助的。我自己参与的内容付费也成功收获了1W+的粉丝，虽然不是技术的，但多少也带来了一点微薄收入吧。<br>这一年自己学习过的并且觉得有帮助的一些Project List记录 :</p>
 <ol>
-<li><a href="[https://casatwy.com](https://casatwy.com/">Casa</a><br>) 的 <a href="http://m.quzhiboapp.com/?#!/intro/376" target="_blank" rel="external">闲话 iOS 应用架构</a>，Casa 讲的真的好，他文章也是读了很多遍，尤其是 <a href="https://casatwy.com/iosying-yong-jia-gou-tan-kai-pian.html" target="_blank" rel="external">架构这个系列</a> 目前还没有太多的实践，18年要补上来🤨</li>
+<li><a href="https://casatwy.com/" target="_blank" rel="external">Casa</a> 的 <a href="http://m.quzhiboapp.com/?#!/intro/376" target="_blank" rel="external">闲话 iOS 应用架构</a>，Casa 讲的真的好，他文章也是读了很多遍，尤其是 <a href="https://casatwy.com/iosying-yong-jia-gou-tan-kai-pian.html" target="_blank" rel="external">架构这个系列</a> 目前还没有太多的实践，18年要补上来🤨</li>
 <li>孙源的 <a href="http://m.quzhiboapp.com/?#!/intro/115" target="_blank" rel="external">iOS 面试小灶直播 - 简历、面试题、进阶</a>，关于面试的很多观点都觉得很赞👍</li>
 <li>喵神的<a href="http://m.quzhiboapp.com/#!/intro/391" target="_blank" rel="external">现场编程 - 用 Swift 创建命令行工具 fengniao-cli Part 1</a>，很可惜只全程观看了part1，因为实在是跟不上喵神。但是看了喵神的现场编程全过程，也理解了他说的那句：不必太崇拜大牛，很多大牛也是面向google，面向github编程的！</li>
 <li>巧神的 <a href="http://m.quzhiboapp.com/?#!/intro/406" target="_blank" rel="external">你所不知道的硅谷 &amp; 旅游攻略</a> 看了巧神的硅谷之行之后真的特别想去硅谷，但是很尴尬，一个是经济的限制，另外一个是人脉的局限，那边根本没有熟人和同事啊！！😭 但还是开阔了一些视野，也了解到了华人工程师和印度工程师的一些差异，也跟国内的IT氛围有很大关系吧。说到这里，聊点题外话，很巧，我女朋友也是一枚程序媛，我们是大学同学，在她工作经历中我能感到一些公司对女性程序媛的歧视吧，很难让我不扩大到大部分。（注：她是一枚Android程序媛，目前工资比我高🤪）</li>
