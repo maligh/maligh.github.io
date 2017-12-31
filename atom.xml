@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://superma.me/"/>
-  <updated>2017-10-17T16:58:36.000Z</updated>
+  <updated>2017-12-31T14:59:48.451Z</updated>
   <id>http://superma.me/</id>
   
   <author>
@@ -14,6 +14,86 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2017年终总结</title>
+    <link href="http://superma.me/2017/12/31/2017%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
+    <id>http://superma.me/2017/12/31/2017年终总结/</id>
+    <published>2017-12-31T14:31:18.000Z</published>
+    <updated>2017-12-31T14:59:48.451Z</updated>
+    
+    <content type="html"><![CDATA[<p>转眼2017年走到了尾声，之前很少有写<code>年终总结</code>，如今已到了奔三的年纪，肩上的责任也越来越‘丰富’，每年做个总结，尽量避免每年‘瞎忙’吧。<a id="more"></a></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1457495-7dd518bf11850849.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="LeaderShip"><a href="#LeaderShip" class="headerlink" title="LeaderShip"></a>LeaderShip</h2><p>其实在17年年初的时候有给自己定过努力的方向，就是尽量提升LeaderShip，<a href="http://www.cocoachina.com/programmer/20161229/18469.html" target="_blank" rel="external">关于LeaderShip可以简单看一下这篇文章</a>，虽然这篇文章的观点我并不完全认同，但大部分还是说的还是有些道理的。我眼中的LeaderShip :</p>
+<ol>
+<li><p>被需要：团队或身边中大多数人在做比较关键的决定时，或者在遇到比较棘手的问题的时候往往都会想到你，找到你一起商议。</p>
+</li>
+<li><p>救火能力：当身边的人都在问“这个问题怎么办”的时候，你应该总是能站出来帮同事顺利解决掉麻烦，能每次成功救火（能不能每次都顺利救火，也就决定了你LeaderShip的等级）</p>
+</li>
+<li><p>更多的承担：即使项目中很多不是你份内的任务，也应该带着一颗学习的心态多去了解，去思考如果是你来做会有什么不同，或者有什么建设性意见可以跟同事提一提或者探讨。（建设性意见的多少，或者防火次数的多少也就决定了你LeaderShip的等级）</p>
+</li>
+<li><p>更多的分享：尽量把一些好的方法、技术、技能点、工具分享给身边的人。情绪会传染，这个大家应该都知道，其实分享精神也同样会传染的，当你分享的东西让大家受益之后，久而久之，别人也都很愿意分享自己的“金刚钻”给你，这样的良性循环能大大提升团队以及自己的成长速度。（炫技的除外）</p>
+</li>
+</ol>
+<p>根据以上几点，回顾自己17年，感觉还差的很多，但进步还是有的，18年应该继续朝这个方向努力。需要明显改善的就是对错误的记录，避免犯同样的错误，再遇到同样的错误也能快速准确的解决掉，同时可以加上分享，让更多的人受益。</p>
+<hr>
+<h2 id="读过的书"><a href="#读过的书" class="headerlink" title="读过的书"></a>读过的书</h2><p><img src="http://upload-images.jianshu.io/upload_images/1457495-ff2a7c19ca209852.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ReadList.jpg"></p>
+<p>今年还是读了不少书的，以上就是今年读过的一些书籍，从左到右（精读到泛读），读完的还是有11本，除此之外还有一本《软技能-代码之外的生存指南》还在读，大部分都是技术书籍，除了技术讲解的书籍之外的一些书都在传递教授一些思想，我不否认我不认同全部，但是能在一本书中得到一点或者几点启迪我还是很满足的！我很赞同<code>何帆</code>老师说的，类似书要“为我所用”才有价值（不记得原话了）</p>
+<p>除了读纸质的数据还读了一些电子书：</p>
+<ol>
+<li><a href="https://github.com/numbbbbb/the-swift-programming-language-in-chinese" target="_blank" rel="external">《The Swift Programming Language 中文版》</a>只陆陆续续读了一部分，也照着敲了一部分，惭愧惭愧啊😂！</li>
+<li><a href="https://xiaozhuanlan.com/wwdc17" target="_blank" rel="external">《iOS成长之路系列》</a>目前一共有3期都买了，只看了一部分自己感兴趣的文章，大佬们的合集，有时间还是要好好拜读。</li>
+<li>最近过一遍 <a href="https://juejin.im/user/57638ad8207703006b06e3ef" target="_blank" rel="external">bestswifter</a> 的 《Python 指北》还是挺有帮助的。</li>
+<li>还买了一本 <a href="https://www.qingdan.us/product/25" target="_blank" rel="external">《iOS监控编程》</a> 这本读完了🤥（没读完）</li>
+</ol>
+<hr>
+<h2 id="内容付费"><a href="#内容付费" class="headerlink" title="内容付费"></a>内容付费</h2><p>去年到今年内容付费火了，我知道和接触的有不少内容付费的事物，有很多还是蛮有帮助的。我自己参与的内容付费也成功收获了1W+的粉丝，虽然不是技术的，但多少也带来了一点微薄收入吧。<br>这一年自己学习过的并且觉得有帮助的一些Project List记录 :</p>
+<ol>
+<li><a href="[https://casatwy.com](https://casatwy.com/">Casa</a><br>) 的 <a href="http://m.quzhiboapp.com/?#!/intro/376" target="_blank" rel="external">闲话 iOS 应用架构</a>，Casa 讲的真的好，他文章也是读了很多遍，尤其是 <a href="https://casatwy.com/iosying-yong-jia-gou-tan-kai-pian.html" target="_blank" rel="external">架构这个系列</a> 目前还没有太多的实践，18年要补上来🤨</li>
+<li>孙源的 <a href="http://m.quzhiboapp.com/?#!/intro/115" target="_blank" rel="external">iOS 面试小灶直播 - 简历、面试题、进阶</a>，关于面试的很多观点都觉得很赞👍</li>
+<li>喵神的<a href="http://m.quzhiboapp.com/#!/intro/391" target="_blank" rel="external">现场编程 - 用 Swift 创建命令行工具 fengniao-cli Part 1</a>，很可惜只全程观看了part1，因为实在是跟不上喵神。但是看了喵神的现场编程全过程，也理解了他说的那句：不必太崇拜大牛，很多大牛也是面向google，面向github编程的！</li>
+<li>巧神的 <a href="http://m.quzhiboapp.com/?#!/intro/406" target="_blank" rel="external">你所不知道的硅谷 &amp; 旅游攻略</a> 看了巧神的硅谷之行之后真的特别想去硅谷，但是很尴尬，一个是经济的限制，另外一个是人脉的局限，那边根本没有熟人和同事啊！！😭 但还是开阔了一些视野，也了解到了华人工程师和印度工程师的一些差异，也跟国内的IT氛围有很大关系吧。说到这里，聊点题外话，很巧，我女朋友也是一枚程序媛，我们是大学同学，在她工作经历中我能感到一些公司对女性程序媛的歧视吧，很难让我不扩大到大部分。（注：她是一枚Android程序媛，目前工资比我高🤪）</li>
+<li><a href="https://juejin.im/user/5656f11760b28da566412f03" target="_blank" rel="external">joy</a>的 <a href="http://m.quzhiboapp.com/?#!/intro/392" target="_blank" rel="external">从 iOS 角度出发，剖析移动端性能监控的技术原理</a> 我现在所在的公司目前还没有自己的APM，这块的工作对项目还是很有用的。今年App已经在大力推广了，18年可以抽些时间搞点事情。</li>
+</ol>
+<p>除了技术的还订阅了《得到App》中的 “吴军-硅谷来信”和“何帆的北大读书俱乐部”，在思想上还是得到了一些启迪，给罗胖点赞。</p>
+<hr>
+<h2 id="投资"><a href="#投资" class="headerlink" title="投资"></a>投资</h2><p>因为公司在做港美股，今年也小试牛刀参与了一下港股，目前总体战绩还是亏损的，哈哈，今年是港股的大牛市，腾讯从年初的198左右飞身翻倍到400+，这样我都能亏损，也是自己佩服自己。之前也看到过唐巧写的<a href="http://blog.devtang.com/2017/05/24/talk-about-buying-stock/" title="每个人都应该买美股" target="_blank" rel="external">每个人都应该买美股</a>，确实我也是秉持一样的观点，每个人最好都能在空闲之余关注一下股票，尤其是港美股，很多我们耳熟能详的公司基本都选择在香港和纽交所上市，包括不限于阿里巴巴，腾讯，百度，新浪，微博等等。买股票能让你潜移默化的了解一些公司或者行业，但同时也你要学会规避风险。股票中还是有很多道理的，包括一些人性中的缺陷，贪婪和恐惧的博弈。</p>
+<p>我很认同那句话：炒股就是对你所掌握的知识的一种变现方式。股票中赚钱的基本只有两种人，一种是价值投资的：他知识丰富，精通他投资的行业，通过自己掌握的知识很难赚不到钱。另外一种是投机主义者：多以证券交易员为主，他们精通各种金融知识，懂得严格止损止盈，他们每天都在等待机会找寻机会，长久来看不盈利还是很难的。说到这里我想到了“量化投资”，大家感兴趣的可以自己去了解一下。</p>
+<p>18年我还会继续在业余时间学习一些金融知识，创建自己的策略，尽量规避风险，感觉这时Python就要大显身手了，还要多学习一下Python啊，并且做到不患得患失，不影响自己的工作🤓</p>
+<hr>
+<h2 id="健身"><a href="#健身" class="headerlink" title="健身"></a>健身</h2><p>称了一下，今年一年足足胖了10斤+，和工作加班变多，夜宵变多，饮食不规律，咖啡饮用量变多，运动变少有很大原因。以前还会经常参加公司的每周羽毛球活动的，偶尔早上还会去宝体跑上几公里，现在全没啦，值得吐槽的是办了一个半年健身卡，只去了4次😤，18年要运动多一些了！也是为了自己的健康，避免职业病！为自己和家人负责。</p>
+<hr>
+<h2 id="奔三"><a href="#奔三" class="headerlink" title="奔三"></a>奔三</h2><p>奔三途中的很大一部分压力都是来自结婚吧，啥时候结婚呢，是一个沉重的话题，虽然我和我女朋友私下已经将它提上日程了，但感觉还是有点遥远，主要是完全都要靠自己，最主要还是一个字，穷😑。女朋友还想在深圳买房，其实我也想，我俩都不太想回长沙。还是要借王健林的那句话，先定一个小目标，然后实现它，逐一攻克吧。希望18年进展顺利。</p>
+<hr>
+<h2 id="厨艺"><a href="#厨艺" class="headerlink" title="厨艺"></a>厨艺</h2><p>说到结婚，不只是物质上的欠缺，还有一些生活上的技能需要掌握，一些习惯需要改变。比较重要的一点就是下厨。17年在这方面做的很差，我基本没做过几道菜，17年办了一个自动续费的饿了么超级会员。可能是平时我有接触到饿了么的移动开发者，看过他们的分享，比较仰慕他们的技术，所以这一年成了他们App的重度用户🤓 （开个玩笑，肯定是自己懒啊👨‍🍳）</p>
+<hr>
+<h2 id="2018展望"><a href="#2018展望" class="headerlink" title="2018展望"></a>2018展望</h2><p><strong>技术上：</strong></p>
+<ul>
+<li>Swift 必须上车了，再不上车已经跟不上时代了。</li>
+<li>Python用多深入以及应用下，使用场景还是比较广的，平时项目中的一些自动化全靠他了。</li>
+<li>多产出：18年技术上还是要多向大佬们靠齐，多多产出，多多参与开源。说到这里，要说一下，今年不知道怎么骗到了霜神大佬的关注，哈哈<img src="http://upload-images.jianshu.io/upload_images/1457495-c8ab67114a70f2bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>(霜神看到了可别取消啊，给大佬递茶)18年要争取多“骗”几个大佬。</li>
+</ul>
+<p><strong>生活上：</strong></p>
+<ul>
+<li>健身要增多，主要是要把肚子减下去，预防职业病。</li>
+<li>厨艺要开始磨炼了，少点外卖，提升生活质量。</li>
+<li>18年要计划和女朋友出去旅行一次，开拓开拓视野。</li>
+<li>争取早点结婚！</li>
+</ul>
+<hr>
+<p>好啦，以上就是我的17年的总结了，基本就是一个大老粗的碎碎念，还有几个小时就到18年啦，感谢你看到最后，感谢你的时间，祝福你，也祝福自己，加油~</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;转眼2017年走到了尾声，之前很少有写&lt;code&gt;年终总结&lt;/code&gt;，如今已到了奔三的年纪，肩上的责任也越来越‘丰富’，每年做个总结，尽量避免每年‘瞎忙’吧。
+    
+    </summary>
+    
+    
+      <category term="其他" scheme="http://superma.me/all-tags/%E5%85%B6%E4%BB%96/"/>
+    
+  </entry>
   
   <entry>
     <title>iOS设计模式四部曲三:行为型模式内附Demo</title>
