@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://superma.me/"/>
-  <updated>2017-12-31T15:06:22.778Z</updated>
+  <updated>2018-02-04T09:26:46.738Z</updated>
   <id>http://superma.me/</id>
   
   <author>
@@ -14,6 +14,77 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>提升iOS开发效率的一些keys</title>
+    <link href="http://superma.me/2018/02/04/%E6%8F%90%E5%8D%87iOS%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87%E7%9A%84%E4%B8%80%E4%BA%9Bkeys/"/>
+    <id>http://superma.me/2018/02/04/提升iOS开发效率的一些keys/</id>
+    <published>2018-02-04T09:20:06.000Z</published>
+    <updated>2018-02-04T09:26:46.738Z</updated>
+    
+    <content type="html"><![CDATA[<p>首先题目写的有点大，这篇文章只是分享一下我平时用到的一些快捷键和习惯，希望能对大家平时的开发效率有所帮助。<a id="more"></a></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1457495-082a6ea037b27c99.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="至于为什么要写？"><a href="#至于为什么要写？" class="headerlink" title="至于为什么要写？"></a>至于为什么要写？</h2><p> 原因有几点：</p>
+<ol>
+<li>工作中我发现有些iOS小伙伴平时开发的时候，比如在快速打开一个类文件的时候，还在项目目录里面一层一层的找，等等，希望本文能提升他们的开发幸福感。</li>
+<li>我自认为我知道的快捷键还蛮多的，但是还是从同事那里学到了几个实用的🤓，这篇文章就当做记录分享自己平时开发的一些小技巧吧，大家看完有什么更好的tip 可以留言分享给我，相当于抛砖引玉吧，我会持续更新的~希望大家都能做一个<code>懒惰的程序员</code>（文末有我对<code>懒惰程序员</code>的定义）。</li>
+</ol>
+<h2 id="鼠标-和-触摸板"><a href="#鼠标-和-触摸板" class="headerlink" title="鼠标 和 触摸板"></a>鼠标 和 触摸板</h2><p>如果你用的iMac 大部分用的是苹果的鼠标，苹果的鼠标是可以设置智能手势的，这些在系统偏好里面都有教程和设置，大家可以去看一下，每每看到同事还在把iMac的鼠标当做windows的来用，我真想说这个鼠标贵是有道理的🙃。<br>鼠标：1. 一个手指右滑返回，在Xcode 中就不用每次都去点击返回上一个类了。2. 两个手指左\右滑切换桌面，MacOS的多桌面挺好的，可以一个放UI，一个放代码，一个放接口文档等等。3. 两个手指轻点，相当于F3上面的快捷键Miss Control，很方便。<br>触摸板：跟鼠标基本一样，切换桌面是三个手指左\右滑，Miss Control 是三个手指向上滑。 </p>
+<p>好了，废话不多说，直接进入关键的吧，我默认用快捷键的使用频次排序吧，希望大家都能动手尝试下。</p>
+<h2 id="Xcode-中"><a href="#Xcode-中" class="headerlink" title="Xcode 中"></a>Xcode 中</h2><ol>
+<li><code>Shift + Command + O</code> 弹出快速查找文件窗口（这个是字母O，Markdown O之后很像数字0 ），<code>Shift +Commond + 0</code> 是快速打开官方文档的快捷键。</li>
+<li><code>Shift + Comand + j</code> 定位到文件所在目录，经常配合上面那条快捷键。</li>
+<li><code>Control + Command + 上\下</code> 切换 <code>.m</code> 和<code>.h</code>。</li>
+<li><code>Command + t</code> 新建一个Tab，这个很实用，我平时一般都会建3，4个Tab，关闭Tab 可以用 <code>Command + w</code>。</li>
+<li>如果你不习惯开多个Tab，习惯开多个Xcode窗口，可以用Command + ` 来互相切换。</li>
+<li><code>Control + Command + e</code> 可以批量修改光标所在位置的变量，像这样<img src="http://upload-images.jianshu.io/upload_images/1457495-905681620219f616.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></li>
+<li><code>Shift + Command + f</code> 打开全局搜索，当然你可以连续按住<code>Command</code>键连续按两次 4，也会聚焦到全局搜索，全局搜索这里要说一下，搜索Xcode 不仅仅是支持text匹配，最常用的可以加个 <code>Any</code> 正则，就可以搜出如图中的这种，等等。<br><img src="http://upload-images.jianshu.io/upload_images/1457495-e271cead8fed657a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></li>
+<li><code>Command + f</code> 在类中搜索 ，<code>enter</code> 匹配下一个 <code>Shift + enter</code> 匹配上一个。</li>
+<li><code>Command + 上\下\左\右</code>  光标切换到类首，类尾，行首，行尾。</li>
+<li><code>alt + 左\右</code> 光标左右移动一个单词。 </li>
+<li><code>Command + delete</code> 删除光标到行首的内容，同理<code>alt + delete</code> 删除光标前的一个单词，另外可以先切换到到行尾 用<code>Command + delete</code>删除一整行内容。</li>
+<li>同理 <code>Command + Shift</code> 和 <code>Command + alt</code>加方向键就可以选中一整行或者多行了。</li>
+<li>选中一段代码 <code>Control + i</code> 会自动缩进。</li>
+<li><code>Command + \</code> 当前行加断点，<code>alt + Command + \</code>，新建一个<code>symbolic breakpoint</code>。</li>
+<li><code>Command + n</code>新建文件 ，<code>Shift + Command + n</code> 新建工程</li>
+<li><code>alt + Command + 左\右</code>  折叠\显示当前块，<code>Shift + alt + Command + 左\右</code> 折叠\显示当前文件中的块。</li>
+<li><code>Control + Command + [</code> 上移，如果没有选中，默认上移当前行，<code>Control + Command + ]</code> 下移。</li>
+<li><code>Command + ]</code> 向右缩进，支持多行，<code>Command + [</code> 向左缩进。</li>
+<li><code>Shift + Command + k</code> product 清理，<code>Command + r</code> Run，<code>Command + b</code> 编译。</li>
+<li>还有一个重要的快捷键，☝️，<code>Control + Command + p</code> 快捷导入，像这样，<img src="http://upload-images.jianshu.io/upload_images/1457495-710fa3971957a3a1.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>很酷吧，需要导入一个工具才可以实现，<a href="https://github.com/markohlebar/Import" target="_blank" rel="external">可以点击这里</a>，Xcode 9 以前用过类似的插件也可以实现这个功能，之前还用<a href="http://mrpeak.cn/" target="_blank" rel="external">Peak君</a>的<a href="https://github.com/music4kid/FastStub-Xcode" target="_blank" rel="external">FastStub-Xcode</a>也挺爽的。</li>
+</ol>
+<h2 id="Xcode-窗体相关"><a href="#Xcode-窗体相关" class="headerlink" title="Xcode 窗体相关"></a>Xcode 窗体相关</h2><ol>
+<li><code>Shift + Command + Y</code> 隐藏 \ 显示 console 区，但是我建议显示console区 用 <code>Shift + Command + C</code>，会直接聚焦效果。</li>
+<li><code>Command + k</code> console清屏。</li>
+<li><code>Control + 1</code> 这个应该很多工程师都没用过🌚，当然点击小图标也可以。<img src="http://upload-images.jianshu.io/upload_images/1457495-a09c8500ed329e93.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>如图可以看到所有调用者，导入的文件，被那些导入等等相关依赖。还可以找到最近打开的文件，Recent Files </li>
+<li><code>Control + 6</code> 查看当前类的方法列表，这里建议用 <code>pragma mark</code> 来合理分块，<a href="https://www.jianshu.com/p/bbb0b57eb168" target="_blank" rel="external">相关扩展阅读可以看这里的代码规范建议</a></li>
+<li><code>Command + 1,2,3,4,5,6,7,8,9</code> 切换左边窗体，<code>Command + 0</code> 显示 \ 隐藏左边窗体。</li>
+<li><code>alt + Command + 0</code> 显示 \ 隐藏右边窗体，同理<code>alt + Command + 1,2</code>等也可以切换</li>
+<li><code>Command + ,</code> 弹出 Perferences ,可以用 <code>Command + w</code> 隐藏</li>
+</ol>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ol>
+<li>还有一个多行编辑，有的时候也会用到，需要借助Sublime Text, 快捷键是 <code>Shift + Command + L</code>，退出多行编辑也是<code>Shift + Command + L</code><br><img src="http://upload-images.jianshu.io/upload_images/1457495-4b1e05f2c78c0d22.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""> </li>
+<li><code>Shift + Command +3</code> 全屏截图，<code>Shift + Command + 4</code> 自选区域截图，<code>Shift + Command + 4 + 空格</code> 截图某一个窗体。</li>
+<li><code>Command + F3</code> 快捷查看桌面。</li>
+<li><code>Control + Command + 空格</code> 弹出表情输入框。</li>
+</ol>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p>推荐大家安装 <code>CheatSheet</code>，之后长按Command 就可以查看所有的快捷键了。<br>题外：在推荐给大家一个应用，<a href="http://www.noiz.io/" target="_blank" rel="external">Noizio </a>，环境噪音模拟工具，可以模拟在咖啡馆，可以模拟在海边等等。</p>
+<h2 id="关于懒惰程序员"><a href="#关于懒惰程序员" class="headerlink" title="关于懒惰程序员"></a>关于懒惰程序员</h2><p>懒惰对于程序员其实是一种夸奖，这里的懒惰并不是常规意义上的懒惰，也许你听过<code>懒惰是程序员的第一美德</code>。懒惰会让程序员想到一些更好的方案去解决手上的问题，往往的结果都是节省了很多体力劳动，以及达到同样的需求用的是最优雅最便捷的方式。<br>举一个实际例子就是，我们最近项目引入了国际化，大家都知道翻译真的是一个体力活，我身边的同事用Python写了一个脚本，可以自动检测需要翻译的文字，自动写到相应的Localization文件以及文字代码所在的位置，大大节省了体力劳动，这就是优秀的懒惰美德。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>如果大家有什么觉得好的快捷键或者是一些提升效率的idea，可以留言分享给我，也让我有一些好习惯补充，同时我也会更新本文，谢谢！希望大家都能成为一个懒惰的程序员，节省下来的时间去喝杯咖啡不好吗？🤓</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;首先题目写的有点大，这篇文章只是分享一下我平时用到的一些快捷键和习惯，希望能对大家平时的开发效率有所帮助。
+    
+    </summary>
+    
+      <category term="Objective-C" scheme="http://superma.me/all-categories/Objective-C/"/>
+    
+    
+      <category term="效率" scheme="http://superma.me/all-tags/%E6%95%88%E7%8E%87/"/>
+    
+  </entry>
   
   <entry>
     <title>2017年终总结</title>
