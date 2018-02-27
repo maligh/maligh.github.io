@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://superma.me/"/>
-  <updated>2018-02-04T09:26:46.738Z</updated>
+  <updated>2018-02-27T16:10:41.193Z</updated>
   <id>http://superma.me/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://superma.me/2018/02/04/%E6%8F%90%E5%8D%87iOS%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87%E7%9A%84%E4%B8%80%E4%BA%9Bkeys/"/>
     <id>http://superma.me/2018/02/04/提升iOS开发效率的一些keys/</id>
     <published>2018-02-04T09:20:06.000Z</published>
-    <updated>2018-02-04T09:26:46.738Z</updated>
+    <updated>2018-02-27T16:10:41.193Z</updated>
     
     <content type="html"><![CDATA[<p>首先题目写的有点大，这篇文章只是分享一下我平时用到的一些快捷键和习惯，希望能对大家平时的开发效率有所帮助。<a id="more"></a></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1457495-082a6ea037b27c99.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
@@ -48,7 +48,7 @@
 <li><code>Command + \</code> 当前行加断点，<code>alt + Command + \</code>，新建一个<code>symbolic breakpoint</code>。</li>
 <li><code>Command + n</code>新建文件 ，<code>Shift + Command + n</code> 新建工程</li>
 <li><code>alt + Command + 左\右</code>  折叠\显示当前块，<code>Shift + alt + Command + 左\右</code> 折叠\显示当前文件中的块。</li>
-<li><code>Control + Command + [</code> 上移，如果没有选中，默认上移当前行，<code>Control + Command + ]</code> 下移。</li>
+<li><code>alt + Command + [</code> 上移，如果没有选中，默认上移当前行，<code>alt + Command + ]</code> 下移。</li>
 <li><code>Command + ]</code> 向右缩进，支持多行，<code>Command + [</code> 向左缩进。</li>
 <li><code>Shift + Command + k</code> product 清理，<code>Command + r</code> Run，<code>Command + b</code> 编译。</li>
 <li>还有一个重要的快捷键，☝️，<code>Control + Command + p</code> 快捷导入，像这样，<img src="http://upload-images.jianshu.io/upload_images/1457495-710fa3971957a3a1.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>很酷吧，需要导入一个工具才可以实现，<a href="https://github.com/markohlebar/Import" target="_blank" rel="external">可以点击这里</a>，Xcode 9 以前用过类似的插件也可以实现这个功能，之前还用<a href="http://mrpeak.cn/" target="_blank" rel="external">Peak君</a>的<a href="https://github.com/music4kid/FastStub-Xcode" target="_blank" rel="external">FastStub-Xcode</a>也挺爽的。</li>
