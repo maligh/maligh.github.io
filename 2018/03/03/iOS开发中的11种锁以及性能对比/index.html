@@ -6,28 +6,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="记录学习中的点滴,努力打怪升级-MaLi">
-    <title>iOS理解Objective-C中消息转发机制附Demo - 记录学习中的点滴,努力打怪升级-MaLi</title>
+    <title>iOS开发中的11种锁以及性能对比 - 记录学习中的点滴,努力打怪升级-MaLi</title>
     <meta name="author" content="Mali">
     
     
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="最近在重温Effective Objective-C 2.0，这篇文章属于重温的产物吧，本文会通过demo来讲解OC中的消息转发机制">
-<meta name="keywords" content="消息转发">
+    <meta name="description" content="在平时开发中我们经常会使用多线程，多线程为我们带来了很大便利，也提高了程序的执行效率，但同时也带来了Data race。">
+<meta name="keywords" content="多线程">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="iOS理解Objective-C中消息转发机制附Demo">
-<meta property="og:url" content="http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/index.html">
+<meta property="og:title" content="iOS开发中的11种锁以及性能对比">
+<meta property="og:url" content="http://superma.me/2018/03/03/iOS开发中的11种锁以及性能对比/index.html">
 <meta property="og:site_name" content="记录学习中的点滴,努力打怪升级-MaLi">
-<meta property="og:description" content="最近在重温Effective Objective-C 2.0，这篇文章属于重温的产物吧，本文会通过demo来讲解OC中的消息转发机制">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1457495-ade801c636fc86fc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1457495-960047111dbd1c57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1457495-8ee6afef466e6177.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-08-05T17:23:18.000Z">
+<meta property="og:description" content="在平时开发中我们经常会使用多线程，多线程为我们带来了很大便利，也提高了程序的执行效率，但同时也带来了Data race。">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1457495-7da10e7cbd400978.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1457495-4151d1dc7f68827e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-03-03T06:34:49.970Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS理解Objective-C中消息转发机制附Demo">
-<meta name="twitter:description" content="最近在重温Effective Objective-C 2.0，这篇文章属于重温的产物吧，本文会通过demo来讲解OC中的消息转发机制">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1457495-ade801c636fc86fc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="iOS开发中的11种锁以及性能对比">
+<meta name="twitter:description" content="在平时开发中我们经常会使用多线程，多线程为我们带来了很大便利，也提高了程序的执行效率，但同时也带来了Data race。">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1457495-7da10e7cbd400978.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
     
     
         
@@ -36,8 +35,8 @@
         <meta property="og:image" content="http://superma.me/assets/images/avatar.jpg"/>
     
     
-        <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1457495-ade801c636fc86fc.jpg"/>
-        <meta class="swiftype" name="image" data-type="enum" content="http://upload-images.jianshu.io/upload_images/1457495-ade801c636fc86fc.jpg" />
+        <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1457495-08155377a6b6423c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://upload-images.jianshu.io/upload_images/1457495-08155377a6b6423c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" />
     
     
     
@@ -224,14 +223,14 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            iOS理解Objective-C中消息转发机制附Demo
+            iOS开发中的11种锁以及性能对比
         </h1>
     
     
         <div class="post-meta">
-    <time itemprop="datePublished" datetime="2017-07-30T15:35:00+08:00">
+    <time itemprop="datePublished" datetime="2018-03-03T14:30:35+08:00">
 	
-		    Jul 30, 2017
+		    Mar 03, 2018
     	
     </time>
     
@@ -248,27 +247,55 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <p>最近在重温Effective Objective-C 2.0，这篇文章属于重温的产物吧，本文会通过demo来讲解OC中的消息转发机制</p>
-<a id="more"></a>
-<p><img src="http://upload-images.jianshu.io/upload_images/1457495-ade801c636fc86fc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>Demo:<a href="https://github.com/maligh/ML-Objective-C-Demo/tree/master/MessageForwarding" target="_blank" rel="external">点我查看,觉得有帮助的话不要吝惜你的star</a><br>话不多说，iOS开发过程中我们经常会碰到这样的报错：<code>unrecognized selector sent to instance **</code>，原因是我们调用了一个不存在的方法。用OC消息机制来说就是：消息的接收者不过到对应的selector，这样就启动了消息转发机制，我们可以通过代码在消息转发的过程中告诉对象应该如何处理未知的消息，默认实现是抛出下面的异常</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1457495-960047111dbd1c57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="unrecognized selector.png"><br>下面我们通过实例来看一下在抛出异常之前也就是消息转发过程中都经过了哪些步骤：</p>
-<hr>
-<p>第一步：对象在收到无法解读的消息后，首先会调用<code>+(BOOL)resolveInstanceMethod:(SEL)sel</code>或者<code>+ (BOOL)resolveClassMethod:(SEL)sel</code>, 询问是否有动态添加方法来进行处理，处理实例如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">//People.m</div><div class="line">void speak(id self, SEL _cmd)&#123;</div><div class="line">    NSLog(@&quot;Now I can speak.&quot;);</div><div class="line">&#125;</div><div class="line">+ (BOOL)resolveInstanceMethod:(SEL)sel &#123;</div><div class="line">    </div><div class="line">    NSLog(@&quot;resolveInstanceMethod:  %@&quot;, NSStringFromSelector(sel));</div><div class="line">    if (sel == @selector(speak)) &#123;</div><div class="line">        class_addMethod([self class], sel, (IMP)speak, &quot;V@:&quot;);</div><div class="line">        return YES;</div><div class="line">    &#125;</div><div class="line">    return [super resolveInstanceMethod:sel];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>当People 收到了未知 speak选择子的消息的时候，如果是实例方法会首选调用上文的<code>resolveInstanceMethod:</code>方法，方法内通过判断选择子然后通过<code>class_addMethod</code>方法动态添加了一个speak的实现方法来解决掉这条未知的消息，此时消息转发过程提前结束。<br>但是当People 收到fly 这条未知消息的时候，第一步返回的是No，也就是没有动态新增实现方法的时候就会调用第二步</p>
-<hr>
-<p>第二步：既然第一步已经问过了，没有新增方法，那就问问有没有别人能够帮忙处理一下啊，调用的是<code>- (id)forwardingTargetForSelector:(SEL)aSelector</code>这个方法<br>上文我们说到People接收到了一条选择子为<code>fly</code>的未知消息，我们可以看到控制台已经打印了<code>resolveInstanceMethod:  fly</code>，代表第一步已经问过了，那么第二步问一下是否有别的类能帮忙处理吗？代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">- (id)forwardingTargetForSelector:(SEL)aSelector &#123;</div><div class="line">    NSLog(@&quot;forwardingTargetForSelector:  %@&quot;, NSStringFromSelector(aSelector));</div><div class="line">    Bird *bird = [[Bird alloc] init];</div><div class="line">    if ([bird respondsToSelector: aSelector]) &#123;</div><div class="line">        return bird;</div><div class="line">    &#125;</div><div class="line">    return [super forwardingTargetForSelector: aSelector];</div><div class="line">&#125;</div><div class="line">// Bird.m</div><div class="line">- (void)fly &#123;</div><div class="line">    NSLog(@&quot;I am a bird, I can fly.&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>通过<code>- (id)forwardingTargetForSelector:(SEL)aSelector</code>的处理，bird能够处理这条消息，所以这条消息被bird成功处理，消息转发流程提前结束。控制台打印<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">forwardingTargetForSelector:  fly</div><div class="line">I am a bird, I can fly.</div></pre></td></tr></table></figure></p>
-<p>但是如果<code>- (id)forwardingTargetForSelector:(SEL)aSelector</code>也找不到能够帮忙处理这条未知消息，那就会走到最后一步，这步也是代价最大的一步</p>
-<hr>
-<p>第三步：调用<code>- (void)forwardInvocation:(NSInvocation *)anInvocation</code>，在调用<code>forwardInvocation:</code>之前会调用<code>- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector</code>方法来获取这个选择子的方法签名，然后在<code>-(void)forwardInvocation:(NSInvocation *)anInvocation</code>方法中你就可以通过<code>anInvocation</code>拿到相应信息做处理，实例代码如下</p>
-<p>当People 收到一条 选择子为code 的消息的时候，前两步发现都没办法处理掉，走到第三步：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">- (void)forwardInvocation:(NSInvocation *)anInvocation &#123;</div><div class="line">    NSLog(@&quot;forwardInvocation: %@&quot;, NSStringFromSelector([anInvocation selector]));</div><div class="line">    if ([anInvocation selector] == @selector(code)) &#123;</div><div class="line">        Monkey *monkey = [[Monkey alloc] init];</div><div class="line">        [anInvocation invokeWithTarget:monkey];</div><div class="line">    &#125;   </div><div class="line">&#125;</div><div class="line"></div><div class="line">- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector &#123;</div><div class="line">    NSLog(@&quot;method signature for selector: %@&quot;, NSStringFromSelector(aSelector));</div><div class="line">    if (aSelector == @selector(code)) &#123;</div><div class="line">        return [NSMethodSignature signatureWithObjCTypes:&quot;V@:@&quot;];</div><div class="line">    &#125;</div><div class="line">    return [super methodSignatureForSelector:aSelector];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>这时控制台会打印<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">resolveInstanceMethod:  code</div><div class="line">forwardingTargetForSelector:  code</div><div class="line">method signature for selector: code</div><div class="line">forwardInvocation: code</div><div class="line">I am a coder.</div></pre></td></tr></table></figure></p>
-<p>此时这个code消息已经被monkey实例处理掉<br>此时消息转发流程完整的结束了，完整的消息转发流程如下：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1457495-8ee6afef466e6177.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<hr>
-<p>那么最后消息未能处理的时候，还会调用到<br><code>- (void)doesNotRecognizeSelector:(SEL)aSelector</code>这个方法，我们也可以在这个方法中做些文章，避免掉crash，但是只建议在线上环境的时候做处理，实际开发过程中还要把异常抛出来</p>
-<p>EOF:OC中消息转发流程大概就是这样了，Demo<a href="https://github.com/maligh/ML-Objective-C-Demo/tree/master/MessageForwarding" target="_blank" rel="external">点这里，觉得有帮助的话不要吝惜你的star</a>，由于个人能力有限，文中难免有些错误，希望大家不吝赐教~<br>另外有一个问题想问大家，+ (BOOL)resolveClassMethod:(SEL)sel 在这个方法中怎么动态添加类方法？ 比如我发送了一条未知的 [People missMethod]消息，怎么添加 +(void)missMethod 的实现呢？</p>
+            <p>在平时开发中我们经常会使用多线程，多线程为我们带来了很大便利，也提高了程序的执行效率，但同时也带来了<code>Data race</code>。<a id="more"></a><code>Data race</code>的定义很简单：当至少有两个线程同时访问同一个变量，而且至少其中有一个是写操作时，就发生了<code>Data race</code>。所以这是就要利用一些同步机制来确保数据的准确性，锁就是同步机制中的一种。</p>
+<h2 id="怎么检测项目中的Data-race？"><a href="#怎么检测项目中的Data-race？" class="headerlink" title="怎么检测项目中的Data race？"></a>怎么检测项目中的<code>Data race</code>？</h2><p><img src="http://upload-images.jianshu.io/upload_images/1457495-7da10e7cbd400978.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>只需要在设置中勾选<code>Thread Sanitizer</code> 即可，顺便可以勾选<code>Pause on issues</code> 就可以断点到相应的代码。<br>更多延伸内容请参考Peak君的<a href="http://mrpeak.cn/blog/thread-sanitizer/" target="_blank" rel="external">如何用Xcode8解决多线程问题</a>和<a href="http://www.mrpeak.cn/blog/ios-thread-safety/" target="_blank" rel="external">iOS多线程到底不安全在哪里？</a></p>
+<p>下面就进入正题简单聊一聊iOS中的锁，以及相关的内容（由于本人能力有限，文中难免有一些遗漏或者错误，请各位看官不吝赐教！谢谢！🙏)</p>
+<h2 id="简单的性能测试"><a href="#简单的性能测试" class="headerlink" title="简单的性能测试"></a>简单的性能测试</h2><p>下图是我针对iOS中的锁自己测试得出的，图中数字代表每次加解锁需要消耗的时间，单位为ns。<a href="https://github.com/maligh/ML-Objective-C-Demo/tree/master/LockPerformance" target="_blank" rel="external">代码在这里</a>，代码参考自YY大神的<a href="https://blog.ibireme.com/2016/01/16/spinlock_is_unsafe_in_ios/" target="_blank" rel="external">不再安全的 OSSpinLock</a>，基本跟YY大神的图差不多😉，YY大神的单位是μs，应该是1000次的，或者写错了吧~<br><img src="http://upload-images.jianshu.io/upload_images/1457495-4151d1dc7f68827e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="LockPerformance.jpg"></p>
+<ul>
+<li>注：运行手机： iphone6s plus ，系统版本：11.2.2，Xcode9.2；数字的单位为ns（得出的具体数值是跑了多次取的均值）。</li>
+</ul>
+<p>值得注意的是：1.这个数字仅仅代表每次加解锁的耗时，并不能全方面的代表性能。2.不同的机型和系统，不同的循环次数可能结果会略微有些差异。<br>但是还是可以看出<code>@synchronized:</code>是表现最差的。</p>
+<p><strong>在具体说这些锁之前，先来说几个概念定义：</strong>(参考<a href="https://www.wikipedia.org/" target="_blank" rel="external">维基百科</a>)</p>
+<ol>
+<li><strong>临界区：</strong>指的是一块对公共资源进行访问的代码，并非一种机制或是算法。</li>
+<li><p><strong>自旋锁：</strong>是用于多线程同步的一种锁，线程反复检查锁变量是否可用。由于线程在这一过程中保持执行，因此是一种<code>忙等待</code>。一旦获取了自旋锁，线程会一直保持该锁，直至显式释放自旋锁。 自旋锁避免了进程上下文的调度开销，因此对于线程只会阻塞很短时间的场合是有效的。</p>
+</li>
+<li><p><strong>互斥锁（Mutex）：</strong>是一种用于多线程编程中，防止两条线程同时对同一公共资源（比如全局变量）进行读写的机制。该目的通过将代码切片成一个一个的临界区而达成。</p>
+</li>
+<li><p><strong>读写锁：</strong>是计算机程序的并发控制的一种同步机制，也称“共享-互斥锁”、多读者-单写者锁) 用于解决多线程对公共资源读写问题。读操作可并发重入，写操作是互斥的。 读写锁通常用互斥锁、条件变量、信号量实现。</p>
+</li>
+<li><p><strong>信号量（semaphore）：</strong>是一种更高级的同步机制，<code>互斥锁</code>可以说是semaphore在仅取值0/1时的特例。<code>信号量</code>可以有更多的取值空间，用来实现更加复杂的同步，而不单单是线程间互斥。</p>
+</li>
+<li><p><strong>条件锁：</strong>就是条件变量，当进程的某些资源要求不满足时就进入休眠，也就是锁住了。当资源被分配到了，条件锁打开，进程继续运行。</p>
+</li>
+</ol>
+<h2 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h2><p><strong>1.NSLock：</strong>是Foundation框架中以对象形式暴露给开发者的一种锁，（Foundation框架同时提供了<code>NSConditionLock</code>，<code>NSRecursiveLock</code>，<code>NSCondition</code>）<code>NSLock</code>定义如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">@protocol NSLocking</div><div class="line"></div><div class="line">- (void)lock;</div><div class="line">- (void)unlock;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@interface NSLock : NSObject &lt;NSLocking&gt; &#123;</div><div class="line">@private</div><div class="line">    void *_priv;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (BOOL)tryLock;</div><div class="line">- (BOOL)lockBeforeDate:(NSDate *)limit;</div><div class="line"></div><div class="line">@property (nullable, copy) NSString *name API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure></p>
+<p>tryLock 和 lock 方法都会请求加锁，唯一不同的是trylock在没有获得锁的时候可以继续做一些任务和处理。lockBeforeDate方法也比较简单，就是在limit时间点之前获得锁，没有拿到返回NO。<br><strong>实际项目中：</strong>NSLock在<a href="https://github.com/AFNetworking/AFNetworking/blob/master/AFNetworking/AFURLSessionManager.m" target="_blank" rel="external">AFNetworking的AFURLSessionManager.m</a>中应用如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">- (instancetype)initWithSessionConfiguration:(NSURLSessionConfiguration *)configuration &#123;</div><div class="line">    ...</div><div class="line">    self.lock = [[NSLock alloc] init];</div><div class="line">    self.lock.name = AFURLSessionManagerLockName;</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line">- (void)setDelegate:(AFURLSessionManagerTaskDelegate *)delegate</div><div class="line">            forTask:(NSURLSessionTask *)task</div><div class="line">&#123;</div><div class="line">    ...</div><div class="line">    [self.lock lock];</div><div class="line">    self.mutableTaskDelegatesKeyedByTaskIdentifier[@(task.taskIdentifier)] = delegate;</div><div class="line">    [delegate setupProgressForTask:task];</div><div class="line">    [self addNotificationObserverForTask:task];</div><div class="line">    [self.lock unlock];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>2.pthread_mutex：</strong><br><strong>实际项目中：</strong> 在<a href="https://github.com/ibireme/YYKit/blob/3869686e0e560db0b27a7140188fad771e271508/YYKit/Cache/YYMemoryCache.m" target="_blank" rel="external">YYKit的YYMemoryCach中可以看到</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">- (instancetype)init &#123;</div><div class="line">    ...</div><div class="line">    pthread_mutex_init(&amp;_lock, NULL);</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line">- (void)_trimToCost:(NSUInteger)costLimit &#123;</div><div class="line">    BOOL finish = NO;</div><div class="line">    pthread_mutex_lock(&amp;_lock);</div><div class="line">    if (costLimit == 0) &#123;</div><div class="line">        [_lru removeAll];</div><div class="line">        finish = YES;</div><div class="line">    &#125; else if (_lru-&gt;_totalCost &lt;= costLimit) &#123;</div><div class="line">        finish = YES;</div><div class="line">    &#125;</div><div class="line">    pthread_mutex_unlock(&amp;_lock);</div><div class="line">    if (finish) return;</div><div class="line">    </div><div class="line">    NSMutableArray *holder = [NSMutableArray new];</div><div class="line">    while (!finish) &#123;</div><div class="line">        if (pthread_mutex_trylock(&amp;_lock) == 0) &#123;</div><div class="line">            if (_lru-&gt;_totalCost &gt; costLimit) &#123;</div><div class="line">                _YYLinkedMapNode *node = [_lru removeTailNode];</div><div class="line">                if (node) [holder addObject:node];</div><div class="line">            &#125; else &#123;</div><div class="line">                finish = YES;</div><div class="line">            &#125;</div><div class="line">            pthread_mutex_unlock(&amp;_lock);</div><div class="line">        &#125; else &#123;</div><div class="line">            usleep(10 * 1000); //10 ms</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">   ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>3.@synchronized:</strong><br><strong>实际项目中：</strong>AFNetworking中 isNetworkActivityOccurring属性的getter方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- (BOOL)isNetworkActivityOccurring &#123;</div><div class="line">    @synchronized(self) &#123;</div><div class="line">        return self.activityCount &gt; 0;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>关于 @synchronized推荐扩展阅读  <a href="http://yulingtianxia.com/blog/2015/11/01/More-than-you-want-to-know-about-synchronized/" target="_blank" rel="external">关于 @synchronized，这儿比你想知道的还要多</a></p>
+<h2 id="自旋锁"><a href="#自旋锁" class="headerlink" title="自旋锁"></a>自旋锁</h2><p><strong>1.OSSpinLock:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">OSSpinLock lock = OS_SPINLOCK_INIT;</div><div class="line">OSSpinLockLock(&amp;lock);</div><div class="line">...</div><div class="line">OSSpinLockUnlock(&amp;lock);</div></pre></td></tr></table></figure></p>
+<p>上面是OSSpinLock使用方式，编译会报警告，已经废弃了，OSSpinLock大家也已经不再用它了，因为它在某一些场景下已经不安全了，可以参考 YY大神的<a href="https://blog.ibireme.com/2016/01/16/spinlock_is_unsafe_in_ios/" target="_blank" rel="external">不再安全的 OSSpinLock</a>，在Protocol Buffers项目中你可以看到这样的注释，大家已经用新的方案替换了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// NOTE: OSSpinLock may seem like a good fit here but Apple engineers have</div><div class="line"> // pointed out that they are vulnerable to live locking on iOS in cases of</div><div class="line"> // priority inversion:</div><div class="line"> //   http://mjtsai.com/blog/2015/12/16/osspinlock-is-unsafe/</div><div class="line"> //   https://lists.swift.org/pipermail/swift-dev/Week-of-Mon-20151214/000372.html</div></pre></td></tr></table></figure></p>
+<p><strong>2.os_unfair_lock:</strong><br>os_unfair_lock 是苹果官方推荐的替换OSSpinLock的方案，但是它在iOS10.0以上的系统才可以调用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">os_unfair_lock_t unfairLock;</div><div class="line">unfairLock = &amp;(OS_UNFAIR_LOCK_INIT);</div><div class="line">os_unfair_lock_lock(unfairLock);</div><div class="line">os_unfair_lock_unlock(unfairLock);</div></pre></td></tr></table></figure></p>
+<h2 id="读写锁"><a href="#读写锁" class="headerlink" title="读写锁"></a>读写锁</h2><p>上文有说到，读写锁又称共享-互斥锁，<br><strong>pthread_rwlock：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//加读锁</div><div class="line">pthread_rwlock_rdlock(&amp;rwlock);</div><div class="line">//解锁</div><div class="line">pthread_rwlock_unlock(&amp;rwlock);</div><div class="line">//加写锁</div><div class="line">pthread_rwlock_wrlock(&amp;rwlock);</div><div class="line">//解锁</div><div class="line">pthread_rwlock_unlock(&amp;rwlock);</div></pre></td></tr></table></figure></p>
+<h2 id="递归锁"><a href="#递归锁" class="headerlink" title="递归锁"></a>递归锁</h2><p>递归锁有一个特点，就是同一个线程可以加锁N次而不会引发死锁。<br><strong>1.NSRecursiveLock:</strong><br>NSRecursiveLock在<a href="https://github.com/ibireme/YYKit/blob/4e1bd1cfcdb3331244b219cbd37cc9b1ccb62b7a/YYKit/Image/YYWebImageOperation.m" target="_blank" rel="external">YYKit中YYWebImageOperation.m</a>中有用到：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">_lock = [NSRecursiveLock new];</div><div class="line">- (void)dealloc &#123;</div><div class="line">    [_lock lock];</div><div class="line">    ...</div><div class="line">    ...</div><div class="line">    [_lock unlock];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>2.pthread_mutex(recursive):</strong><br>pthread_mutex锁也支持递归，只需要设置PTHREAD_MUTEX_RECURSIVE即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">pthread_mutex_t lock;</div><div class="line">pthread_mutexattr_t attr;</div><div class="line">pthread_mutexattr_init(&amp;attr);</div><div class="line">pthread_mutexattr_settype(&amp;attr, PTHREAD_MUTEX_RECURSIVE);</div><div class="line">pthread_mutex_init(&amp;lock, &amp;attr);</div><div class="line">pthread_mutexattr_destroy(&amp;attr);</div><div class="line">pthread_mutex_lock(&amp;lock);</div><div class="line">pthread_mutex_unlock(&amp;lock);</div></pre></td></tr></table></figure></p>
+<h2 id="条件锁"><a href="#条件锁" class="headerlink" title="条件锁"></a>条件锁</h2><p><strong>1. NSCondition:</strong><br><strong>定义：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@interface NSCondition : NSObject &lt;NSLocking&gt; &#123;</div><div class="line">@private</div><div class="line">    void *_priv;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)wait;</div><div class="line">- (BOOL)waitUntilDate:(NSDate *)limit;</div><div class="line">- (void)signal;</div><div class="line">- (void)broadcast;</div></pre></td></tr></table></figure></p>
+<p>遵循NSLocking协议，使用的时候同样是lock,unlock加解锁，wait是傻等，waitUntilDate:方法是等一会，都会阻塞掉线程，signal是唤起一个在等待的线程，broadcast是广播全部唤起。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">NSCondition *lock = [[NSCondition alloc] init];</div><div class="line">//Son 线程</div><div class="line">dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</div><div class="line">    [lock lock];</div><div class="line">    while (No Money) &#123;</div><div class="line">        [lock wait];</div><div class="line">    &#125;</div><div class="line">    NSLog(@&quot;The money has been used up.&quot;);</div><div class="line">    [lock unlock];</div><div class="line">&#125;);</div><div class="line">    </div><div class="line"> //Father线程</div><div class="line">dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</div><div class="line">    [lock lock];</div><div class="line">    NSLog(@&quot;Work hard to make money.&quot;);</div><div class="line">    [lock signal];</div><div class="line">    [lock unlock];</div><div class="line"> &#125;);</div></pre></td></tr></table></figure></p>
+<p><strong>2.NSConditionLock:</strong><br><strong>定义：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">@interface NSConditionLock : NSObject &lt;NSLocking&gt; &#123;</div><div class="line">@private</div><div class="line">    void *_priv;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (instancetype)initWithCondition:(NSInteger)condition NS_DESIGNATED_INITIALIZER;</div><div class="line"></div><div class="line">@property (readonly) NSInteger condition;</div><div class="line">- (void)lockWhenCondition:(NSInteger)condition;</div><div class="line">- (BOOL)tryLock;</div><div class="line">- (BOOL)tryLockWhenCondition:(NSInteger)condition;</div><div class="line">- (void)unlockWithCondition:(NSInteger)condition;</div><div class="line">- (BOOL)lockBeforeDate:(NSDate *)limit;</div><div class="line">- (BOOL)lockWhenCondition:(NSInteger)condition beforeDate:(NSDate *)limit;</div></pre></td></tr></table></figure></p>
+<p>很简单，方法很清晰，基本同上。</p>
+<h2 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h2><p><strong>dispatch_semaphore:</strong><br>dispatch_semaphore在YYKit中的<a href="https://github.com/ibireme/YYKit/blob/3869686e0e560db0b27a7140188fad771e271508/YYKit/Utility/YYThreadSafeArray.m" target="_blank" rel="external">YYThreadSafeArray.m</a>有所应用，YY大神有这样一句注释：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@discussion Generally, access performance is lower than NSMutableArray, </div><div class="line"> but higher than using @synchronized, NSLock, or pthread_mutex_t.</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#define LOCK(...) dispatch_semaphore_wait(_lock, DISPATCH_TIME_FOREVER); \</div><div class="line">__VA_ARGS__; \</div><div class="line">dispatch_semaphore_signal(_lock);</div></pre></td></tr></table></figure>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>其实本文写的都是一些再基础不过的内容，在平时阅读一些开源项目的时候经常会遇到一些保持线程同步的方式，因为场景不同可能选型不同，这篇就做一下简单的记录吧~我相信读完这篇你应该能根据不同场景选择合适的锁了吧、能够道出<code>自旋锁</code>和<code>互斥锁</code>的区别了吧。</p>
+<h2 id="最后："><a href="#最后：" class="headerlink" title="最后："></a>最后：</h2><p>由于本人能力有限，文中难免有一些遗漏或者错误，请各位看官不吝赐教！谢谢！同时有任何关于锁相关的疑问可以疯狂留言，一起交流，一起进步~🙏 祝大家每天都能进步一点点~</p>
+<h2 id="扩展阅读："><a href="#扩展阅读：" class="headerlink" title="扩展阅读："></a>扩展阅读：</h2><ol>
+<li><a href="https://blog.ibireme.com/2016/01/16/spinlock_is_unsafe_in_ios/" target="_blank" rel="external">不再安全的 OSSpinLock</a>🔥🔥</li>
+<li><a href="https://juejin.im/post/57f6e9f85bbb50005b126e5f" target="_blank" rel="external">深入理解 iOS 开发中的锁</a>🔥🔥</li>
+<li><a href="http://yulingtianxia.com/blog/2015/11/01/More-than-you-want-to-know-about-synchronized/" target="_blank" rel="external">关于 @synchronized，这儿比你想知道的还要多</a>🔥🔥🔥</li>
+<li><a href="https://casatwy.com/pthreadde-ge-chong-tong-bu-ji-zhi.html" target="_blank" rel="external">pthread的各种同步机制- Casa Taloyum</a>🔥🔥</li>
+<li><a href="https://developer.apple.com/library/prerelease/content/documentation/Cocoa/Conceptual/Multithreading/Introduction/Introduction.html#//apple_ref/doc/uid/10000057" target="_blank" rel="external">Threading Programming Guide</a></li>
+</ol>
 
             
         </div>
@@ -278,7 +305,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="/all-tags/消息转发/">消息转发</a>
+    <a class="tag tag--primary tag--small t-link" href="/all-tags/多线程/">多线程</a>
 
             </div>
         
@@ -288,7 +315,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/08/06/重温《EffectiveObjective-C2-0编写高质量iOS与OSX代码的52个有效方法》/"  data-tooltip="重温《EffectiveObjective-C2.0编写高质量iOS与OSX代码的52个有效方法》">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -296,7 +323,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/07/04/Objective-C编程规范以及建议/" data-tooltip="Objective-C编程规范以及建议">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/02/04/提升iOS开发效率的一些keys/" data-tooltip="提升iOS开发效率的一些keys">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -314,7 +341,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://superma.me/2018/03/03/iOS开发中的11种锁以及性能对比/">
                     <i class="fa fa-facebook-official"></i>
                 </a>
             </li>
@@ -322,7 +349,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://superma.me/2018/03/03/iOS开发中的11种锁以及性能对比/">
                     <i class="fa fa-twitter"></i>
                 </a>
             </li>
@@ -330,7 +357,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://superma.me/2018/03/03/iOS开发中的11种锁以及性能对比/">
                     <i class="fa fa-google-plus"></i>
                 </a>
             </li>
@@ -338,7 +365,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="http://service.weibo.com/share/share.php?&amp;title=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="post-action-btn btn btn--default" target="new" href="http://service.weibo.com/share/share.php?&amp;title=http://superma.me/2018/03/03/iOS开发中的11种锁以及性能对比/">
                     <i class="fa fa-weibo"></i>
                 </a>
             </li>
@@ -346,7 +373,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="http://connect.qq.com/widget/shareqq/index.html?url=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/&amp;title=iOS理解Objective-C中消息转发机制附Demo">
+                <a class="post-action-btn btn btn--default" target="new" href="http://connect.qq.com/widget/shareqq/index.html?url=http://superma.me/2018/03/03/iOS开发中的11种锁以及性能对比/&amp;title=iOS开发中的11种锁以及性能对比">
                     <i class="fa fa-qq"></i>
                 </a>
             </li>
@@ -354,7 +381,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="post-action-btn btn btn--default" target="new" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://superma.me/2018/03/03/iOS开发中的11种锁以及性能对比/">
                     <i class="fa fa-star"></i>
                 </a>
             </li>
@@ -362,7 +389,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="http://widget.renren.com/dialog/share?resourceUrl=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="post-action-btn btn btn--default" target="new" href="http://widget.renren.com/dialog/share?resourceUrl=http://superma.me/2018/03/03/iOS开发中的11种锁以及性能对比/">
                     <i class="fa fa-renren"></i>
                 </a>
             </li>
@@ -402,7 +429,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/08/06/重温《EffectiveObjective-C2-0编写高质量iOS与OSX代码的52个有效方法》/"  data-tooltip="重温《EffectiveObjective-C2.0编写高质量iOS与OSX代码的52个有效方法》">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -410,7 +437,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/07/04/Objective-C编程规范以及建议/" data-tooltip="Objective-C编程规范以及建议">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/02/04/提升iOS开发效率的一些keys/" data-tooltip="提升iOS开发效率的一些keys">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -428,7 +455,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://superma.me/2018/03/03/iOS开发中的11种锁以及性能对比/">
                     <i class="fa fa-facebook-official"></i>
                 </a>
             </li>
@@ -436,7 +463,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://superma.me/2018/03/03/iOS开发中的11种锁以及性能对比/">
                     <i class="fa fa-twitter"></i>
                 </a>
             </li>
@@ -444,7 +471,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://superma.me/2018/03/03/iOS开发中的11种锁以及性能对比/">
                     <i class="fa fa-google-plus"></i>
                 </a>
             </li>
@@ -452,7 +479,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="http://service.weibo.com/share/share.php?&amp;title=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="post-action-btn btn btn--default" target="new" href="http://service.weibo.com/share/share.php?&amp;title=http://superma.me/2018/03/03/iOS开发中的11种锁以及性能对比/">
                     <i class="fa fa-weibo"></i>
                 </a>
             </li>
@@ -460,7 +487,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="http://connect.qq.com/widget/shareqq/index.html?url=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/&amp;title=iOS理解Objective-C中消息转发机制附Demo">
+                <a class="post-action-btn btn btn--default" target="new" href="http://connect.qq.com/widget/shareqq/index.html?url=http://superma.me/2018/03/03/iOS开发中的11种锁以及性能对比/&amp;title=iOS开发中的11种锁以及性能对比">
                     <i class="fa fa-qq"></i>
                 </a>
             </li>
@@ -468,7 +495,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="post-action-btn btn btn--default" target="new" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://superma.me/2018/03/03/iOS开发中的11种锁以及性能对比/">
                     <i class="fa fa-star"></i>
                 </a>
             </li>
@@ -476,7 +503,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="http://widget.renren.com/dialog/share?resourceUrl=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="post-action-btn btn btn--default" target="new" href="http://widget.renren.com/dialog/share?resourceUrl=http://superma.me/2018/03/03/iOS开发中的11种锁以及性能对比/">
                     <i class="fa fa-renren"></i>
                 </a>
             </li>
@@ -501,7 +528,7 @@
             
             
             <li class="share-option">
-                <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://superma.me/2018/03/03/iOS开发中的11种锁以及性能对比/">
                     <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
                 </a>
             </li>
@@ -509,7 +536,7 @@
             
             
             <li class="share-option">
-                <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://superma.me/2018/03/03/iOS开发中的11种锁以及性能对比/">
                     <i class="fa fa-twitter"></i><span>Share on Twitter</span>
                 </a>
             </li>
@@ -517,7 +544,7 @@
             
             
             <li class="share-option">
-                <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://superma.me/2018/03/03/iOS开发中的11种锁以及性能对比/">
                     <i class="fa fa-google-plus"></i><span>Share on Google+</span>
                 </a>
             </li>
@@ -525,7 +552,7 @@
             
             
             <li class="share-option">
-                <a class="share-option-btn" target="new" href="http://service.weibo.com/share/share.php?&amp;title=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="share-option-btn" target="new" href="http://service.weibo.com/share/share.php?&amp;title=http://superma.me/2018/03/03/iOS开发中的11种锁以及性能对比/">
                     <i class="fa fa-weibo"></i><span>Share on Weibo</span>
                 </a>
             </li>
@@ -533,7 +560,7 @@
             
             
             <li class="share-option">
-                <a class="share-option-btn" target="new" href="http://connect.qq.com/widget/shareqq/index.html?url=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/&amp;title=iOS理解Objective-C中消息转发机制附Demo">
+                <a class="share-option-btn" target="new" href="http://connect.qq.com/widget/shareqq/index.html?url=http://superma.me/2018/03/03/iOS开发中的11种锁以及性能对比/&amp;title=iOS开发中的11种锁以及性能对比">
                     <i class="fa fa-qq"></i><span>Share on QQ</span>
                 </a>
             </li>
@@ -541,7 +568,7 @@
             
             
             <li class="share-option">
-                <a class="share-option-btn" target="new" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="share-option-btn" target="new" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://superma.me/2018/03/03/iOS开发中的11种锁以及性能对比/">
                     <i class="fa fa-star"></i><span>Share on Qzone</span>
                 </a>
             </li>
@@ -549,7 +576,7 @@
             
             
             <li class="share-option">
-                <a class="share-option-btn" target="new" href="http://widget.renren.com/dialog/share?resourceUrl=http://superma.me/2017/07/30/iOS理解Objective-C中消息转发机制附Demo/">
+                <a class="share-option-btn" target="new" href="http://widget.renren.com/dialog/share?resourceUrl=http://superma.me/2018/03/03/iOS开发中的11种锁以及性能对比/">
                     <i class="fa fa-renren"></i><span>Share on Renren</span>
                 </a>
             </li>
